@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.10.12) (preloaded format=pdflatex 2023.10.14)  14 OCT 2023 17:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.10.12) (preloaded format=pdflatex 2023.10.14)  30 OCT 2023 08:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -841,7 +841,7 @@ Package hyperref Info: Link coloring ON on input line 363.
 \@outlinefile=\write4
 \openout4 = `memoria.out'.
 
-<./img/cabecera.pdf, id=67, 617.67549pt x 135.51413pt>
+<./img/cabecera.pdf, id=75, 617.67549pt x 135.51413pt>
 File: ./img/cabecera.pdf Graphic file (type pdf)
 <use ./img/cabecera.pdf>
 Package pdftex.def Info: ./img/cabecera.pdf  used on input line 365.
@@ -875,7 +875,7 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <8> on input line 365.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <6> on input line 365.
-<./img/escudoInfor.pdf, id=68, 618.11432pt x 737.07487pt>
+<./img/escudoInfor.pdf, id=76, 618.11432pt x 737.07487pt>
 File: ./img/escudoInfor.pdf Graphic file (type pdf)
 <use ./img/escudoInfor.pdf>
 Package pdftex.def Info: ./img/escudoInfor.pdf  used on input line 365.
@@ -1099,10 +1099,16 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 5.87491pt
 (hyperref)                replaced by space on input line 1.
 
-) [13]
+[13]
+LaTeX Info: Redefining \. on input line 38.
+LaTeX Info: Redefining \% on input line 38.
+ [14])
+LaTeX Info: Redefining \. on input line 467.
+LaTeX Info: Redefining \% on input line 467.
+ [15]
 \openout2 = `./tex/7_Conclusiones_Lineas_de_trabajo_futuras.aux'.
 
- (tex/7_Conclusiones_Lineas_de_trabajo_futuras.tex [14
+ (tex/7_Conclusiones_Lineas_de_trabajo_futuras.tex [16
 
 
 
@@ -1113,7 +1119,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                \hskip 5.87491pt
 (hyperref)                replaced by space on input line 1.
 
-) [15]
+) [17]
 No file memoria.bbl.
 \tf@toc=\write5
 \openout5 = `memoria.toc'.
@@ -1146,16 +1152,16 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `memoria.out' has not changed.
-(rerunfilecheck)             Checksum: 71BEB4E123CDB37AE90C29F16B8F8DDA;2698.
+(rerunfilecheck)             Checksum: 523E060E519F2F330D249DB5211BA5F6;3226.
  ) 
 Here is how much of TeX's memory you used:
- 17683 strings out of 474823
- 281158 string characters out of 5760764
+ 17725 strings out of 474823
+ 281577 string characters out of 5760764
  1940043 words of memory out of 5000000
- 39134 multiletter control sequences out of 15000+600000
- 654093 words of font info for 160 fonts, out of 8000000 for 9000
+ 39142 multiletter control sequences out of 15000+600000
+ 654736 words of font info for 167 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 85i,12n,93p,1006b,500s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 85i,12n,93p,1006b,571s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Program Files/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Program Files/M
 iKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Program Files/MiKTeX/fonts/type1/pub
 lic/lm/lmcsc10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:
@@ -1165,9 +1171,9 @@ lmr7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Program Fi
 les/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Program Files/MiKTeX/fonts/type
 1/public/lm/lmro12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmssbx10.
 pfb>
-Output written on memoria.pdf (27 pages, 664881 bytes).
+Output written on memoria.pdf (29 pages, 677823 bytes).
 PDF statistics:
- 640 PDF objects out of 1000 (max. 8388607)
- 45 named destinations out of 1000 (max. 500000)
- 57483 words of extra memory for PDF output out of 61914 (max. 10000000)
+ 677 PDF objects out of 1000 (max. 8388607)
+ 65 named destinations out of 1000 (max. 500000)
+ 57499 words of extra memory for PDF output out of 61914 (max. 10000000)
 

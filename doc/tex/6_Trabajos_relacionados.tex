@@ -8,5 +8,49 @@ En este artículo se documenta el uso de la visión por computador para la clasi
 
 Se emplea un método en el que se emplea el uso de la cara para la calibración de la amplitud de la prueba. Para ello el sujeto ha de elevar las manos a la altura de la cara y apuntar con las puntas de los dedos hacia la misma.
 
-El estudio se realizó con 387 vídeos de \textit{rapid finger-tapping test} (RFT) de 13 pacientes diagnosticados con \textbf{Enfermedad del Parkinson} en estado avanzado y 84 vídeos de \textit{rapid finger-tapping test} de 6 personas de control sanas.
+El estudio se realizó con 387 vídeos de \textit{rapid finger-tapping test} (RFT) de 13 pacientes diagnosticados con \textbf{Enfermedad del Parkinson} en estado avanzado y 84 vídeos de \textit{rapid finger-tapping test} de 6 personas de control sanas. En total 471 vídeos.
+
+\subsection{Metodología}
+\begin{enumerate}
+	\item Se realiza un reconocimiento facial del individuo y se crea a partir de el 2 cuadrados en los costados de la cara para realizar la medición de la amplitud.
+	\item Se genera una serie temporal que representa la distancia desde el dedo indice al pulgar siendo esta la amplitud del movimiento.
+	\item Se extraen algunas características de la serie temporal, por ejemplo, la velocidad media de apertura y cierre de dedos, el número total de toques de los dedos, la amplitud máxima...
+	\item Se selección las características no redundantes mediante el algoritmo chi-cuadrado
+	\item Se entrena una máquina de vectores de soporte (SVM) mediante las características obtenidas para realizar la clasificación.
+
+\end{enumerate}
+\subsection{Resultados}
+Se encontró una nueva característica representativa del ritmo de golpeteo llamada "correlación cruzada entre los picos normalizados", la cual mostró una fuerte correlación de Guttman (2 = -0,80) con las valoraciones clínicas. Al utilizar el clasificador de máquina de vectores de soporte y una validación cruzada de 10 veces, se logró categorizar las muestras de pacientes en los niveles UPDRS-FT con una precisión del 88\%. Este mismo esquema de clasificación también permitió discriminar entre las muestras \textbf{RFT} de los controles sanos y los pacientes con \textbf{EP}, logrando una precisión del 95\%.
+
+
+\section{The discerning eye of computer vision}
+Este artículo utilizan 133 vídeos de manos realizando el \textbf{RFT} procedentes de 39 pacientes de \textbf{EP} y 30 pacientes de control.
+
+A través de estos vídeos se han logrado extraer características y comprobar la relación que existe entre estas y la gravedad de la enfermedad en un paciente siendo esta valorada desde 0 (normal) hasta 4 (enfermedad muy grave).
+
+
+\subsection{Metodología}
+\begin{enumerate}
+	\item Se utiliza la librería de DeepCutLab la cual se trata de una librería de visión por computador para obtener la serie temporal de la amplitud.
+	\item Se normaliza la serie con la amplitud máxima siendo igual a 1 y escalando los valores conforme a esta medida.
+	\item Al igual que en el estudio anterior se extraen ciertas características de la serie siendo estas la velocidad, la amplitud y el ritmo.
+
+\end{enumerate}
+\subsection{Resultados}
+DeepLabCut rastreó y midió con fiabilidad el \textit{finger-tap} en un vídeo estándar de smartphone. Las medidas del ordenador se relacionaron bien con las valoraciones clínicas de la bradicinesia.
+
+
+\section{Supervised classification of bradykinesia}
+Este artículo utiliza 70 vídeos de evaluaciones de \textit{finger-tap} en un entorno clínico (40 manos con \textbf{Parkinson}, 30 manos de control).
+control). Dos expertos clínicos en \textbf{Parkinson}, que desconocían los diagnósticos, evaluaron los vídeos para dar un grado de gravedad de la bradicinesia entre 0 y 4 utilizando la Escala Unificada de Calificación de la Enfermedad de Parkinson (UPDRS, por sus siglas en inglés)
+
+
+\subsection{Metodología}
+\begin{enumerate}
+	\item Extraer la frecuencia: La frecuencia de intervención se estimó como la frecuencia correspondiente al pico de amplitud máxima en el espectro de la transformada rápida de Fourier (FFT). 
+	\item La densidad espectral de energía se calculó como la integral al cuadrado del espectro FFT, una medida que se espera que aumente con la amplitud del golpeteo.
+\end{enumerate}
+\subsection{Resultados}
+Una máquina de vectores de apoyo con núcleos de función de base radial predijo la presencia de bradicinesia leve/moderada/grave con una precisión de prueba estimada del 0,8 \%.
+bradicinesia con una precisión de prueba estimada de 0,8. Un modelo Naïve Bayes predijo la presencia de la enfermedad de Parkinson con una precisión de prueba estimada de 0,67. 
 

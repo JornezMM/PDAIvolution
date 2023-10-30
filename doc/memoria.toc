@@ -17,4 +17,12 @@
 \contentsline {chapter}{5.\hskip .5em\relax Aspectos relevantes del desarrollo del proyecto}{11}{chapter*.10}%
 \contentsline {chapter}{6.\hskip .5em\relax Trabajos relacionados}{13}{chapter*.11}%
 \contentsline {section}{\numberline {6.1}A computer vision framework for finger-tapping evaluation}{13}{section.6.1}%
-\contentsline {chapter}{7.\hskip .5em\relax Conclusiones y Líneas de trabajo futuras}{15}{chapter*.12}%
+\contentsline {subsection}{Metodología}{13}{section*.12}%
+\contentsline {subsection}{Resultados}{14}{section*.13}%
+\contentsline {section}{\numberline {6.2}The discerning eye of computer vision}{14}{section.6.2}%
+\contentsline {subsection}{Metodología}{14}{section*.14}%
+\contentsline {subsection}{Resultados}{15}{section*.15}%
+\contentsline {section}{\numberline {6.3}Supervised classification of bradykinesia}{15}{section.6.3}%
+\contentsline {subsection}{Metodología}{15}{section*.16}%
+\contentsline {subsection}{Resultados}{15}{section*.17}%
+\contentsline {chapter}{7.\hskip .5em\relax Conclusiones y Líneas de trabajo futuras}{17}{chapter*.18}%
