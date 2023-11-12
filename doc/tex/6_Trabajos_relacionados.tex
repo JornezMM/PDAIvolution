@@ -4,11 +4,11 @@ Durante los últimos años se han utilizado diferentes métodos para evaluar la 
 
 \section{A computer vision framework for finger-tapping evaluation}
 
-En este artículo se documenta el uso de la visión por computador para la clasificación de individuos según el nivel de gravedad de la \textbf{Enfermedad del Parkinson}.
+En este artículo~\cite{khan2014computer} se documenta el uso de la visión por computador para la clasificación de individuos según el nivel de gravedad de la Enfermedad del Parkinson.
 
 Se emplea un método en el que se emplea el uso de la cara para la calibración de la amplitud de la prueba. Para ello el sujeto ha de elevar las manos a la altura de la cara y apuntar con las puntas de los dedos hacia la misma.
 
-El estudio se realizó con 387 vídeos de \textit{rapid finger-tapping test} (RFT) de 13 pacientes diagnosticados con \textbf{Enfermedad del Parkinson} en estado avanzado y 84 vídeos de \textit{rapid finger-tapping test} de 6 personas de control sanas. En total 471 vídeos.
+El estudio se realizó con 387 vídeos de \textit{rapid finger-tapping test} (RFT) de 13 pacientes diagnosticados con Enfermedad del Parkinson en estado avanzado y 84 vídeos de \textit{rapid finger-tapping test} de 6 personas de control sanas. En total 471 vídeos.
 
 \subsection{Metodología}
 \begin{enumerate}
@@ -20,11 +20,11 @@ El estudio se realizó con 387 vídeos de \textit{rapid finger-tapping test} (RF
 
 \end{enumerate}
 \subsection{Resultados}
-Se encontró una nueva característica representativa del ritmo de golpeteo llamada "correlación cruzada entre los picos normalizados", la cual mostró una fuerte correlación de Guttman (2 = -0,80) con las valoraciones clínicas. Al utilizar el clasificador de máquina de vectores de soporte y una validación cruzada de 10 veces, se logró categorizar las muestras de pacientes en los niveles UPDRS-FT con una precisión del 88\%. Este mismo esquema de clasificación también permitió discriminar entre las muestras \textbf{RFT} de los controles sanos y los pacientes con \textbf{EP}, logrando una precisión del 95\%.
+Se encontró una nueva característica representativa del ritmo de golpeteo llamada <<correlación cruzada entre los picos normalizados>>, la cual mostró una fuerte correlación de Guttman con las valoraciones clínicas. Al utilizar el clasificador de máquina de vectores de soporte y una validación cruzada de 10 grupos, se logró categorizar las muestras de pacientes en los niveles UPDRS-FT con una precisión del 88\%. Este mismo esquema de clasificación también permitió discriminar entre las muestras \textbf{RFT} de los controles sanos y los pacientes con \textbf{EP}, logrando una precisión del 95\%.
 
 
 \section{The discerning eye of computer vision}
-Este artículo utilizan 133 vídeos de manos realizando el \textbf{RFT} procedentes de 39 pacientes de \textbf{EP} y 30 pacientes de control.
+Este artículo \cite{williams2020discerning} utilizan 133 vídeos de manos realizando el \textbf{RFT} procedentes de 39 pacientes de Enfermedad del Parkinson y 30 pacientes de control.
 
 A través de estos vídeos se han logrado extraer características y comprobar la relación que existe entre estas y la gravedad de la enfermedad en un paciente siendo esta valorada desde 0 (normal) hasta 4 (enfermedad muy grave).
 
@@ -41,8 +41,8 @@ DeepLabCut rastreó y midió con fiabilidad el \textit{finger-tap} en un vídeo 
 
 
 \section{Supervised classification of bradykinesia}
-Este artículo utiliza 70 vídeos de evaluaciones de \textit{finger-tap} en un entorno clínico (40 manos con \textbf{Parkinson}, 30 manos de control).
-control). Dos expertos clínicos en \textbf{Parkinson}, que desconocían los diagnósticos, evaluaron los vídeos para dar un grado de gravedad de la bradicinesia entre 0 y 4 utilizando la Escala Unificada de Calificación de la Enfermedad de Parkinson (UPDRS, por sus siglas en inglés)
+Este artículo  \cite{williams2020supervised} utiliza 70 vídeos de evaluaciones de \textit{finger-tap} en un entorno clínico (40 manos con \textbf{Parkinson}, 30 manos de control).
+Dos expertos clínicos en \textbf{Parkinson}, que desconocían los diagnósticos, evaluaron los vídeos para dar un grado de gravedad de la bradicinesia entre 0 y 4 utilizando la Escala Unificada de Calificación de la Enfermedad de Parkinson (UPDRS, por sus siglas en inglés)
 
 
 \subsection{Metodología}
@@ -51,6 +51,6 @@ control). Dos expertos clínicos en \textbf{Parkinson}, que desconocían los dia
 	\item La densidad espectral de energía se calculó como la integral al cuadrado del espectro FFT, una medida que se espera que aumente con la amplitud del golpeteo.
 \end{enumerate}
 \subsection{Resultados}
-Una máquina de vectores de apoyo con núcleos de función de base radial predijo la presencia de bradicinesia leve/moderada/grave con una precisión de prueba estimada del 0,8 \%.
-bradicinesia con una precisión de prueba estimada de 0,8. Un modelo Naïve Bayes predijo la presencia de la enfermedad de Parkinson con una precisión de prueba estimada de 0,67. 
+Una máquina de vectores de soporte con núcleos de función de base radial predijo la presencia de bradicinesia leve/moderada/grave con una precisión de prueba estimada del 0,8 \%.
+Un modelo Naïve Bayes predijo la presencia de la enfermedad de Parkinson con una precisión de prueba estimada de 0,67. 
 
