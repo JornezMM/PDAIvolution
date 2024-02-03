@@ -1,3 +1,25 @@
+\newcommand{\cu}[9]{
+    \begin{table}[p]
+        \centering
+        \begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+            \toprule
+            \textbf{CU-#1} & \textbf{#2} \\
+            \toprule
+            \textbf{Versión} & 1.0 \\
+            \textbf{Autor} & \theauthor \\
+            \textbf{Requisitos asociados} & #3 \\
+            \textbf{Descripción} & #4 \\
+            \textbf{Precondición} & #5 \\
+            \textbf{Acciones} & #6 \\
+            \textbf{Postcondición} & #7 \\
+            \textbf{Excepciones} & #8 \\
+			\textbf{Importancia} & #9 \\
+            \bottomrule
+        \end{tabularx}
+        \caption{CU-#1 #2.}
+    \end{table}
+}
+
 \apendice{Especificación de Requisitos}
 
 \section{Introducción}
@@ -28,9 +50,179 @@ Además se busca que el usuario médico sea capaz de realizar comparaciones de m
 \item El administrador ha de ser capaz de visualizar a los usuarios.
 \item Los médicos han de ser capaces de agregarse pacientes asociados.
 \item Los médicos han de ser capaces de eliminar sus pacientes asociados.
+\item El paciente y el médico han de ser capaces de ver la evolución del paciente.
 
 \end{enumerate}
 
 \section{Especificación de requisitos}
 
+\cu{1}{Iniciar sesión}
+{RF-1,RF-6}
+{Los usuarios deben ser capaces de iniciar sesión}
+{	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+	\item El usuario debe estar dado de alta en la base de datos.
+	\item Estar en la página de inicio de sesión.
+	\end{itemize}}
+{
+	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
 
+    \item El usuario introduce su nombre de usuario.
+    \item El usuario introduce su contraseña.
+    \item El usuario hace clic en el botón de iniciar sesión.
+    \end{itemize}
+}
+{El usuario será redirijo a su página de perfil correspondiente}
+{	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+
+    \item Las credenciales no son correctas.
+    \item El usuario no está dado de alta.
+    \end{itemize}}
+{Alta}
+
+\cu{2}{Finalizar sesión}
+{RF-1,RF-7}
+{Los usuarios deben ser capaces de iniciar sesión}
+{	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+	\item El usuario debe tener la sesión iniciada.
+	\end{itemize}}
+{
+	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+
+    \item El usuario hace clic en el botón de finalizar sesión.
+    \end{itemize}
+}
+{El usuario será redirijo a su página de perfil correspondiente}
+{}
+{Alta}
+
+\cu{3}{Visualizar evolución}
+{RF-14}
+{El paciente y el médico han de ser capaces de visualizar la evolución del paciente}
+{	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+	\item El paciente debe estar dado de alta en la base de datos.
+	\item El paciente debe de tener al menos 2 vídeos para ver la gráfica.
+	\end{itemize}}
+{
+	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+
+    \item El usuario accede a su perfil.
+    \item Se visualiza la gráfica de la evolución del paciente.
+    \end{itemize}
+}
+{Se muestra al usuario su gráfico correspondiente}
+{}
+{Alta}
+
+\cu{4.1}{Dar de alta a usuarios}
+{RF-8}
+{El administrador debe poder dar de alta a nuevos usuarios.}
+{	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+	\item El usuario no debe estar dado de alta.
+	\end{itemize}}
+{
+	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+
+    \item El administrador pulsa el botón de <<añadir usuario>>.
+    \item El administrador introduce los datos del paciente.
+    \item El administrador confirma los datos y pulsa el botón <<añadir>>.
+    \end{itemize}
+}
+{Se muestra el nuevo usuario en la lista de usuarios}
+{\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+
+    \item El usuario ya existe.
+    \item Los datos introducidos son erróneos.
+    \end{itemize}}
+{Alta}
+
+\cu{4.2}{Dar de baja a usuarios}
+{RF-9}
+{El administrador debe poder dar de baja a usuarios.}
+{	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+	\item El usuario debe estar dado de alta.
+	\end{itemize}}
+{
+	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+
+    \item El administrador pulsa el botón de <<eliminar usuario>>.
+    \item El administrador confirma el usuario y pulsa el botón <<eliminar>>.
+    \end{itemize}
+}
+{Ya no se muestra al usuario en la lista de usuarios}
+{\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+
+    \item El usuario no existe.
+    \end{itemize}}
+{Alta}
+
+\cu{4.3}{Modificar usuarios}
+{RF-10}
+{El administrador debe poder modificar usuarios.}
+{	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+	\item El usuario debe estar dado de alta.
+	\end{itemize}}
+{
+	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+
+    \item El administrador pulsa el botón de <<modificar usuario>>.
+    \item El administrador realiza los cambios del usuario y pulsa el botón <<confirmar>>.
+    \end{itemize}
+}
+{Se muestra la modificación del usuario.}
+{\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+
+    \item El usuario modificado coincide con otro que ya existe.
+    \end{itemize}}
+{Alta}
+
+\cu{4.4}{Visualizar usuarios}
+{RF-11}
+{El administrador debe poder visualizar la vista de usuarios.}
+{	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+	\item Debe existir al menos 1 usuario.
+	\end{itemize}}
+{
+	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+
+    \item El administrador visualiza la lista de usuarios.
+    \end{itemize}
+}
+{Se muestra la lista de usuarios.}
+{}
+{Media}
