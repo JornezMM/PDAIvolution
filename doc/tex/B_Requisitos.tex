@@ -226,3 +226,164 @@ Además se busca que el usuario médico sea capaz de realizar comparaciones de m
 {Se muestra la lista de usuarios.}
 {}
 {Media}
+
+\cu{5.1}{Añadir vídeos}
+{RF-2}
+{Tanto los médicos como los pacientes han de ser capaces de añadir nuevos vídeos.}
+{	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+	\item Debe existir el paciente al que se le quiere añadir el vídeo.
+	\end{itemize}}
+{
+	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+
+    \item El usuario pulsa el botón <<añadir vídeo>>.
+    \item Se rellenan los datos correspondientes del vídeo como la mano.
+    \item Se añade el fichero con el vídeo que se quiere subir.
+    \item Se pulsa el botón <<añadir>>.
+    \end{itemize}
+}
+{El nuevo vídeo debe estar en la lista de vídeos del paciente correspondiente.}
+{\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+	\item No se han rellenado los datos correctamente.
+	\item El fichero subido no corresponde con formato solicitado.
+	\end{itemize}}
+{Alta}
+
+\cu{5.2}{Eliminar vídeos}
+{RF-3}
+{Tanto los médicos como los pacientes han de ser capaces de eliminar vídeos.}
+{	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+	\item Debe existir el paciente al que se le quiere eliminar el vídeo.
+	\item El paciente debe tener al menos un vídeo.
+	\end{itemize}}
+{
+	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+
+    \item El usuario pulsa el botón <<eliminar vídeo>> al lado del vídeo que desea eliminar.
+    \item Se pulsa el botón <<confirmar>>.
+    \end{itemize}
+}
+{El vídeo ya no esta en la lista de vídeos del paciente correspondiente.}
+{}
+{Media}
+
+\cu{5.3}{Modificar vídeos}
+{RF-4}
+{Tanto los médicos como los pacientes han de ser capaces de modificar datos de los vídeos del paciente.}
+{	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+	\item Debe existir el paciente al que se le quiere modificar el vídeo.
+	\item El paciente debe tener al menos un vídeo.
+	\end{itemize}}
+{
+	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+
+    \item El usuario pulsa el botón <<editar vídeo>> al lado del vídeo que desea modificar.
+    \item El usuario modifica los datos que sean necesarios del vídeo seleccionado.
+    \item El usuario pulsa el botón <<confirmar>>.
+    
+    \end{itemize}
+}
+{El vídeo debe aparecer con las modificaciones realizadas en la lista de vídeos del paciente correspondiente.}
+{}
+{Baja}
+
+\cu{5.4}{Clasificar vídeos}
+{RF-5}
+{Tanto los médicos como los pacientes han de ser capaces de clasificar los vídeos del paciente.}
+{	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+	\item Debe existir el paciente al que se le quiere clasificar el vídeo.
+	\item El paciente debe tener al menos un vídeo.
+	\end{itemize}}
+{
+	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+
+    \item El usuario pulsa el botón <<clasificar vídeo>>.
+    \item Se clasificará el vídeo correspondiente.
+
+    
+    \end{itemize}
+}
+{Aparecerá la clasificación del vídeo.}
+{}
+{Alta}
+
+\cu{6.1}{Añadir paciente}
+{RF-12}
+{El médico a de ser capaz de añadir pacientes a su lista de pacientes.}
+{	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+	\item Debe existir el paciente que se desea añadir.
+	\end{itemize}}
+{
+	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+
+    \item El médico pulsa el botón <<añadir paciente>>.
+    \item Se deberá rellenar los datos del paciente que se desea agregar.
+    \item El paciente se agregará a la lista de pacientes.
+    
+    \end{itemize}
+}
+{Aparecerá el paciente en la lista del médico.}
+{	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+
+    \item El paciente no existe.
+    \item El paciente ya se encuentra en la lista del médico.
+    
+    \end{itemize}}
+{Alta}
+
+\cu{6.2}{Eliminar paciente}
+{RF-13}
+{El médico a de ser capaz de eliminar pacientes a su lista de pacientes.}
+{	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+	\item Debe existir el paciente que se desea eliminar.
+	\item El paciente debe estar incluido en la lista de pacientes del médico.
+	\end{itemize}}
+{
+	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+
+    \item El médico pulsa el botón <<eliminar paciente>>.
+    \item Se selecciona el paciente que se desea eliminar.
+	\item Se confirma que se desea eliminar a ese paciente.
+    
+    \end{itemize}
+}
+{Ya no aparecerá el paciente en la lista del médico.}
+{	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+
+    \item El paciente no existe.
+    \item El paciente no se encuentra en la lista del médico.
+    
+    \end{itemize}}
+{Media}
+
+
