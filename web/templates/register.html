@@ -58,23 +58,24 @@
 <body>
     <div class="container">
         <h1>Register</h1>
-        <form>
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <div class="form-group">
-                <label for="confirm_password">Confirm Password:</label>
-                <input type="password" id="confirm_password" name="confirm_password" required>
-            </div>
-            <div class="form-group">
-                <button type="submit">Register</button>
-            </div>           
-        </form>
+        <form action="/submit_registration" method="post">
+            <label for="name">Nombre:</label><br>
+            <input type="text" id="name" name="name" required><br>
+            <label for="last_name">Apellidos:</label><br>
+            <input type="text" id="last_name1" name="last_name" required><br>
+            <input type="text" id="last_name2" name="last_name" required><br>
+            <label for="gender">Genero:</label><br>
+            <select id="gender" name="gender" required>
+              <option value="male">Hombre</option>
+              <option value="female">Mujer</option>
+              <option value="other">Otro</option>
+            </select><br>
+            <label for="birth_date">Fecha de naciemiento:</label><br>
+            <input type="date" id="birth_date" name="birth_date" required><br>
+            <label for="password">Contraseña:</label><br>
+            <input type="password" id="password" name="password" required><br>
+            <input type="submit" value="Register">
+          </form>
     </div>
 </body>
 </html>
