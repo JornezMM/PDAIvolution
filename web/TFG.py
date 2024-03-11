@@ -3,6 +3,7 @@ from flask_font_awesome import FontAwesome
 from flask_sqlalchemy import SQLAlchemy
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user
+from werkzeug.security import generate_password_hash
 
 app = Flask(__name__)
 font_awesome = FontAwesome(app)
@@ -24,12 +25,11 @@ class Video(db.Model):
 
 class Patient(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    age = db.Column(db.Integer, nullable=False)
     username = db.Column(db.String(100), nullable=False)
+    password = db.Column(db.String(100), nullable=False)
     first_name = db.Column(db.String(100), nullable=False)
     last_name1 = db.Column(db.String(100), nullable=False)
     last_name2 = db.Column(db.String(100), nullable=True)
-    password = db.Column(db.String(100), nullable=False)
     birth_date = db.Column(db.Date, nullable=False)
     gender = db.Column(db.Enum('M', 'F','O'), nullable=False)
     doctor_id = db.Column(db.Integer, db.ForeignKey('doctor.id'), nullable=False)
@@ -81,18 +81,59 @@ def login():
 
 @app.route('/register/', methods=['GET', 'POST'])
 def register():
-    # if request.method == 'POST':
-    #     username = request.form['username']
-    #     password = request.form['password']
-        
-    #     # Check if user already exists in the database
-    #     for user in users:
-    #         if user['username'] == username:
-    #             return 'Username already taken'
-        
-    #     # Add new user to the database
-    #     users.append({'username': username, 'password': password})
-    #     return redirect(url_for('login'))
+    if request.method == 'GET':
+        return render_template('register.html')
+
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        user_type = request.form['user_type']
+        first_name = request.form['name']
+        last_name1 = request.form['last_name1']
+        last_name2 = request.form['last_name2']
+
+        if user_type == 'patient':
+            # Check if the patient already exists in the database
+            existing_patient = Patient.query.filter_by(username=username).first()
+            if existing_patient:
+                return 'Patient already exists'
+            
+            # Create a new patient
+            birth_date = request.form['birth_date']
+            gender = request.form['gender']
+            doctor_id = request.form['doctor_id']
+            hashed_password = generate_password_hash(password)  # Hash the password
+            patient = Patient(username=username, password=hashed_password, first_name=first_name, last_name1=last_name1, last_name2=last_name2, birth_date=birth_date, gender=gender, doctor_id=doctor_id)
+            db.session.add(patient)
+            print(patient)
+            db.session.commit()
+        elif user_type == 'doctor':
+            # Check if the doctor already exists in the database
+            existing_doctor = Doctor.query.filter_by(username=username).first()
+            if existing_doctor:
+                return 'Doctor already exists'
+            
+            # Create a new doctor
+            hashed_password = generate_password_hash(password)  # Hash the password
+            doctor = Doctor(username=username, password=hashed_password, first_name=first_name, last_name1=last_name1, last_name2=last_name2)
+            db.session.add(doctor)
+            print(doctor)
+            db.session.commit()
+        elif user_type == 'admin':
+            # Check if the admin already exists in the database
+            existing_admin = Admin.query.filter_by(username=username).first()
+            if existing_admin:
+
+                return 'Admin already exists'
+            
+            # Create a new admin
+            hashed_password = generate_password_hash(password)  # Hash the password
+            admin = Admin(username=username, password=hashed_password, first_name=first_name, last_name1=last_name1, last_name2=last_name2)
+            db.session.add(admin)
+            db.session.commit()
+            return "aaaaaaaaaaaaaaaaaaaaaaaaaa"
+
+    return redirect(url_for('home'))
     
     return render_template('register.html')
 
