@@ -15,6 +15,27 @@ Otros problemas: Las alteraciones de la marcha (como pasos indecisos o congelaci
 
 \subsection{Rapid finger tapping test}
 
-El test de golpeteo rápido de los dedos, también conocido como <<rapid finger tapping test>> o RFTT es un procedimiento por el cual el paciente realiza golpeteos de manera repetitiva durante un periodo de entre 10 y 15 segundos en los cuales ha de intentar generar la mayor amplitud posible entre el dedo indice y el pulgar sin bajar la frecuencia a la que lo realiza. Este test es usado comunmente para el diagnostico de personas con la EP ya que como se explicó anteriormente uno de los síntomas que presenta esta enfermedad el la bradicisnesia el cual produce que una persona con EP al realizar este test muestre deteriodo ya sea en la amplitud o en la frecuencia según avanza la prueba. Este test será el que se utilizará en este proyecto para determinar el grado de EP en el que se encuentra el paciente.
+El test de golpeteo rápido de los dedos, también conocido como <<rapid finger tapping test>> o RFTT es un procedimiento por el cual el paciente realiza golpeteos de manera repetitiva durante un periodo de entre 10 y 15 segundos en los cuales ha de intentar generar la mayor amplitud posible entre el dedo indice y el pulgar sin bajar la frecuencia a la que lo realiza. Este test es usado comúnmente para el diagnostico de personas con la EP ya que como se explicó anteriormente uno de los síntomas que presenta esta enfermedad el la bradicisnesia el cual produce que una persona con EP al realizar este test muestre deteriodo ya sea en la amplitud o en la frecuencia según avanza la prueba. Este test será el que se utilizará en este proyecto para determinar el grado de EP en el que se encuentra el paciente.
 
 \subsection{Unified parkinson disease rating scale}
+
+La escala de evaluación unificada de la EP o UPDRS por sus siglas en inglés es una herramienta creada por la Movement Disorder Society que permite, mediante la evaluación de diversos parámetros del la EP, medir la gravedad de la enfermedad. En ella se miden diversos aspectos de las experiencias tanto motoras como no motoras de la vida diaria. Para el proyecto utilizaremos solo algunas de las medidas que se utilizan para la clasificación del estado de la persona ya que son los datos que se extraerán de los vídeos proporcionados por los pacientes.
+
+
+\section{Aprendizaje automático}
+
+El aprendiza automático es una rama de la inteligencia artificial centrada en el desarrollo de métodos y algoritmos para que el computador de manera autónoma sea capaz de, mediante la experiencia y el procesamiento de datos, mejorar en esa tarea. De esta manera los modelos realizaran predicciones cada vez más precisas.
+
+Dentro de un <<dataset>> podemos encontrar lo que se conocen como instancias. Una instancia es cada fila del <<dataset>> caracterizadas por atributos que pueden ser tanto categóricos (nombres, colores, categorías,etc) como valores numéricos (números).
+
+Dentro del aprendizaje automático podemos distinguir tres tipos principales:
+\begin{itemize}
+\item Aprendizaje supervisado: a este aprendizaje se le proporciona un con junto de datos completo con ejemplos etiquetados, y es mediante estos ejemplos con los que aprende a clasificar nuevos datos o realizar predicciones. Se puede dividir en regresión (predicción de datos numéricos) o clasificación (predicción de datos categóricos)
+\item Aprendizaje no supervisado: este aprendizaje a diferencia del supervisado se le entregan los datos sin clasificar de manera que tiene que ser él el que encuentre las relaciones. Se puede dividir en: clustering (agrupación de datos por su similitud) y reducción dimensional (disminuye el número de variables en un conjunto de datos sin perder información importante).
+\item Aprendizaje semi-supervisado: este aprendizaje es una combinación de los dos aprendizajes anteriores ya que se le proporcionan dos conjuntos de  datos. En el primer conjuntos los datos están etiquetados, este conjunto es el conocido como entrenamiento (training) que es con el cual el modelo se entrena para encontrar la relación entre los datos. En el segundo conjunto los datos no están etiquetados, este conjunto es conocido como test que es el que permite al modelo comparar como de precisas son las predicciones que se realizan ya que, pese a que al modelo se le introduzcan los datos sin etiquetar, el <<dataset>> si contiene las etiquetas de estas instancias.
+\end{itemize}
+
+\section{Aprendizaje semisupervisado}
+
+
+
