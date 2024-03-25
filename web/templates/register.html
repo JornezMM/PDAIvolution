@@ -30,8 +30,8 @@
                 <input type="text" id="last_name1" name="last_name1" class="form-control" required>
             </div>
             <div class="col-md-6">
-                <label for="last_name2" class="form-label">&nbsp;</label> <input type="text" id="last_name2"
-                    name="last_name2" class="form-control">
+                <label for="last_name2" class="form-label">&nbsp;</label> 
+                <input type="text" id="last_name2" name="last_name2" class="form-control">
             </div>
             <div class="col-md-6"> <label for="username" class="form-label">Nombre de usuario:</label>
                 <input type="text" id="username" name="username" class="form-control" required>
@@ -43,21 +43,27 @@
                 <div class="row">
                     <div class="col-md-6">
                         <label for="gender" class="form-label">Genero:</label>
-                        <select id="gender" name="gender" class="form-select">
-                            <option value="M">Hombre</option>
+                        <select id="gender" name="gender" class="form-select" required>
+                            <option value="M" selected>Hombre</option>
                             <option value="F">Mujer</option>
                             <option value="O">Otro</option>
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label for="birth_date" class="form-label">Fecha de naciemiento:</label>
-                        <input type="date" id="birth_date" name="birth_date" class="form-control">
+                        <label for="birth_date" class="form-label">Fecha de nacimiento:</label>
+                        <input type="date" id="birth_date" name="birth_date" class="form-control" required value="1900-01-01">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <label for="doctor_id" class="form-label">ID del doctor:</label>
-                        <input type="text" id="doctor_id" name="doctor_id" class="form-control">
+                        <select id="doctor_id" name="doctor_id" class="form-select" required>
+                            <option value="" disabled>Select a doctor</option>
+                            <option value="" selected>No doctor</option>
+                            {% for doctor in doctorNames %}
+                                <option value="{{ doctor.id }}">{{ doctor.first_name }} {{ doctor.last_name1 }} {{ doctor.last_name2 }}</option>
+                            {% endfor %}
+                        </select>
                     </div>
                 </div>
             </div>

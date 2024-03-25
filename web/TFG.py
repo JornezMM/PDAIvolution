@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user
 from werkzeug.security import generate_password_hash
+import datetime
 
 app = Flask(__name__)
 font_awesome = FontAwesome(app)
@@ -15,7 +16,7 @@ login_manager.init_app(app)
 
 
 class Video(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)    
     user_id = db.Column(db.Integer, db.ForeignKey('patient.id'), nullable=False)
     hand = db.Column(db.Enum('left', 'right'), nullable=False)
     date = db.Column(db.Date, nullable=False)
@@ -25,7 +26,7 @@ class Video(db.Model):
 
 class Patient(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(100), nullable=False)
+    username = db.Column(db.String(100), nullable=False, unique=True)
     password = db.Column(db.String(100), nullable=False)
     first_name = db.Column(db.String(100), nullable=False)
     last_name1 = db.Column(db.String(100), nullable=False)
@@ -36,7 +37,7 @@ class Patient(db.Model):
 
 class Admin(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(100), nullable=False)
+    username = db.Column(db.String(100), nullable=False, unique=True)
     password = db.Column(db.String(100), nullable=False)
     first_name = db.Column(db.String(100), nullable=False)
     last_name1 = db.Column(db.String(100), nullable=False)
@@ -44,7 +45,7 @@ class Admin(db.Model):
 
 class Doctor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(100), nullable=False)
+    username = db.Column(db.String(100), nullable=False, unique=True)
     password = db.Column(db.String(100), nullable=False)
     first_name = db.Column(db.String(100), nullable=False)
     last_name1 = db.Column(db.String(100), nullable=False)
@@ -82,7 +83,8 @@ def login():
 @app.route('/register/', methods=['GET', 'POST'])
 def register():
     if request.method == 'GET':
-        return render_template('register.html')
+        doctorNames = db.session.query(Doctor.id,Doctor.first_name, Doctor.last_name1).all()
+        return render_template('register.html', doctorNames=doctorNames)
 
     if request.method == 'POST':
         username = request.form['username']
@@ -99,7 +101,7 @@ def register():
                 return 'Patient already exists'
             
             # Create a new patient
-            birth_date = request.form['birth_date']
+            birth_date = datetime.datetime.strptime(request.form['birth_date'], '%Y-%m-%d').date()
             gender = request.form['gender']
             doctor_id = request.form['doctor_id']
             hashed_password = generate_password_hash(password)  # Hash the password
@@ -131,7 +133,7 @@ def register():
             admin = Admin(username=username, password=hashed_password, first_name=first_name, last_name1=last_name1, last_name2=last_name2)
             db.session.add(admin)
             db.session.commit()
-            return "aaaaaaaaaaaaaaaaaaaaaaaaaa"
+            return ""
 
     return redirect(url_for('home'))
     
