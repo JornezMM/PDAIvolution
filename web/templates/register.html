@@ -46,7 +46,6 @@
                         <select id="gender" name="gender" class="form-select" required>
                             <option value="M" selected>Hombre</option>
                             <option value="F">Mujer</option>
-                            <option value="O">Otro</option>
                         </select>
                     </div>
                     <div class="col-md-6">
@@ -57,9 +56,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <label for="doctor_id" class="form-label">ID del doctor:</label>
-                        <select id="doctor_id" name="doctor_id" class="form-select" required>
+                        <select id="doctor_id" name="doctor_id" class="form-select" {% if user_type == 'patient' %}required{% endif %}>
                             <option value="" disabled>Select a doctor</option>
-                            <option value="" selected>No doctor</option>
                             {% for doctor in doctorNames %}
                                 <option value="{{ doctor.id }}">{{ doctor.first_name }} {{ doctor.last_name1 }} {{ doctor.last_name2 }}</option>
                             {% endfor %}

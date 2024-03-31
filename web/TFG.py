@@ -32,7 +32,7 @@ class Patient(db.Model):
     last_name1 = db.Column(db.String(100), nullable=False)
     last_name2 = db.Column(db.String(100), nullable=True)
     birth_date = db.Column(db.Date, nullable=False)
-    gender = db.Column(db.Enum('M', 'F','O'), nullable=False)
+    gender = db.Column(db.Enum('M', 'F'), nullable=False)
     doctor_id = db.Column(db.Integer, db.ForeignKey('doctor.id'), nullable=False)
 
 class Admin(db.Model):
@@ -67,23 +67,15 @@ def home():
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
-    # if request.method == 'POST':
-    #     username = request.form['username']
-    #     password = request.form['password']
-        
-    #     # Check if user exists in the database
-    #     for user in users:
-    #         if user['username'] == username and user['password'] == password:
-    #             return redirect(url_for('home'))
-        
-    #     return 'Invalid username or password'
+
     
     return render_template('login.html')
 
 @app.route('/register/', methods=['GET', 'POST'])
 def register():
     if request.method == 'GET':
-        doctorNames = db.session.query(Doctor.id,Doctor.first_name, Doctor.last_name1).all()
+        doctorNames = db.session.query(Doctor.id,Doctor.first_name, Doctor.last_name1,Doctor.last_name2).all()
+        print(doctorNames)
         return render_template('register.html', doctorNames=doctorNames)
 
     if request.method == 'POST':
@@ -95,49 +87,36 @@ def register():
         last_name2 = request.form['last_name2']
 
         if user_type == 'patient':
-            # Check if the patient already exists in the database
             existing_patient = Patient.query.filter_by(username=username).first()
             if existing_patient:
-                return 'Patient already exists'
-            
-            # Create a new patient
+                return "<script>alert('Ese nombre de usuario ya existe.'); window.location.href='/register/';</script>"
             birth_date = datetime.datetime.strptime(request.form['birth_date'], '%Y-%m-%d').date()
             gender = request.form['gender']
             doctor_id = request.form['doctor_id']
-            hashed_password = generate_password_hash(password)  # Hash the password
+            hashed_password = generate_password_hash(password)
             patient = Patient(username=username, password=hashed_password, first_name=first_name, last_name1=last_name1, last_name2=last_name2, birth_date=birth_date, gender=gender, doctor_id=doctor_id)
             db.session.add(patient)
             print(patient)
             db.session.commit()
         elif user_type == 'doctor':
-            # Check if the doctor already exists in the database
             existing_doctor = Doctor.query.filter_by(username=username).first()
             if existing_doctor:
-                return 'Doctor already exists'
-            
-            # Create a new doctor
-            hashed_password = generate_password_hash(password)  # Hash the password
+                return "<script>alert('Ese nombre de usuario ya existe.'); window.location.href='/register/';</script>"
+            hashed_password = generate_password_hash(password)
             doctor = Doctor(username=username, password=hashed_password, first_name=first_name, last_name1=last_name1, last_name2=last_name2)
             db.session.add(doctor)
             print(doctor)
             db.session.commit()
         elif user_type == 'admin':
-            # Check if the admin already exists in the database
             existing_admin = Admin.query.filter_by(username=username).first()
             if existing_admin:
-
-                return 'Admin already exists'
-            
-            # Create a new admin
-            hashed_password = generate_password_hash(password)  # Hash the password
+                return "<script>alert('Ese nombre de usuario ya existe.'); window.location.href='/register/';</script>"
+            hashed_password = generate_password_hash(password)
             admin = Admin(username=username, password=hashed_password, first_name=first_name, last_name1=last_name1, last_name2=last_name2)
             db.session.add(admin)
             db.session.commit()
-            return ""
-
-    return redirect(url_for('home'))
-    
-    return render_template('register.html')
+            return redirect(url_for('home'))
+    return redirect(url_for('register'))
 
 if __name__ == '__main__':
     app.run(debug=True)
