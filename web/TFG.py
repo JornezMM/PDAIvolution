@@ -1,9 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 from flask_font_awesome import FontAwesome
 from flask_sqlalchemy import SQLAlchemy
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
 
 app = Flask(__name__)
@@ -24,7 +24,11 @@ class Video(db.Model):
     classification = db.Column(db.String(100), nullable=True)
 
 
-class Patient(db.Model):
+class Patient(UserMixin, db.Model):
+    def _repr_(self):
+        return f'<Patient {self.username}>'
+    def get_id(self):
+        return self.id
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), nullable=False, unique=True)
     password = db.Column(db.String(100), nullable=False)
@@ -35,7 +39,11 @@ class Patient(db.Model):
     gender = db.Column(db.Enum('M', 'F'), nullable=False)
     doctor_id = db.Column(db.Integer, db.ForeignKey('doctor.id'), nullable=False)
 
-class Admin(db.Model):
+class Admin(UserMixin, db.Model):
+    def _repr_(self):
+        return f'<Admin {self.username}>'
+    def get_id(self):
+        return self.id
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), nullable=False, unique=True)
     password = db.Column(db.String(100), nullable=False)
@@ -43,7 +51,11 @@ class Admin(db.Model):
     last_name1 = db.Column(db.String(100), nullable=False)
     last_name2 = db.Column(db.String(100), nullable=True)
 
-class Doctor(db.Model):
+class Doctor(UserMixin,db.Model):
+    def _repr_(self):
+        return f'<Doctor {self.username}>'
+    def get_id(self):
+        return self.id
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), nullable=False, unique=True)
     password = db.Column(db.String(100), nullable=False)
@@ -58,26 +70,69 @@ with app.app_context():
 @login_manager.user_loader
 def loader_user(user_id):
     """Carga el usuario desde la base de datos"""
-
-    return Users.query.get(user_id)
+    if session.get('usertype') == None:
+        return None
+    user_type = session.get('usertype')
+    if user_type == 'patient':
+        return Patient.query.get(user_id)
+    elif user_type == 'doctor':
+        return Doctor.query.get(user_id)
+    elif user_type == 'admin':
+        return Admin.query.get(user_id)
+    else:
+        return None
 
 @app.route('/')
+def index():
+   return render_template('home.html')
+
+@app.route('/home/')
 def home():
    return render_template('home.html')
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
-
-    
+    if request.method == 'GET':
+        if current_user.is_authenticated:
+            return redirect(url_for('home'))
+        else:
+            return render_template('login.html')
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        user_type = request.form['role']
+        if user_type == 'patient':
+            user = Patient.query.filter_by(username=username).first()
+        elif user_type == 'doctor':
+            user = Doctor.query.filter_by(username=username).first()
+        elif user_type == 'admin':
+            user = Admin.query.filter_by(username=username).first()
+        if user and check_password_hash(user.password, password):
+            session['usertype'] = user_type
+            login_user(user)
+            if user_type == 'patient':
+                return redirect(url_for('home'))
+            elif user_type == 'doctor':
+                return redirect(url_for('home'))
+            elif user_type == 'admin':
+                return redirect(url_for('home'))
+        else:
+            return "<script>alert('Usuario o contraseña incorrectos.'); window.location.href='/login/';</script>"
     return render_template('login.html')
-
+@app.route('/logout/')
+def logout():
+    logout_user()
+    return redirect(url_for('home'))
 @app.route('/register/', methods=['GET', 'POST'])
 def register():
     if request.method == 'GET':
-        doctorNames = db.session.query(Doctor.id,Doctor.first_name, Doctor.last_name1,Doctor.last_name2).all()
-        print(doctorNames)
-        return render_template('register.html', doctorNames=doctorNames)
-
+        if current_user.is_authenticated:
+            if session.get("usertype") == 'admin':
+                return render_template('register.html')
+            else:
+                return redirect(url_for('login'))
+        else:
+            return redirect(url_for('login'))
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -116,8 +171,8 @@ def register():
             db.session.add(admin)
             db.session.commit()
             return redirect(url_for('home'))
-    return redirect(url_for('register'))
-
+        return redirect(url_for('register'))
+    return render_template('register.html')
 if __name__ == '__main__':
     app.run(debug=True)
     
