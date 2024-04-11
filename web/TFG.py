@@ -128,7 +128,8 @@ def register():
     if request.method == 'GET':
         if current_user.is_authenticated:
             if session.get("usertype") == 'admin':
-                return render_template('register.html')
+                doctors= Doctor.query.all()
+                return render_template('register.html', doctorNames=doctors)
             else:
                 return redirect(url_for('login'))
         else:
@@ -172,7 +173,6 @@ def register():
             db.session.commit()
             return redirect(url_for('home'))
         return redirect(url_for('register'))
-    return render_template('register.html')
 if __name__ == '__main__':
     app.run(debug=True)
     
