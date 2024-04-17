@@ -117,7 +117,7 @@ def login():
             elif user_type == 'admin':
                 return redirect(url_for('home'))
         else:
-            return "<script>alert('Usuario o contraseña incorrectos.'); window.location.href='/login/';</script>"
+            return render_template('login.html', error=True)
     return render_template('login.html')
 @app.route('/logout/')
 def logout():
