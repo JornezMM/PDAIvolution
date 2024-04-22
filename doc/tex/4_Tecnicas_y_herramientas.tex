@@ -34,3 +34,36 @@ Principalmente de Python:
 \item \textbf{Scikit-Learn}: esta librería ofrece una amplia variedad de algoritmos de aprendizaje supervisados, semisupervisados y no supervisados~\cite{sklearnHome}. Además posee una gran compatibilidad con otras librerías como así como una extensa documentación que facilitan su implementación.3.
 \item \textbf{TSFresh}: es una biblioteca de Python, para la extracción y representación de características de series temporales~\cite{tsfreshHome}. Esta herramienta agiliza el proceso de extracción de características a partir de datos de series temporales para apoyar las tareas de aprendizaje automático. Ofrece una selección de características definidas que abarcan diferentes medidas estadísticas, como análisis de tendencias, patrones estacionales, métricas de correlación y evaluaciones de complejidad.
 \end{itemize}
+
+\subsection{Entorno de desarrollo}
+Incluye el entorno integrado de desarrollo (IDE), lenguaje y otros programas usados.
+\begin{itemize}
+\item \textbf{Visual Studio Code}: editor y depurador de código, así como algunas de sus extensiones más importantes.
+\item \textbf{Python}: lenguaje de programación de alto nivel ampliamente usado. Ha sido escogido para realizar este proyecto debido a que posee una gran variedad de paquetes y librerías de Machine Learning~\cite{python}.
+\item \textbf{Git}: es un software de control de versiones distribuido, utilizado para la control de versiones en proyectos software.
+\item \textbf{Github Copilot}: es un asistente de programación con inteligencia artificial que te permite realizar código de forma más rápida mediante la realización de consultas y las sugerencias que provee.
+\end{itemize}
+\subsection{Desarrollo web}
+A continuación se exponen tanto librerías como recursos para el desarrollo del apartado web:
+
+\begin{itemize}
+\item \textbf{Boostrap}: es un <<framework>> utilizado para la creación de páginas web~\cite{boostrap}. En esencia es un librería de código que simplifica el proceso de desarrollo de una página web. Unas de sus principales características son:
+\begin{itemize}
+\item \textbf{Diseño <<responsive>>}: Boostrap permite de una forma muy sencilla implementar la posibilidad de que la página web con todos sus componentes se adapten automáticamente en tiempo real a cualquier pantalla incluso si se modifica el tamaño de la ventana.
+\item \textbf{Documentación y comunidad}: dado que Boostrap es un framework muy conocido, tanto la documentación del framework como la comunidad que ayuda a desarrollarlo facilitan mucho la posibilidad de aprenderlo y poder encontrar soluciones especificas a nuestro diseño en poco tiempo.
+\item \textbf{Enfoque móvil}: Boostrap esta diseñado teniendo en cuenta también el diseño en dispositivos móviles, lo que ayuda al desarrollo de la web para multiplataformas.
+\end{itemize}
+\item \textbf{Flask}: es un <<framework>> escrito en Python  que simplifica y facilita la creación de aplicaciones web mediante el uso del patrón Modelo-Vista-Controlador~\cite{flask}. Dado que es considerado un micro <<framework>> no viene con todas las funcionalidades por defecto; sin embargo, existen librerías compatibles con Flask que permiten añadir todas las funcionalidades que se necesiten. Entre ellas se han usado:
+\begin{itemize}
+\item \textbf{Werkzeug}: es un conjunto de librerías de Python usados para el desarrollo web~\cite{werkzeug}. Se ha utilizado Flask junto a Werkzeug ya que este contiene una librería de cifrado que se ha utilizado durante el desarrollo del proyecto.
+\item \textbf{SQLAlchemy}: dado que Flask no puede hacer uso de forma directa de las bases de datos hace uso de la librería SQLAlchemy~\cite{sqlalchemy}. Esta librería permite la creación de bases de datos mediante la creación de clases en Python, definir el esquema y la relación entre las tablas y hacer consultas mediante métodos y objetos en vez de consultas SQL sin formato.
+\item \textbf{Flask-Login}: es una extensión de Flask que simplifica añadir la funcionalidad de iniciar sesión, administrar sesión y cerrar sesión~\cite{flasklogin}. Permite además otorgar y restringir accesos de distintas secciones de la aplicación así como cargar datos relacionados con la sesión actual.
+\end{itemize}
+\item \textbf{Jinja}: es un motor de plantillas rápido, seguro y fácil de usar para Python~\cite{jinja}. Permite la modificación de partes de la plantilla de la web mediante el uso de código como la agregación de contenido dependiendo del valor de variables mediante bucles o condicionales.
+\item \textbf{Font Awesome}: es una herramienta usada para el diseño y desarrollo de páginas web~\cite{fontawesome}. En vez de usar archivos de imágenes para iconos utiliza fuentes. Esto ofrece diversas ventajas:
+\begin{itemize}
+\item Escalabilidad: los iconos se escalan perfectamente a cualquier tamaño sin perder calidad.
+\item Colores personalizables: permite modificar el color de los iconos usando solo CSS.
+Para poder utilizar Font Awesome con Flask se ha utilizado la librería Flask-FontAwesome que permite su implementación~\cite{flaskfontawesome}.
+\end{itemize}
+\end{itemize}
