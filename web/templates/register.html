@@ -50,7 +50,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="birth_date" class="form-label">Fecha de nacimiento:</label>
-                        <input type="date" id="birth_date" name="birth_date" class="form-control" required value="1900-01-01">
+                        <input type="date" id="birth_date" name="birth_date" class="form-control" {% if user_type == 'patient' %}required{% endif %} max="2009-12-31">
                     </div>
                 </div>
                 <div class="row">

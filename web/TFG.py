@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_font_awesome import FontAwesome
 from flask_sqlalchemy import SQLAlchemy
-from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
@@ -126,6 +125,8 @@ def logout():
 @app.route('/register/', methods=['GET', 'POST'])
 def register():
     if request.method == 'GET':
+        doctors= Doctor.query.all()
+        return render_template('register.html', doctorNames=doctors)
         if current_user.is_authenticated:
             if session.get("usertype") == 'admin':
                 doctors= Doctor.query.all()
@@ -173,6 +174,57 @@ def register():
             db.session.commit()
             return redirect(url_for('home'))
         return redirect(url_for('register'))
+
+@app.route('/admin/', methods=['GET', 'POST'])
+def admin():
+    if request.method == 'GET':
+        doctors = Doctor.query.all()
+        patients = Patient.query.all()
+        admins = Admin.query.all()
+        return render_template('adminHome.html', doctors=doctors, patients=patients, admins=admins)
+        if current_user.is_authenticated:
+            if session.get("usertype") == 'admin':
+                return render_template('admin.html')
+            else:
+                return redirect(url_for('login'))
+        else:
+            return redirect(url_for('login'))
+    if request.method == 'POST':
+        return render_template('admin.html')
+
+@app.route('/modify/<string:user>', methods=['GET', 'POST'])
+def modify(user):
+    if request.method == 'GET':
+        rowData = user.split('-')
+        match rowData[0].lower():
+            case 'doctor':
+                doctor = Doctor.query.filter_by(username=rowData[1]).first()
+                print(doctor)
+                return render_template('modify.html', user=doctor, user_type='doctor')
+            case 'patient':
+                patient = Patient.query.filter_by(username=rowData[1]).first()
+                return render_template('modify.html', user=patient, user_type='patient')
+            case 'admin':
+                admin = Admin.query.filter_by(username=rowData[1]).first()
+                return render_template('modify.html', user=admin, user_type='admin')
+        if current_user.is_authenticated:
+            if session.get("usertype") == 'admin':
+                rowData = user.split('-')
+                match rowData[0].toLowerCase():
+                    case 'doctor':
+                        doctor = Doctor.query.get(rowData[1])
+                        return render_template('modify.html', user=doctor, user_type='doctor')
+                    case 'patient':
+                        patient = Patient.query.get(rowData[1])
+                        return render_template('modify.html', user=patient, user_type='patient')
+                    case 'admin':
+                        admin = Admin.query.get(rowData[1])
+                        return render_template('modify.html', user=admin, user_type='admin')
+            else:
+                return redirect(url_for('login'))
+        else:
+            return redirect(url_for('login'))
+
 if __name__ == '__main__':
     app.run(debug=True)
     
