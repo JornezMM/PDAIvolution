@@ -1,14 +1,12 @@
 \capitulo{3}{Conceptos teóricos}
 
-En este capítulo se definirán algunos conceptos teóricos para facilitar la compresión de este proyecto.
+En este capítulo se definirán algunos conceptos teóricos para facilitar la comprensión de este proyecto.
 
 \section{Enfermedad del Parkinson}
 
-En este apartado se explicarán lo conceptos teóricos relativos a la enfermedad del Parkinson (EP).
-\subsection{Concepto general de la EP}
 La EP es una  enfermedad neurodegenerativa multisistémica progresiva que cada afecta principalmente a a gente de avanzada edad~\cite{pdsymptoms}.  
 Entre los síntomas principales de esta enfermedad podemos encontrar:
-Perdida significativa de parte de las células productoras de dopamina lo que produce que aparezcan mucho antes los síntomas relacionados con el movimiento que presenta la EP.Otro de los síntomas que podemos encontrar en la EP es la bradicinesia es cual se caracteriza por la lentitud al realizar movimientos voluntarios así como la ralentización y decremento de amplitud a la hora de realizar movimientos repetitivos.
+Perdida significativa de parte de las células productoras de dopamina lo que produce que aparezcan mucho antes los síntomas relacionados con el movimiento que presenta la EP. Otro de los síntomas que podemos encontrar en la EP es la bradicinesia es cual se caracteriza por la lentitud al realizar movimientos voluntarios así como la ralentización y decremento de amplitud a la hora de realizar movimientos repetitivos.
 El diagnóstico de la EP se basa en criterios específicos. Los síntomas iniciales incluyen lentitud de movimientos, junto con rigidez muscular, temblores o problemas de equilibrio. Los controles posteriores descartan otras posibles causas y confirman la presencia de factores que sugieren claramente la EP.
 Progresión habitual: La EP suele empezar en un lado del cuerpo y extenderse a lo largo de unos años. Los síntomas incluyen postura encorvada, rigidez, letra más pequeña y marcha arrastrando los pies. Los temblores son frecuentes.
 Otros problemas: Las alteraciones de la marcha (como pasos indecisos o congelación repentina) se vuelven habituales. La pérdida de equilibrio es un problema importante, que aumenta el riesgo de caídas y lesiones.
@@ -32,10 +30,14 @@ Dentro del aprendizaje automático podemos distinguir tres tipos principales:
 \begin{itemize}
 \item Aprendizaje supervisado: a este aprendizaje se le proporciona un con junto de datos completo con ejemplos etiquetados, y es mediante estos ejemplos con los que aprende a clasificar nuevos datos o realizar predicciones. Se puede dividir en regresión (predicción de datos numéricos) o clasificación (predicción de datos categóricos)
 \item Aprendizaje no supervisado: este aprendizaje a diferencia del supervisado se le entregan los datos sin clasificar de manera que tiene que ser él el que encuentre las relaciones. Se puede dividir en: clustering (agrupación de datos por su similitud) y reducción dimensional (disminuye el número de variables en un conjunto de datos sin perder información importante).
-\item Aprendizaje semi-supervisado: este aprendizaje es una combinación de los dos aprendizajes anteriores ya que se le proporcionan dos conjuntos de  datos. En el primer conjuntos los datos están etiquetados, este conjunto es el conocido como entrenamiento (training) que es con el cual el modelo se entrena para encontrar la relación entre los datos. En el segundo conjunto los datos no están etiquetados, este conjunto es conocido como test que es el que permite al modelo comparar como de precisas son las predicciones que se realizan ya que, pese a que al modelo se le introduzcan los datos sin etiquetar, el <<dataset>> si contiene las etiquetas de estas instancias.
+\item Aprendizaje semi-supervisado: este aprendizaje es una combinación de los dos aprendizajes anteriores ya que se le proporcionan dos conjuntos de  datos. En el primer conjuntos los datos están etiquetados, este conjunto es el conocido como entrenamiento (training) que es con el cual el modelo se entrena para encontrar la relación entre los datos. En el segundo conjunto los datos no están etiquetados, este conjunto es conocido como test que es el que permite al modelo comparar como de precisas son las predicciones que se realizan ya que, pese a que al modelo se le introduzcan los datos sin etiquetar, el <<dataset>> si contiene las etiquetas de estas instancias. Al igual que el aprendizaje supervisado su objetivo principal es la creación de clasificadores o regresores.
 \end{itemize}
 
-\section{Aprendizaje semisupervisado}
+Un clasificador se compone principalmente de dos fases: la fase de entrenamiento y la fase de predicción. Durante la primera fase se le introducen datos al clasificador con una etiqueta y el objetivo de este es encontrar una hipótesis que se cumpla para cualquier instancia incluso si no se encuentra dentro de los datos de entrenamiento. Para ello suponemos que la  hipótesis que mejor se adapte a las instancias que no se encuentran en la fase de entrenamiento, es la que mejor se adapte al conjunto de entrenamiento. Es decir, el clasificador <<aprende>> del conjunto de entrenamiento. 
+
+
+
+
 
 
 
