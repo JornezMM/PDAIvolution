@@ -224,7 +224,20 @@ def modify(user):
                 return redirect(url_for('login'))
         else:
             return redirect(url_for('login'))
-
+@app.route('/patient/', methods=['GET'])
+def patient():
+    if request.method == 'GET':
+        if current_user.is_authenticated:
+            if session.get("usertype") == 'patient':
+                user= Patient.query.filter_by(id=current_user.id).first()
+                age= datetime.datetime.now().year - user.birth_date.year-1
+                if datetime.datetime.now().month > user.birth_date.month and datetime.datetime.now().day > user.birth_date.day:
+                    age += 1
+                return render_template('patientHome.html',user=user, age=age)
+            else:
+                return redirect(url_for('login'))
+        else:
+            return redirect(url_for('login'))
 if __name__ == '__main__':
     app.run(debug=True)
     
