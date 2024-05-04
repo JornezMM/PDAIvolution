@@ -110,7 +110,7 @@ def login():
             session['usertype'] = user_type
             login_user(user)
             if user_type == 'patient':
-                return redirect(url_for('home'))
+                return redirect(url_for('patient'))
             elif user_type == 'doctor':
                 return redirect(url_for('home'))
             elif user_type == 'admin':
