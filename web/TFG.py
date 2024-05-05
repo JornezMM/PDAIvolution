@@ -118,6 +118,7 @@ def login():
         else:
             return render_template('login.html', error=True)
     return render_template('login.html')
+
 @app.route('/logout/')
 def logout():
     logout_user()
@@ -142,7 +143,6 @@ def register():
         first_name = request.form['name']
         last_name1 = request.form['last_name1']
         last_name2 = request.form['last_name2']
-
         if user_type == 'patient':
             existing_patient = Patient.query.filter_by(username=username).first()
             if existing_patient:
@@ -153,7 +153,6 @@ def register():
             hashed_password = generate_password_hash(password)
             patient = Patient(username=username, password=hashed_password, first_name=first_name, last_name1=last_name1, last_name2=last_name2, birth_date=birth_date, gender=gender, doctor_id=doctor_id)
             db.session.add(patient)
-            print(patient)
             db.session.commit()
         elif user_type == 'doctor':
             existing_doctor = Doctor.query.filter_by(username=username).first()
@@ -162,7 +161,6 @@ def register():
             hashed_password = generate_password_hash(password)
             doctor = Doctor(username=username, password=hashed_password, first_name=first_name, last_name1=last_name1, last_name2=last_name2)
             db.session.add(doctor)
-            print(doctor)
             db.session.commit()
         elif user_type == 'admin':
             existing_admin = Admin.query.filter_by(username=username).first()
@@ -184,7 +182,7 @@ def admin():
         return render_template('adminHome.html', doctors=doctors, patients=patients, admins=admins)
         if current_user.is_authenticated:
             if session.get("usertype") == 'admin':
-                return render_template('admin.html')
+                return render_template('admin.html', admin_id=current_user.id)
             else:
                 return redirect(url_for('login'))
         else:
@@ -199,11 +197,12 @@ def modify(user):
         match rowData[0].lower():
             case 'doctor':
                 doctor = Doctor.query.filter_by(username=rowData[1]).first()
-                print(doctor)
                 return render_template('modify.html', user=doctor, user_type='doctor')
             case 'patient':
                 patient = Patient.query.filter_by(username=rowData[1]).first()
-                return render_template('modify.html', user=patient, user_type='patient')
+                doctor= Doctor.query.get(patient.doctor_id)
+                doctors = Doctor.query.all()
+                return render_template('modify.html', user=patient, user_type='patient', doctors=doctors, doctor=doctor)
             case 'admin':
                 admin = Admin.query.filter_by(username=rowData[1]).first()
                 return render_template('modify.html', user=admin, user_type='admin')
@@ -224,6 +223,53 @@ def modify(user):
                 return redirect(url_for('login'))
         else:
             return redirect(url_for('login'))
+    if request.method == 'POST':
+        old_username = user.split('-')[1]
+        print(old_username)
+        user_type = user.split('-')[0]
+        username = request.form['username']
+        password = request.form['password']
+        first_name = request.form['name']
+        last_name1 = request.form['last_name1']
+        last_name2 = request.form['last_name2']
+        if user_type == 'patient':
+            birth_date = datetime.datetime.strptime(request.form['birth_date'], '%Y-%m-%d').date()
+            doctor_id = request.form['doctor_id']
+            patient = Patient.query.filter_by(username=old_username).first()
+            patient.username = username
+            patient.first_name = first_name
+            patient.last_name1 = last_name1
+            patient.last_name2 = last_name2
+            patient.birth_date = birth_date
+            patient.doctor_id = doctor_id
+            if password:
+                hashed_password = generate_password_hash(password)
+                patient.password = hashed_password
+            db.session.commit()
+        elif user_type == 'doctor':
+            doctor = Doctor.query.filter_by(username=old_username).first()
+            doctor.username = username
+            doctor.first_name = first_name
+            doctor.last_name1 = last_name1
+            doctor.last_name2 = last_name2
+            if password:
+                hashed_password = generate_password_hash(password)
+                doctor.password = hashed_password
+            db.session.commit()
+        elif user_type == 'admin':
+            admins = Admin.query.all()
+            admin = Admin.query.filter_by(username=old_username).first()
+            admin.username = username
+            admin.first_name = first_name
+            admin.last_name1 = last_name1
+            admin.last_name2 = last_name2
+            if password:
+                hashed_password = generate_password_hash(password)
+                admin.password = hashed_password
+            db.session.commit()
+        return redirect(url_for('admin'))
+            
+
 @app.route('/patient/', methods=['GET'])
 def patient():
     if request.method == 'GET':
@@ -238,6 +284,7 @@ def patient():
                 return redirect(url_for('login'))
         else:
             return redirect(url_for('login'))
+        
 if __name__ == '__main__':
     app.run(debug=True)
     

@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <title>Página principal</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -6,56 +7,56 @@
     integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     {{ font_awesome.load_js() }}
     </style>
-  </head>
-    <body>
-        <div class="container">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Username</th>
-                        <th>Rol</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for user in admins %}
-                    <tr>
-                        <td>{{ user.first_name }} {{ user.last_name1 }} {{ user.last_name2 }}</td>
-                        <td>{{ user.username }}</td>
-                        <td>Administrador</td>
-                        <td>
-                            <button class="btn fa-solid fa-pen-to-square edit-button" onclick="modifyAdmin(event)">Edit</button>
-                            <button class="btn btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                    {% for user in patients %}
-                    <tr>
-                        <td>{{ user.first_name }} {{ user.last_name1 }} {{ user.last_name2 }}</td>
-                        <td>{{ user.username }}</td>
-                        <td>Paciente</td>
-                        <td>
-                            <button class="btn fa-solid fa-pen-to-square edit-button" onclick="modifyPatien(event)">Edit</button>
-                            <button class="btn btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                    {% for user in doctors %}
-                    <tr>
-                        <td>{{ user.first_name }} {{ user.last_name1 }} {{ user.last_name2 }}</td>
-                        <td>{{ user.username }}</td>
-                        <td>Doctor</td>
-                        <td>
-                            <button class="btn fa-solid fa-pen-to-square edit-button" onclick="modifyDoctor(event)">Edit</button>
-                            <button class="btn btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </body>
+</head>
+<body>
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Username</th>
+                    <th>Rol</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in admins %}
+                <tr>
+                    <td>{{ user.first_name }} {{ user.last_name1 }} {{ user.last_name2 }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>Administrador</td>
+                    <td>
+                        <button class="btn fa-solid fa-pen-to-square edit-button" onclick="modifyAdmin(event)">Edit</button>
+                        <button class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% for user in patients %}
+                <tr>
+                    <td>{{ user.first_name }} {{ user.last_name1 }} {{ user.last_name2 }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>Paciente</td>
+                    <td>
+                        <button class="btn fa-solid fa-pen-to-square edit-button" onclick="modifyPatien(event)">Edit</button>
+                        <button class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% for user in doctors %}
+                <tr>
+                    <td>{{ user.first_name }} {{ user.last_name1 }} {{ user.last_name2 }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>Doctor</td>
+                    <td>
+                        <button class="btn fa-solid fa-pen-to-square edit-button" onclick="modifyDoctor(event)">Edit</button>
+                        <button class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
 </html>
 <script>
     function getData(event) {
@@ -64,8 +65,8 @@
         const tableCells = tableRow.querySelectorAll('td');
         const rowData = {};
         for (let i = 0; i < tableCells.length; i++) {
-          const cellText = tableCells[i].textContent.trim();
-          rowData[i] = cellText;
+            const cellText = tableCells[i].textContent.trim();
+            rowData[i] = cellText;
         }
         return rowData;
     };
@@ -75,11 +76,10 @@
     }
     function modifyAdmin(event){
         const username = getData(event)[1];
-        window.location.href = `/modify/admin-`+username;;
+        window.location.href = `/modify/admin-`+username;
     }
     function modifyDoctor(event){
         const username = getData(event)[1];
-        window.location.href = `/modify/doctor-`+username;;
+        window.location.href = `/modify/doctor-`+username;
     }
-
 </script>
