@@ -22,7 +22,6 @@ class Video(db.Model):
     video_data = db.Column(db.LargeBinary, nullable=False)
     classification = db.Column(db.String(100), nullable=True)
 
-
 class Patient(UserMixin, db.Model):
     def _repr_(self):
         return f'<Patient {self.username}>'
@@ -61,10 +60,38 @@ class Doctor(UserMixin,db.Model):
     first_name = db.Column(db.String(100), nullable=False)
     last_name1 = db.Column(db.String(100), nullable=False)
     last_name2 = db.Column(db.String(100), nullable=True)
+    
+class Medicine(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    dosage = db.Column(db.String(100), nullable=False)
+
+class PatientMedicine(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'), nullable=False)
+    medicine_id = db.Column(db.Integer, db.ForeignKey('medicine.id'), nullable=False)
+    start_date = db.Column(db.Date, nullable=False)
+    end_date = db.Column(db.Date, nullable=True)
+
 # Initialize the database
+def create_default_admin():
+    if not Admin.query.first():
+        default_admin = Admin(
+            username='admin',
+            password=generate_password_hash('defaultpassword'),
+            first_name='Default',
+            last_name1='Admin',
+            last_name2=''
+        )
+        db.session.add(default_admin)
+        db.session.commit()
+        print("Default admin created.")
+    else:
+        print("Admin already exists.")
 db.init_app(app)
 with app.app_context():
     db.create_all()
+    create_default_admin()
     
 @login_manager.user_loader
 def loader_user(user_id):
@@ -179,14 +206,15 @@ def admin():
         doctors = Doctor.query.all()
         patients = Patient.query.all()
         admins = Admin.query.all()
-        return render_template('adminHome.html', doctors=doctors, patients=patients, admins=admins)
         if current_user.is_authenticated:
             if session.get("usertype") == 'admin':
-                return render_template('admin.html', admin_id=current_user.id)
+                        return render_template('adminHome.html', doctors=doctors, patients=patients, admins=admins, admin_username=current_user.username)
             else:
                 return redirect(url_for('login'))
         else:
             return redirect(url_for('login'))
+        return render_template('adminHome.html', doctors=doctors, patients=patients, admins=admins)
+        
     if request.method == 'POST':
         return render_template('admin.html')
 
