@@ -1,5 +1,12 @@
 \apendice{Especificación de diseño}
-
+\newcommand{\imagenAmpliada}[2]{
+	\begin{figure}[!h]
+		\centering
+		\includegraphics[width=1.3\textwidth]{#1}
+		\caption{#2}\label{fig:#1}
+	\end{figure}
+	\FloatBarrier
+}
 \section{Introducción}
 En el siguiente apartado se describen los detalles de la estructura del \textit{software}: el comportamiento y la interacción entre los distintos componentes.
 
@@ -9,21 +16,133 @@ Para implementar la persistencia de los datos se ha hecho uso de una base de dat
 \subsection{Modelo entidad-relación}
 
 Para representar gráficamente las relaciones entre los datos, se ha creado un diagrama E-R (ver figura~\ref{fig:./img/DiagramaER.pdf}). En el se puede observar una ISA exclusiva total. Esto se debe a que, tras consultarlo con el profesor Jesús Maudes, se llegó a la conclusión de que crear una ISA exclusiva total era una solución válida debido a que se quiere evitar que un mismo usuario tenga acceso a varias funcionalidades. En caso de que esto se requiriese (si un doctor necesita permisos de administración) se crearía otra cuenta de forma más controlada.
-
-\imagen{./img/DiagramaER.pdf}{Diagrama entidad-relación}
-
+\begin{landscape}
+\imagenAmpliada{./img/DiagramaER.pdf}{Diagrama entidad-relación}
+\end{landscape}
 \subsection{Modelo relacional}
 
 Partiendo del modelo entidad-relación (ver figura~\ref{fig:./img/DiagramaER.pdf}) se ha creado el diagrama relacional (ver figura~\ref{fig:./img/DiagramaRelacional.pdf}).
 A continuación se mencionan algunas de las decisiones más importantes que se han decido tomar a la hora de crear este diagrama.
 Con respecto a la ISA se ha decidido dividir en tres tablas distintas ya que en un principio un usuario solo va a poder tener uno de los tres roles asignados y en caso de que se necesitase que un doctor tuviera el rol de administrador, que es el un caso excepcional, se le otorgaría otra cuenta distinta con los permisos de administración. De esta manera podremos controlar los accesos de cada usuario de manera más limpia y exclusiva.
 El rol de administrador es un rol que pese a que no se relacione con ninguna otra entidad, se ha visto que es necesario para poder permitir el acceso a los controles de administrador.
-
-
-
-
 \imagen{./img/DiagramaRelacional.pdf}{Diagrama relacional de la aplicación}
 
+\subsection{Diccionario de datos}
+Se adjunta a continuación, para cada tabla, el diccionario de datos correspondiente.
+\begin{itemize}
+\item \textbf{Administradores}:la tabla ~\ref{datadic:admin} contiene la información correspondiente a los administradores de la aplicación.
+\begin{table}
+	\scalebox{0.80}{
+		\begin{tabular}{@{}p{5em} p{6em} p{6em} p{20em}@{}}
+			\toprule
+			\textbf{Nombre} & \textbf{Tipo} & \textbf{Columna} & \textbf{Descripción}\\
+			\midrule
+			\texttt{id} & \texttt{INTEGER} & \texttt{\textbf{PK}} & Identificador único del administrador. \\
+			\texttt{username} & \texttt{VARCHAR(100)} & \texttt{UNIQUE NOT NULL} & Nombre de usuario del administrador. Debe ser único. \\
+			\texttt{password} & \texttt{VARCHAR(100)} & \texttt{NOT NULL} & Contraseña del administrador, cifrada usando sha-256. \\
+			\texttt{first\_name} & \texttt{VARCHAR(100)} & \texttt{NOT NULL} & Primer nombre del administrador. \\
+			\texttt{last\_name} & \texttt{VARCHAR(100)} & \texttt{NOT NULL} & Apellidos del administrador. \\
+			\bottomrule
+		\end{tabular}
+	}
+	\caption[Diccionario de datos: \texttt{Admin}]{Diccionario de datos. Tabla correspondiente a la clase \texttt{Admin}.}
+	\label{datadic:admin}
+\end{table}
+\item \textbf{Doctores}:la tabla ~\ref{datadic:doctor} contiene la información correspondiente a los doctores.
+\begin{table}
+	\scalebox{0.80}{
+		\begin{tabular}{@{}p{5em} p{6em} p{6em} p{20em}@{}}
+			\toprule
+			\textbf{Nombre} & \textbf{Tipo} & \textbf{Columna} & \textbf{Descripción}\\
+			\midrule
+			\texttt{id} & \texttt{INTEGER} & \texttt{\textbf{PK}} & Identificador único del doctor. \\
+			\texttt{username} & \texttt{VARCHAR(100)} & \texttt{UNIQUE NOT NULL} & Nombre de usuario del doctor. Debe ser único. \\
+			\texttt{password} & \texttt{VARCHAR(100)} & \texttt{NOT NULL} & Contraseña del doctor, cifrada usando sha-256. \\
+			\texttt{first\_name} & \texttt{VARCHAR(100)} & \texttt{NOT NULL} & Primer nombre del doctor. \\
+			\texttt{last\_name} & \texttt{VARCHAR(100)} & \texttt{NOT NULL} & Apellidos del doctor. \\
+			\bottomrule
+		\end{tabular}
+	}
+	\caption[Diccionario de datos: \texttt{Doctor}]{Diccionario de datos. Tabla correspondiente a la clase \texttt{Doctor}.}
+	\label{datadic:doctor}
+\end{table}
+\item \textbf{Pacientes}:la tabla ~\ref{datadic:patient} contiene la información correspondiente a los pacientes.
+\begin{table}
+\scalebox{0.80}{
+	\begin{tabular}{@{}p{5em} p{6em} p{6em} p{20em}@{}}
+		\toprule
+		\textbf{Nombre} & \textbf{Tipo} & \textbf{Columna} & \textbf{Descripción}\\
+		\midrule
+		\texttt{id} & \texttt{INTEGER} & \texttt{\textbf{PK}} & Identificador único del paciente. \\
+		\texttt{username} & \texttt{VARCHAR(100)} & \texttt{UNIQUE NOT NULL} & Nombre de usuario del paciente. Debe ser único. \\
+		\texttt{password} & \texttt{VARCHAR(100)} & \texttt{NOT NULL} & Contraseña del paciente, cifrada usando sha-256. \\
+		\texttt{first\_name} & \texttt{VARCHAR(100)} & \texttt{NOT NULL} & Primer nombre del paciente. \\
+		\texttt{last\_name} & \texttt{VARCHAR(100)} & \texttt{NOT NULL} & Apellidos del paciente. \\
+		\texttt{birth\_date} & \texttt{DATE} & \texttt{NOT NULL} & Fecha de nacimiento del paciente. \\
+		\texttt{handedness} & \texttt{ENUM('right', 'left')} & \texttt{NOT NULL} & Mano dominante del paciente (derecha o izquierda). \\
+		\texttt{gender} & \texttt{ENUM('M', 'F')} & \texttt{NOT NULL} & Género del paciente (masculino o femenino). \\
+		\texttt{doctor\_id} & \texttt{INTEGER} & \texttt{FK(doctor.id)} & Clave foránea a la tabla Doctor. Indica el doctor a cargo del paciente. \\
+		\bottomrule
+	\end{tabular}
+	}
+\caption[Diccionario de datos: \texttt{Patient}]{Diccionario de datos. Tabla correspondiente a la clase \texttt{Patient}.}
+\label{datadic:patient}
+\end{table}
+\item \textbf{Vídeos}: la tabla ~\ref{datadic:video} contiene la información correspondiente a los vídeos de los pacientes pacientes.
+\begin{table}
+	\scalebox{0.80}{
+		\begin{tabular}{@{}p{5em} p{6em} p{6em} p{20em}@{}}
+			\toprule
+			\textbf{Nombre} & \textbf{Tipo} & \textbf{Columna} & \textbf{Descripción}\\
+			\midrule
+			\texttt{id} & \texttt{INTEGER} & \texttt{\textbf{PK}} & Identificador único del video.\\
+			\texttt{patient\_id} & \texttt{INTEGER} & \texttt{FK(patient.id)} & Clave foránea a la tabla Paciente. Indica el paciente asociado al video.\\
+			\texttt{hand} & \texttt{ENUM('left', 'right')} & \texttt{NOT NULL} & Mano usada en el vídeo (izquierda o derecha). \\
+			\texttt{date} & \texttt{DATE} & \texttt{NOT NULL} & Fecha de grabación del video. \\
+			\texttt{video\_data} & \texttt{LargeBinary} & \texttt{NOT NULL} & Datos binarios del vídeo. \\
+			\texttt{classification} & \texttt{VARCHAR(100)} & \texttt{NULL} & Clasificación del vídeo (opcional). \\
+			\bottomrule
+		\end{tabular}
+	}
+	\caption[Diccionario de datos: \texttt{Video}]{Diccionario de datos. Tabla correspondiente a la clase \texttt{Video}.}
+	\label{datadic:video}
+\end{table}
+
+\item \textbf{Medicinas}:la tabla ~\ref{datadic:medicine} contiene la información de las medicinas.
+\begin{table}
+	\scalebox{0.80}{
+		\begin{tabular}{@{}p{5em} p{6em} p{6em} p{20em}@{}}
+			\toprule
+			\textbf{Nombre} & \textbf{Tipo} & \textbf{Columna} & \textbf{Descripción}\\
+			\midrule
+			\texttt{id} & \texttt{INTEGER} & \texttt{\textbf{PK}} & Identificador único del medicamento. \\
+			\texttt{name} & \texttt{VARCHAR(100)} & \texttt{NOT NULL} & Nombre del medicamento. \\
+			\bottomrule
+		\end{tabular}
+	}
+	\caption[Diccionario de datos: \texttt{Medicine}]{Diccionario de datos. Tabla correspondiente a la clase \texttt{Medicine}.}
+	\label{datadic:medicine}
+\end{table}
+\item \textbf{PacienteMedicinas}: la tabla ~\ref{datadic:patientmedicine} contiene la información de las medicinas administradas a cada paciente incluyendo la fecha de inicio del tratamiento así como la fecha de finalización.
+\begin{table}
+	\scalebox{0.80}{
+		\begin{tabular}{@{}p{5em} p{6em} p{6em} p{20em}@{}}
+			\toprule
+			\textbf{Nombre} & \textbf{Tipo} & \textbf{Columna} & \textbf{Descripción}\\
+			\midrule
+			\texttt{id} & \texttt{INTEGER} & \texttt{\textbf{PK}} & Identificador único de la asociación entre paciente y medicamento. \\
+			\texttt{patient\_id} & \texttt{INTEGER} & \texttt{FK(patient.id)} & Clave foránea a la tabla Paciente. Indica el paciente que toma el medicamento. \\
+			\texttt{medicine\_id} & \texttt{INTEGER} & \texttt{FK(medicine.id)} & Clave foránea a la tabla Medicamento. Indica el medicamento que toma el paciente. \\
+			\texttt{dosage} & \texttt{VARCHAR(100)} & \texttt{NOT NULL} & Dosis del medicamento para el paciente. \\
+			\texttt{start\_date} & \texttt{DATE} & \texttt{NOT NULL} & Fecha de inicio del tratamiento con el medicamento. \\
+			\texttt{end\_date} & \texttt{DATE} & \texttt{NULL} & Fecha de fin del tratamiento con el medicamento (opcional). \\
+			\bottomrule
+		\end{tabular}
+	}
+	\caption[Diccionario de datos: \texttt{PatientMedicine}]{Diccionario de datos. Tabla correspondiente a la clase \texttt{PatientMedicine}.}
+	\label{datadic:patientmedicine}
+\end{table}
+\end{itemize}
 \section{Diseño procedimental}
 
 \section{Diseño arquitectónico}
