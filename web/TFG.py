@@ -16,7 +16,7 @@ login_manager.init_app(app)
 
 class Video(db.Model):
     id = db.Column(db.Integer, primary_key=True)    
-    user_id = db.Column(db.Integer, db.ForeignKey('patient.id'), nullable=False)
+    patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'), nullable=False)
     hand = db.Column(db.Enum('left', 'right'), nullable=False)
     date = db.Column(db.Date, nullable=False)
     video_data = db.Column(db.LargeBinary, nullable=False)
@@ -31,9 +31,9 @@ class Patient(UserMixin, db.Model):
     username = db.Column(db.String(100), nullable=False, unique=True)
     password = db.Column(db.String(100), nullable=False)
     first_name = db.Column(db.String(100), nullable=False)
-    last_name1 = db.Column(db.String(100), nullable=False)
-    last_name2 = db.Column(db.String(100), nullable=True)
+    last_name = db.Column(db.String(100), nullable=False)
     birth_date = db.Column(db.Date, nullable=False)
+    handedness = db.Column(db.Enum('right', 'left'), nullable=False)
     gender = db.Column(db.Enum('M', 'F'), nullable=False)
     doctor_id = db.Column(db.Integer, db.ForeignKey('doctor.id'), nullable=False)
 
@@ -46,8 +46,7 @@ class Admin(UserMixin, db.Model):
     username = db.Column(db.String(100), nullable=False, unique=True)
     password = db.Column(db.String(100), nullable=False)
     first_name = db.Column(db.String(100), nullable=False)
-    last_name1 = db.Column(db.String(100), nullable=False)
-    last_name2 = db.Column(db.String(100), nullable=True)
+    last_name = db.Column(db.String(100), nullable=False)
 
 class Doctor(UserMixin,db.Model):
     def _repr_(self):
@@ -58,18 +57,17 @@ class Doctor(UserMixin,db.Model):
     username = db.Column(db.String(100), nullable=False, unique=True)
     password = db.Column(db.String(100), nullable=False)
     first_name = db.Column(db.String(100), nullable=False)
-    last_name1 = db.Column(db.String(100), nullable=False)
-    last_name2 = db.Column(db.String(100), nullable=True)
+    last_name = db.Column(db.String(100), nullable=False)
     
 class Medicine(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
-    dosage = db.Column(db.String(100), nullable=False)
 
 class PatientMedicine(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'), nullable=False)
     medicine_id = db.Column(db.Integer, db.ForeignKey('medicine.id'), nullable=False)
+    dosage = db.Column(db.String(100), nullable=False)
     start_date = db.Column(db.Date, nullable=False)
     end_date = db.Column(db.Date, nullable=True)
 
@@ -78,10 +76,9 @@ def create_default_admin():
     if not Admin.query.first():
         default_admin = Admin(
             username='admin',
-            password=generate_password_hash('defaultpassword'),
+            password="scrypt:32768:8:1$qIEAmGScjaI4Sokx$33074b5fb76cf77744d751e832250dbcd090080cdd93f23adb5d555ccd324e2021cb04076c0e3a9fc8ba62239452db8851791d8d0fc93ef9558aeeb4e6a5953d",
             first_name='Default',
-            last_name1='Admin',
-            last_name2=''
+            last_name='Admin'
         )
         db.session.add(default_admin)
         db.session.commit()
@@ -168,8 +165,7 @@ def register():
         password = request.form['password']
         user_type = request.form['user_type']
         first_name = request.form['name']
-        last_name1 = request.form['last_name1']
-        last_name2 = request.form['last_name2']
+        last_name = request.form['last_name']
         if user_type == 'patient':
             existing_patient = Patient.query.filter_by(username=username).first()
             if existing_patient:
@@ -177,8 +173,9 @@ def register():
             birth_date = datetime.datetime.strptime(request.form['birth_date'], '%Y-%m-%d').date()
             gender = request.form['gender']
             doctor_id = request.form['doctor_id']
+            handedness = request.form['handedness']
             hashed_password = generate_password_hash(password)
-            patient = Patient(username=username, password=hashed_password, first_name=first_name, last_name1=last_name1, last_name2=last_name2, birth_date=birth_date, gender=gender, doctor_id=doctor_id)
+            patient = Patient(username=username, password=hashed_password, first_name=first_name, last_name=last_name, birth_date=birth_date, gender=gender, doctor_id=doctor_id, handedness=handedness)
             db.session.add(patient)
             db.session.commit()
         elif user_type == 'doctor':
@@ -186,7 +183,7 @@ def register():
             if existing_doctor:
                 return "<script>alert('Ese nombre de usuario ya existe.'); window.location.href='/register/';</script>"
             hashed_password = generate_password_hash(password)
-            doctor = Doctor(username=username, password=hashed_password, first_name=first_name, last_name1=last_name1, last_name2=last_name2)
+            doctor = Doctor(username=username, password=hashed_password, first_name=first_name, last_name=last_name)
             db.session.add(doctor)
             db.session.commit()
         elif user_type == 'admin':
@@ -194,11 +191,12 @@ def register():
             if existing_admin:
                 return "<script>alert('Ese nombre de usuario ya existe.'); window.location.href='/register/';</script>"
             hashed_password = generate_password_hash(password)
-            admin = Admin(username=username, password=hashed_password, first_name=first_name, last_name1=last_name1, last_name2=last_name2)
+            admin = Admin(username=username, password=hashed_password, first_name=first_name, last_name=last_name)
             db.session.add(admin)
             db.session.commit()
-            return redirect(url_for('home'))
-        return redirect(url_for('register'))
+        return redirect(url_for('admin'))
+
+        
 
 @app.route('/admin/', methods=['GET', 'POST'])
 def admin():
@@ -258,16 +256,14 @@ def modify(user):
         username = request.form['username']
         password = request.form['password']
         first_name = request.form['name']
-        last_name1 = request.form['last_name1']
-        last_name2 = request.form['last_name2']
+        last_name = request.form['last_name']
         if user_type == 'patient':
             birth_date = datetime.datetime.strptime(request.form['birth_date'], '%Y-%m-%d').date()
             doctor_id = request.form['doctor_id']
             patient = Patient.query.filter_by(username=old_username).first()
             patient.username = username
             patient.first_name = first_name
-            patient.last_name1 = last_name1
-            patient.last_name2 = last_name2
+            patient.last_name = last_name
             patient.birth_date = birth_date
             patient.doctor_id = doctor_id
             if password:
@@ -278,8 +274,7 @@ def modify(user):
             doctor = Doctor.query.filter_by(username=old_username).first()
             doctor.username = username
             doctor.first_name = first_name
-            doctor.last_name1 = last_name1
-            doctor.last_name2 = last_name2
+            doctor.last_name = last_name
             if password:
                 hashed_password = generate_password_hash(password)
                 doctor.password = hashed_password
@@ -289,8 +284,7 @@ def modify(user):
             admin = Admin.query.filter_by(username=old_username).first()
             admin.username = username
             admin.first_name = first_name
-            admin.last_name1 = last_name1
-            admin.last_name2 = last_name2
+            admin.last_name = last_name
             if password:
                 hashed_password = generate_password_hash(password)
                 admin.password = hashed_password

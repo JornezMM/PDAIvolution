@@ -24,13 +24,9 @@
                 <label for="name" class="form-label">Nombre:</label>
                 <input type="text" id="name" name="name" class="form-control" value="{{ user.first_name }}" required>
             </div>
-            <div class="col-md-6">
-                <label for="last_name1" class="form-label">Apellidos:</label>
-                <input type="text" id="last_name1" name="last_name1" class="form-control" value="{{ user.last_name1 }}" required>
-            </div>
-            <div class="col-md-6">
-                <label for="last_name2" class="form-label">&nbsp;</label> 
-                <input type="text" id="last_name2" name="last_name2" value="{{ user.last_name2 }}" class="form-control">
+            <div class="col-md-12"></div>
+                <label for="last_name" class="form-label">Apellidos:</label>
+                <input type="text" id="last_name" name="last_name" class="form-control" value="{{ user.last_name }}" required>
             </div>
             <div class="col-md-6">
                 <label for="username" class="form-label">Nombre de usuario:</label>
@@ -55,13 +51,14 @@
                             <input type="date" id="birth_date" name="birth_date" class="form-control" required value="{{user.birth_date}}">
                         </div>
                     </div>
+                    
                     <div class="row">
                         <div class="col-md-12">
                             <label for="doctor_id" class="form-label">ID del doctor:</label>
                             <select id="doctor_id" name="doctor_id" class="form-select" {% if user_type == 'patient' %} required {% endif %}>
                                 <option value="" disabled>Select a doctor</option>
                                 {% for doctor in doctors %}
-                                    <option value="{{ doctor.id }}" {% if user.doctor_id == doctor.id %}selected{% endif %}>{{ doctor.first_name }} {{ doctor.last_name1 }} {{ doctor.last_name2 }}</option>
+                                    <option value="{{ doctor.id }}" {% if user.doctor_id == doctor.id %}selected{% endif %}>{{ doctor.first_name }} {{ doctor.last_name }}</option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -69,7 +66,7 @@
                 </div>
             {% endif %}
             <div class="col-12">
-                <input type="submit" value="Register" class="btn btn-primary">
+                <input type="submit" value="Modificar" class="btn btn-primary">
             </div>
         </form>
     </div>

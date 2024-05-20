@@ -22,7 +22,7 @@
             <tbody>
                 {% for user in admins %}
                 <tr>
-                    <td>{{ user.first_name }} {{ user.last_name1 }} {{ user.last_name2 }}</td>
+                    <td>{{ user.first_name }} {{ user.last_name }}</td>
                     <td>{{ user.username }}</td>
                     <td>Administrador</td>
                     <td>
@@ -39,7 +39,7 @@
                 {% endfor %}
                 {% for user in patients %}
                 <tr>
-                    <td>{{ user.first_name }} {{ user.last_name1 }} {{ user.last_name2 }}</td>
+                    <td>{{ user.first_name }} {{ user.last_name }}</td>
                     <td>{{ user.username }}</td>
                     <td>Paciente</td>
                     <td>
@@ -50,7 +50,7 @@
                 {% endfor %}
                 {% for user in doctors %}
                 <tr>
-                    <td>{{ user.first_name }} {{ user.last_name1 }} {{ user.last_name2 }}</td>
+                    <td>{{ user.first_name }} {{ user.last_name }}</td>
                     <td>{{ user.username }}</td>
                     <td>Doctor</td>
                     <td>
