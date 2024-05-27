@@ -147,6 +147,7 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('home'))
+
 @app.route('/register/', methods=['GET', 'POST'])
 def register():
     if request.method == 'GET':
@@ -169,7 +170,7 @@ def register():
         if user_type == 'patient':
             existing_patient = Patient.query.filter_by(username=username).first()
             if existing_patient:
-                return "<script>alert('Ese nombre de usuario ya existe.'); window.location.href='/register/';</script>"
+                return render_template('register.html', error=True)
             birth_date = datetime.datetime.strptime(request.form['birth_date'], '%Y-%m-%d').date()
             gender = request.form['gender']
             doctor_id = request.form['doctor_id']
@@ -181,7 +182,7 @@ def register():
         elif user_type == 'doctor':
             existing_doctor = Doctor.query.filter_by(username=username).first()
             if existing_doctor:
-                return "<script>alert('Ese nombre de usuario ya existe.'); window.location.href='/register/';</script>"
+                return render_template('register.html', error=True)
             hashed_password = generate_password_hash(password)
             doctor = Doctor(username=username, password=hashed_password, first_name=first_name, last_name=last_name)
             db.session.add(doctor)
@@ -189,14 +190,12 @@ def register():
         elif user_type == 'admin':
             existing_admin = Admin.query.filter_by(username=username).first()
             if existing_admin:
-                return "<script>alert('Ese nombre de usuario ya existe.'); window.location.href='/register/';</script>"
+                return render_template('register.html', error=True)
             hashed_password = generate_password_hash(password)
             admin = Admin(username=username, password=hashed_password, first_name=first_name, last_name=last_name)
             db.session.add(admin)
             db.session.commit()
-        return redirect(url_for('admin'))
-
-        
+        return redirect(url_for('admin'))    
 
 @app.route('/admin/', methods=['GET', 'POST'])
 def admin():
@@ -291,6 +290,32 @@ def modify(user):
             db.session.commit()
         return redirect(url_for('admin'))
             
+@app.route('/delete/<string:user>', methods=['GET'])
+def delete(user):
+    if current_user.is_authenticated:
+        if session.get("usertype") == 'admin':
+            user_type = user.split('-')[0]
+            username = user.split('-')[1]
+            if user_type == 'patient':
+                patient = Patient.query.filter_by(username=username).first()
+                db.session.delete(patient)
+                db.session.commit()
+            elif user_type == 'doctor':
+                doctor = Doctor.query.filter_by(username=username).first()
+                if get_doctor_patients(doctor.id):
+                    return "<script>alert('No se puede eliminar un doctor con pacientes asignados.'); window.location.href='/admin/';</script>"
+                else:
+                    db.session.delete(doctor)
+                    db.session.commit()
+            elif user_type == 'admin':
+                admin = Admin.query.filter_by(username=username).first()
+                db.session.delete(admin)
+                db.session.commit()
+            return redirect(url_for('admin'))
+        else:
+            return redirect(url_for('login'))
+    else:
+        return redirect(url_for('login'))
 
 @app.route('/patient/', methods=['GET'])
 def patient():
@@ -299,14 +324,27 @@ def patient():
             if session.get("usertype") == 'patient':
                 user= Patient.query.filter_by(id=current_user.id).first()
                 age= datetime.datetime.now().year - user.birth_date.year-1
+                actual_medicine = PatientMedicine.query.filter_by(patient_id=user.id).where(PatientMedicine.end_date == None).first()
+                if actual_medicine:
+                    medicine_name = Medicine.query.get(actual_medicine.medicine_id).name
+                else:
+                    medicine_name = None
+                    actual_medicine = None                
                 if datetime.datetime.now().month > user.birth_date.month and datetime.datetime.now().day > user.birth_date.day:
                     age += 1
-                return render_template('patientHome.html',user=user, age=age)
+                doctor= Doctor.query.get(user.doctor_id)
+                return render_template('patientHome.html',user=user, age=age, actual_medicine=actual_medicine, medicine_name=medicine_name,doctor=doctor)
             else:
                 return redirect(url_for('login'))
         else:
             return redirect(url_for('login'))
-        
+
+
+
+def get_doctor_patients(doctor_id):
+    return Patient.query.filter_by(doctor_id=doctor_id).all()
+
+
 if __name__ == '__main__':
     app.run(debug=True)
     
