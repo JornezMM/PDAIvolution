@@ -111,7 +111,17 @@ def index():
 
 @app.route('/home/')
 def home():
-   return render_template('home.html')
+    if current_user.is_authenticated:
+        if session.get("usertype") == 'doctor':
+            return redirect(url_for('doctor'))
+        elif session.get("usertype") == 'admin':
+            return redirect(url_for('admin'))
+        elif session.get("usertype") == 'patient':
+            return redirect(url_for('patient'))
+        else:
+            return redirect(url_for('login'))
+    else:
+        return redirect(url_for('login'))
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
@@ -205,12 +215,12 @@ def admin():
         admins = Admin.query.all()
         if current_user.is_authenticated:
             if session.get("usertype") == 'admin':
-                        return render_template('adminHome.html', doctors=doctors, patients=patients, admins=admins, admin_username=current_user.username)
+                        return render_template('admin.html', doctors=doctors, patients=patients, admins=admins, admin_username=current_user.username)
             else:
                 return redirect(url_for('login'))
         else:
             return redirect(url_for('login'))
-        return render_template('adminHome.html', doctors=doctors, patients=patients, admins=admins)
+        return render_template('admin.html', doctors=doctors, patients=patients, admins=admins)
         
     if request.method == 'POST':
         return render_template('admin.html')
@@ -333,13 +343,26 @@ def patient():
                 if datetime.datetime.now().month > user.birth_date.month and datetime.datetime.now().day > user.birth_date.day:
                     age += 1
                 doctor= Doctor.query.get(user.doctor_id)
-                return render_template('patientHome.html',user=user, age=age, actual_medicine=actual_medicine, medicine_name=medicine_name,doctor=doctor)
+                return render_template('patient.html',user=user, age=age, actual_medicine=actual_medicine, medicine_name=medicine_name,doctor=doctor)
             else:
                 return redirect(url_for('login'))
         else:
             return redirect(url_for('login'))
 
-
+@app.route('/doctor/', methods=['GET'])
+def doctor():
+    if request.method == 'GET':
+        if current_user.is_authenticated:
+            if session.get("usertype") == 'doctor':
+                patients = get_doctor_patients(current_user.id)
+                print(patients)
+                print("Prueba")
+                return render_template('doctor.html', patients=patients)
+            else:
+                return redirect(url_for('login'))
+        else:
+            print("Prueba")
+            return redirect(url_for('login'))
 
 def get_doctor_patients(doctor_id):
     return Patient.query.filter_by(doctor_id=doctor_id).all()
