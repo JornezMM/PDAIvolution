@@ -18,6 +18,7 @@
         }
     </style>
 </head>
+<body>
     {% include 'navbarlogged.html' %}
     <div class="container pt-5 my-5">
         <div class="card bg-dark text-white my-5" style="border-radius: 1rem;">
@@ -64,10 +65,15 @@
                                 <td>Paciente</td>
                                 <td>
                                     <button class="btn fa-solid fa-pen-to-square edit-button" onclick="modifyPatient(event)" style="color: white;">Edit</button>
-                                    <button class="btn btn-danger" onclick="deletePatient(event)">Delete</button>
+                                    <button class="btn btn-danger" onclick="deletePatient(event)">Eliminar Usuario</button>
                                 </td>
                             </tr>
                             {% endfor %}
+                            <tr>
+                                <td colspan="4">
+                                    <button class="btn btn-primary" onclick="window.location.href='/register'">Añadir usuario</button>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

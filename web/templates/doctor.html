@@ -44,13 +44,13 @@
                             <td>{{ patient.first_name }} {{ patient.last_name }}</td>
                             <td>{{ patient.username }}</td>
                             <td>
-                                <button class="btn btn-primary" onclick="modifyPatien(event)">Visualizar usuario</button>
+                                <button class="btn btn-primary" onclick="viewPatient(event)">Ver usuario</button>
                             </td>
                             <td>
-                                <button class="btn btn-success" onclick="addMedicine(event)">Añadir medicinas</button>
+                                <button class="btn btn-success" onclick="addMedicine(event)">Ver medicinas</button>
                             </td>
                             <td>
-                                <button class="btn btn-info" onclick="manageVideo(event)">Gestionar video a usuario</button>
+                                <button class="btn btn-info" onclick="manageVideo(event)">Ver videos del usuario</button>
                             </td>
                         </tr>
                         {% endfor %}
@@ -80,10 +80,10 @@
     }
     function addMedicine(event) {
         const username = getData(event)[1];
-        window.location.href = `/add_medicine/${username}`;
+        window.location.href = `/medicines/${username}`;
     }
-    function modifyPatien(event) {
+    function viewPatient(event) {
         const username = getData(event)[1];
-        window.location.href = `/modify_patient/${username}`;
+        window.location.href = `/view/${username}`;
     }
 </script>
