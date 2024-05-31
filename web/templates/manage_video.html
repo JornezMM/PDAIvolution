@@ -41,11 +41,19 @@
                             <tr>
                                 <td>{{ video.name }}</td>
                                 <td>{{ video.date }}</td>
-                                <td>{{ video.hand }}</td>
+                                <td>{%if video.hand==right %}
+                                    Derecha
+                                    {% else %}
+                                    Izquierda
+                                    {% endif%}
+                                </td>
                                 <td>{{ video.amplitude }}</td>
                                 <td>{{ video.slowness }}</td>
                                 <td>
                                     <button class="btn btn-danger" onclick="deleteVideo(event)">Eliminar video</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary" onclick="window.location.href='/video/{{ video.id }}'">Ver video</button>
                                 </td>
                             {% endfor %}
                             <tr>
