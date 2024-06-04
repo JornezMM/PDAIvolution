@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +20,6 @@
           }
     </style>    
 </head>
-
 <body>
     {% include 'navbarlogged.html' %}
       <div class="container pt-5 my-5">
@@ -97,5 +95,17 @@
             </div>
         </div>
     </section>
+    <script>
+        document.getElementById('user_type').addEventListener('change', function() {
+            let selectedOption = this.value;
+            let patientFields = document.getElementById('patientFields');
+            
+            if (selectedOption === 'patient') {
+                patientFields.style.display = 'block';
+            } else {
+                patientFields.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
