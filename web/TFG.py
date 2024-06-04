@@ -5,16 +5,20 @@ from flask_login import LoginManager, UserMixin, login_user, logout_user, curren
 from werkzeug.security import generate_password_hash, check_password_hash
 from models import Admin, Doctor, Patient, Medicine, PatientMedicine, Video, db
 import datetime
+import os
 
 HOME = 'home.html'
 LOGIN = 'login.html'
 REDIRECTHOME = 'home'
+REGISTER = 'register.html'
+MODIFY = 'modify.html'
+
 
 app = Flask(__name__)
 font_awesome = FontAwesome(app)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite"
-app.config["SECRET_KEY"] = "abc"
-
+app.config["SECRET_KEY"] = os.environ.get('SECRET_KEY')
+print(app.config["SECRET_KEY"])
 login_manager = LoginManager()
 login_manager.init_app(app)
 
@@ -100,7 +104,7 @@ def logout():
 def register_get():
     if current_user.is_authenticated and session.get("usertype") == 'admin':
         doctors= Doctor.query.all()
-        return render_template('register.html', doctorNames=doctors)
+        return render_template(REGISTER, doctorNames=doctors)
     return redirect(url_for(REDIRECTHOME))
                     
 @app.route('/register/', methods=['POST'])
@@ -118,7 +122,7 @@ def register_post():
             db.session.add(register_admin(request.form))
             db.session.commit()
         else:
-            return render_template('register.html', error=True)
+            return render_template(REGISTER, error=True)
         return redirect(url_for('admin'))
     return redirect(url_for(REDIRECTHOME))    
     
@@ -138,7 +142,7 @@ def register_patient(form):
 def register_doctor(form):
     username = form['username']
     if Doctor.query.filter_by(username=username).first():
-        return render_template('register.html', error=True)
+        return render_template(REGISTER, error=True)
     password = form['password']
     first_name = form['name']
     last_name = form['last_name']
@@ -148,7 +152,7 @@ def register_doctor(form):
 def register_admin(form):
     username = form['username']
     if Admin.query.filter_by(username=username).first():
-        return render_template('register.html', error=True)
+        return render_template(REGISTER, error=True)
     password = form['password']
     first_name = form['name']
     last_name = form['last_name']
@@ -172,15 +176,15 @@ def modify_get(user):
         match splited_user[0].lower():
             case 'doctor':
                 doctor = Doctor.query.filter_by(username=username).first()
-                return render_template('modify.html', user=doctor, user_type='doctor')
+                return render_template(MODIFY, user=doctor, user_type='doctor')
             case 'patient':
                 patient = Patient.query.filter_by(username=username).first()
                 doctor= Doctor.query.get(patient.doctor_id)
                 doctors = Doctor.query.all()
-                return render_template('modify.html', user=patient, user_type='patient', doctors=doctors, doctor=doctor)
+                return render_template(MODIFY, user=patient, user_type='patient', doctors=doctors, doctor=doctor)
             case 'admin':
                 admin = Admin.query.filter_by(username=username).first()
-                return render_template('modify.html', user=admin, user_type='admin')
+                return render_template(MODIFY, user=admin, user_type='admin')
     return redirect(url_for(REDIRECTHOME))
 
 @app.route('/modify/<string:user>', methods=['POST'])
@@ -212,7 +216,6 @@ def modify_post(user):
             doctor.password = generate_password_hash(password)
         db.session.commit()
     elif user_type == 'admin':
-        admins = Admin.query.all()
         admin = Admin.query.filter_by(username=old_username).first()
         admin.username = username
         admin.first_name = first_name
@@ -374,7 +377,7 @@ def video(video_id):
     return redirect(url_for(REDIRECTHOME))
 
 @app.route('/videoView/<int:video_id>')
-def videoView(video_id):
+def video_view(video_id):
     video = Video.query.get_or_404(video_id)
     return Response(video.video_data, mimetype='video/mp4')
 
