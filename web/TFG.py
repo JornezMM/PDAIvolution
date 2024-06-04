@@ -63,16 +63,16 @@ def index():
 def home():
     if current_user.is_authenticated:
         return redirect(url_for(session.get("usertype")))
-    return redirect(url_for('loginGet'))
+    return redirect(url_for('login_get'))
 
 @app.route('/login/', methods=['GET'])
-def loginGet():
+def login_get():
     if current_user.is_authenticated:
         return redirect(url_for(REDIRECTHOME))
     return render_template(LOGIN)
 
 @app.route('/login/',methods=['POST'])
-def loginPost():
+def login_post():
     username = request.form['username']
     password = request.form['password']
     user_type = request.form['role']
@@ -97,14 +97,14 @@ def logout():
     return redirect(url_for(REDIRECTHOME))
 
 @app.route('/register/', methods=['GET'])
-def registerGet():
+def register_get():
     if current_user.is_authenticated and session.get("usertype") == 'admin':
         doctors= Doctor.query.all()
         return render_template('register.html', doctorNames=doctors)
     return redirect(url_for(REDIRECTHOME))
                     
 @app.route('/register/', methods=['POST'])
-def registerPost():
+def register_post():
     if current_user.is_authenticated and session.get("usertype") == 'admin':
         username = request.form['username']
         user_type = request.form['user_type']
@@ -165,7 +165,7 @@ def admin():
     return redirect(url_for(REDIRECTHOME))
 
 @app.route('/modify/<string:user>', methods=['GET'])
-def modifyGet(user):
+def modify_get(user):
     if current_user.is_authenticated and session.get("usertype") == 'admin':
         splited_user = user.split('-')
         username = splited_user[1]
@@ -184,7 +184,7 @@ def modifyGet(user):
     return redirect(url_for(REDIRECTHOME))
 
 @app.route('/modify/<string:user>', methods=['POST'])
-def modifyPost(user):
+def modify_post(user):
     old_username = user.split('-')[1]
     user_type = user.split('-')[0]
     username = request.form['username']
@@ -273,9 +273,9 @@ def doctor():
         
 @app.route('/view/<string:patient_username>', methods=['GET'])
 def view(patient_username):
-    if request.method == 'GET' and session.get("usertype") == 'doctor' and Patient.query.get(patient_id).doctor_id == current_user.id:
-        if current_user.is_authenticated:
-            patient_id = Patient.query.filter_by(username=patient_username).first().id
+    if current_user.is_authenticated and session.get("usertype") == 'doctor':
+        patient_id = Patient.query.filter_by(username=patient_username).first().id
+        if  Patient.query.get(patient_id).doctor_id == current_user.id:
             user= Patient.query.filter_by(id=patient_id).first()
             age= datetime.datetime.now().year - user.birth_date.year-1
             actual_medicine = PatientMedicine.query.filter_by(patient_id=user.id).where(PatientMedicine.end_date == None).first()
@@ -288,7 +288,7 @@ def view(patient_username):
                 age += 1
             doctor= Doctor.query.get(user.doctor_id)
             return render_template('patient.html',user=user, age=age, actual_medicine=actual_medicine, medicine_name=medicine_name,doctor=doctor)
-        return redirect(url_for(REDIRECTHOME))
+    return redirect(url_for(REDIRECTHOME))
     
 @app.route('/medicines/<string:patient_username>', methods=['GET'])
 def medicines(patient_username):
@@ -308,14 +308,14 @@ def medicines(patient_username):
             return redirect(url_for(REDIRECTHOME))
         
 @app.route('/add_medicine/<string:patient_username>', methods=['GET'])
-def add_medicineGet(patient_username):
+def add_medicine_get(patient_username):
     if current_user.is_authenticated and session.get("usertype") == 'doctor' and Patient.query.filter_by(username=patient_username).first().doctor_id == current_user.id:
         medicines = Medicine.query.all()
         return render_template('add_medicine.html', medicines=medicines)
     return redirect(url_for(REDIRECTHOME))
     
 @app.route('/add_medicine/<string:patient_username>', methods=['POST'])
-def add_medicinePost(patient_username):
+def add_medicine_post(patient_username):
     if current_user.is_authenticated and session.get("usertype") == 'doctor' and Patient.query.filter_by(username=patient_username).first().doctor_id == current_user.id:
         patient = Patient.query.filter_by(username=patient_username).first()
         medicine_id = request.form['medicine']
@@ -343,7 +343,7 @@ def manage_video(patient_username):
         return redirect(url_for(REDIRECTHOME))
     
 @app.route('/add_video/<string:patient_username>', methods=['GET'])
-def add_video(patient_username):
+def add_video_get(patient_username):
     if current_user.is_authenticated and session.get("usertype") == 'doctor' and Patient.query.filter_by(username=patient_username).first().doctor_id == current_user.id:
         patient = Patient.query.filter_by(username=patient_username).first()
         videos = Video.query.filter_by(patient_id=patient.id).all()
@@ -351,7 +351,7 @@ def add_video(patient_username):
     return redirect(url_for(REDIRECTHOME))
 
 @app.route('/add_video/<string:patient_username>', methods=['POST'])
-def add_videoPost(patient_username):
+def add_video_post(patient_username):
     if current_user.is_authenticated and session.get("usertype") == 'doctor' and Patient.query.filter_by(username=patient_username).first().doctor_id == current_user.id:
         patient = Patient.query.filter_by(username=patient_username).first()
         hand = request.form['hand']
