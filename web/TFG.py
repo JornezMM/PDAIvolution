@@ -5,20 +5,20 @@ from flask_login import LoginManager, UserMixin, login_user, logout_user, curren
 from werkzeug.security import generate_password_hash, check_password_hash
 from models import Admin, Doctor, Patient, Medicine, PatientMedicine, Video, db
 import datetime
-import os
+from dotenv import load_dotenv,dotenv_values
 
 HOME = 'home.html'
 LOGIN = 'login.html'
 REDIRECTHOME = 'home'
 REGISTER = 'register.html'
 MODIFY = 'modify.html'
-
-
+SECRET_KEY='SECRET_KEY'
+load_dotenv()
+config = dotenv_values(".env")
 app = Flask(__name__)
 font_awesome = FontAwesome(app)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite"
-app.config["SECRET_KEY"] = os.environ.get('SECRET_KEY')
-print(app.config["SECRET_KEY"])
+app.config[SECRET_KEY] = config[SECRET_KEY]
 login_manager = LoginManager()
 login_manager.init_app(app)
 
