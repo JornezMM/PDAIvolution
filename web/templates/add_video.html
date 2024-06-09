@@ -28,6 +28,7 @@
             <div class="card-body pb-5 text-left">
                 <div class="container mt-2 px-3">
                     <form method="post" class="row g-3" enctype="multipart/form-data">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                         <div class="col-12 mt-4">
                             <h1 class="text-center">Añadir video</h1>
                             <div class="dropzone">

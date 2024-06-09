@@ -27,6 +27,7 @@
             <div class="container mt-2 px-3">
                 <h1>Modificar</h1>
                 <form action="#" method="post" class="row g-3">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                     <div class="col-md-6">
                         <label for="user_type" class="form-label">Tipo de usuario:</label>
                         {% if user_type == 'admin' %}

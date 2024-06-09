@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from models import Admin, Doctor, Patient, Medicine, PatientMedicine, Video, db
+from flask_wtf.csrf import CSRFProtect
 import datetime
 from dotenv import load_dotenv,dotenv_values
 
@@ -15,7 +16,9 @@ MODIFY = 'modify.html'
 SECRET_KEY='SECRET_KEY'
 load_dotenv()
 config = dotenv_values(".env")
+csrf=CSRFProtect()
 app = Flask(__name__)
+csrf.init_app(app)
 font_awesome = FontAwesome(app)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite"
 app.config[SECRET_KEY] = config[SECRET_KEY]

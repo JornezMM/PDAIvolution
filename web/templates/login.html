@@ -28,7 +28,8 @@
     <div class="card bg-dark text-white my-5" style="border-radius: 1rem;">
       <div class="card-body p-5 text-right">
         <h1 class="mb-7">Iniciar sesión</h1>
-        <form action="#" class="mt-5" method="post">
+        <form action="{{ url_for('login_post') }}" class="mt-5" method="post">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
           {% if error %}
           <div class="alert alert-danger mb-5" role="alert">
             Credenciales incorrectas. Por favor, inténtelo de nuevo.
