@@ -3,6 +3,4 @@
 /venv10/
 /.idea/
 *.pkl
-
-# Temp ignore for testinG
-TFG.py
+/instance/
