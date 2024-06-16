@@ -15,8 +15,11 @@ from dotenv import load_dotenv, dotenv_values
 from paddel.preprocessing.input.features import extract_video_features
 from tempfile import NamedTemporaryFile
 import os
-from controllers.admin_controllers import register_patient, register_doctor, register_admin
-
+from controllers.admin_controllers import (
+    register_patient,
+    register_doctor,
+    register_admin,
+)
 
 
 HOME = "home.html"
@@ -24,9 +27,7 @@ LOGIN = "login.html"
 REDIRECTHOME = "home"
 REGISTER = "register.html"
 MODIFY = "modify.html"
-
-
-
+SECRET_KEY="SECRET_KEY"
 
 def create_app():
     app = Flask(__name__)
@@ -36,7 +37,7 @@ def create_app():
     csrf.init_app(app)
     FontAwesome(app)
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite"
-    app.config["SECRET_KEY"] = config["SECRET_KEY"]
+    app.config[SECRET_KEY] = config[SECRET_KEY]
     login_manager = LoginManager()
     login_manager.init_app(app)
 
@@ -59,8 +60,7 @@ def create_app():
             db.session.add(medicine2)
             db.session.add(medicine3)
         db.session.commit()
-            
-            
+
     with app.app_context():
         db.create_all()
         create_default_admin()
@@ -80,11 +80,9 @@ def create_app():
         else:
             return None
 
-
     @app.route("/")
     def index():
         return render_template("home.html")
-
 
     @app.route("/home/")
     def home():
@@ -92,13 +90,11 @@ def create_app():
             return redirect(url_for(session.get("usertype")))
         return redirect(url_for("login_get"))
 
-
     @app.route("/login/", methods=["GET"])
     def login_get():
         if current_user.is_authenticated:
             return redirect(url_for(REDIRECTHOME))
         return render_template(LOGIN)
-
 
     @app.route("/login/", methods=["POST"])
     def login_post():
@@ -121,13 +117,11 @@ def create_app():
         else:
             return render_template(LOGIN, error=True)
 
-
     @app.route("/logout/")
     def logout():
         logout_user()
         session.clear()
         return redirect(url_for(REDIRECTHOME))
-
 
     @app.route("/register/", methods=["GET"])
     def register_get():
@@ -135,7 +129,6 @@ def create_app():
             doctors = Doctor.query.all()
             return render_template(REGISTER, doctorNames=doctors)
         return redirect(url_for(REDIRECTHOME))
-
 
     @app.route("/register/", methods=["POST"])
     def register_post():
@@ -180,7 +173,6 @@ def create_app():
             )
         return redirect(url_for(REDIRECTHOME))
 
-
     @app.route("/modify/<string:user>", methods=["GET"])
     def modify_get(user):
         if current_user.is_authenticated and session.get("usertype") == "admin":
@@ -205,7 +197,6 @@ def create_app():
                     admin = Admin.query.filter_by(username=username).first()
                     return render_template(MODIFY, user=admin, user_type="admin")
         return redirect(url_for(REDIRECTHOME))
-
 
     @app.route("/modify/<string:user>", methods=["POST"])
     def modify_post(user):
@@ -247,7 +238,6 @@ def create_app():
             db.session.commit()
         return redirect(url_for("admin"))
 
-
     @app.route("/delete/<string:user>", methods=["GET"])
     def delete(user):
         if current_user.is_authenticated and session.get("usertype") == "admin":
@@ -278,7 +268,6 @@ def create_app():
             return redirect(url_for("admin"))
         return redirect(url_for(REDIRECTHOME))
 
-
     @app.route("/patient/", methods=["GET"])
     def patient():
         if current_user.is_authenticated and session.get("usertype") == "patient":
@@ -293,7 +282,9 @@ def create_app():
             )
             if actual_medicine:
                 medicine_name = (
-                    Medicine.query.filter_by(id=actual_medicine.medicine_id).firts().name
+                    Medicine.query.filter_by(id=actual_medicine.medicine_id)
+                    .firts()
+                    .name
                 )
             if (
                 datetime.datetime.now().month > user.birth_date.month
@@ -311,7 +302,6 @@ def create_app():
             )
         return redirect(url_for(REDIRECTHOME))
 
-
     @app.route("/doctor/", methods=["GET"])
     def doctor():
         if current_user.is_authenticated and session.get("usertype") == "doctor":
@@ -319,13 +309,15 @@ def create_app():
             return render_template("doctor.html", patients=patients)
         return redirect(url_for(REDIRECTHOME))
 
-
     @app.route("/view/<string:patient_username>", methods=["GET"])
     def view(patient_username):
         if current_user.is_authenticated and session.get("usertype") == "doctor":
             patient_id = Patient.query.filter_by(username=patient_username).first().id
             print(patient_id)
-            if Patient.query.filter_by(id=patient_id).first().doctor_id == current_user.id:
+            if (
+                Patient.query.filter_by(id=patient_id).first().doctor_id
+                == current_user.id
+            ):
                 patient = Patient.query.filter_by(id=patient_id).first()
                 print(patient_id)
                 age = datetime.datetime.now().year - patient.birth_date.year - 1
@@ -359,14 +351,15 @@ def create_app():
                 )
         return redirect(url_for(REDIRECTHOME))
 
-
     @app.route("/medicines/<string:patient_username>", methods=["GET"])
     def medicines(patient_username):
         if request.method == "GET":
             if current_user.is_authenticated:
                 if (
                     session.get("usertype") == "doctor"
-                    and Patient.query.filter_by(username=patient_username).first().doctor_id
+                    and Patient.query.filter_by(username=patient_username)
+                    .first()
+                    .doctor_id
                     == current_user.id
                 ):
                     patient = Patient.query.filter_by(username=patient_username).first()
@@ -393,7 +386,9 @@ def create_app():
     @app.route("/delete_medicine/<int:patient_medicine_id>", methods=["GET"])
     def delete_medicine(patient_medicine_id):
         if current_user.is_authenticated and session.get("usertype") == "doctor":
-            patient_medicine = PatientMedicine.query.filter_by(id=patient_medicine_id).first()
+            patient_medicine = PatientMedicine.query.filter_by(
+                id=patient_medicine_id
+            ).first()
             patient = Patient.query.filter_by(id=patient_medicine.patient_id).first()
             if patient.doctor_id == current_user.id:
                 db.session.delete(patient_medicine)
@@ -404,7 +399,9 @@ def create_app():
     @app.route("/end_treatment/<int:patient_medicine_id>", methods=["GET"])
     def end_treatment(patient_medicine_id):
         if current_user.is_authenticated and session.get("usertype") == "doctor":
-            patient_medicine = PatientMedicine.query.filter_by(id=patient_medicine_id).first()
+            patient_medicine = PatientMedicine.query.filter_by(
+                id=patient_medicine_id
+            ).first()
             patient = Patient.query.filter_by(id=patient_medicine.patient_id).first()
             if patient.doctor_id == current_user.id:
                 patient_medicine.end_date = datetime.datetime.now().date()
@@ -423,7 +420,6 @@ def create_app():
             medicines = Medicine.query.all()
             return render_template("add_medicine.html", medicines=medicines)
         return redirect(url_for(REDIRECTHOME))
-
 
     @app.route("/add_medicine/<string:patient_username>", methods=["POST"])
     def add_medicine_post(patient_username):
@@ -458,31 +454,29 @@ def create_app():
             return redirect(url_for("medicines", patient_username=patient_username))
         return redirect(url_for(REDIRECTHOME))
 
-
     @app.route("/manage_video/<string:patient_username>", methods=["GET"])
     def manage_video(patient_username):
         if request.method == "GET":
-            if current_user.is_authenticated:
-                if (
-                    session.get("usertype") == "doctor"
-                    and Patient.query.filter_by(username=patient_username).first().doctor_id
-                    == current_user.id
-                ):
-                    patient = Patient.query.filter_by(username=patient_username).first()
-                    videos = Video.query.filter_by(patient_id=patient.id).all()
-                    for video in videos:
-                        file = NamedTemporaryFile(delete=False)
-                        file_path = file.name
-                        contents = video.video_data
-                        with open(file_path, "wb") as f:
-                            f.write(contents)
-                        file.close()
-                        os.remove(file_path)
-                    return render_template(
-                        "manage_video.html", patient=patient, videos=videos
-                    )
+            if (
+                current_user.is_authenticated
+                and session.get("usertype") == "doctor"
+                and Patient.query.filter_by(username=patient_username).first().doctor_id
+                == current_user.id
+            ):
+                patient = Patient.query.filter_by(username=patient_username).first()
+                videos = Video.query.filter_by(patient_id=patient.id).all()
+                for video in videos:
+                    file = NamedTemporaryFile(delete=False)
+                    file_path = file.name
+                    contents = video.video_data
+                    with open(file_path, "wb") as f:
+                        f.write(contents)
+                    file.close()
+                    os.remove(file_path)
+                return render_template(
+                    "manage_video.html", patient=patient, videos=videos
+                )
             return redirect(url_for(REDIRECTHOME))
-
 
     @app.route("/add_video/<string:patient_username>", methods=["GET"])
     def add_video_get(patient_username):
@@ -496,7 +490,6 @@ def create_app():
             videos = Video.query.filter_by(patient_id=patient.id).all()
             return render_template("add_video.html", patient=patient, videos=videos)
         return redirect(url_for(REDIRECTHOME))
-
 
     @app.route("/add_video/<string:patient_username>", methods=["POST"])
     def add_video_post(patient_username):
@@ -536,9 +529,6 @@ def create_app():
             return redirect(url_for("manage_video", patient_username=patient.username))
         return redirect(url_for(REDIRECTHOME))
 
-
-
-
     @app.route("/video/<int:video_id>", methods=["GET"])
     def video(video_id):
         if current_user.is_authenticated:
@@ -547,16 +537,12 @@ def create_app():
             return render_template("video.html", video=video, patient=patient)
         return redirect(url_for(REDIRECTHOME))
 
-
     @app.route("/videoView/<int:video_id>")
     def video_view(video_id):
         video = Video.query.get_or_404(video_id)
         return Response(video.video_data, mimetype="video/mp4")
 
-
     def get_doctor_patients(doctor_id):
         return Patient.query.filter_by(doctor_id=doctor_id).all()
-
-
 
     return app
