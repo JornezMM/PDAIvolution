@@ -96,11 +96,13 @@ Se adjunta a continuación, para cada tabla, el diccionario de datos correspondi
 			\textbf{Nombre} & \textbf{Tipo} & \textbf{Columna} & \textbf{Descripción}\\
 			\midrule
 			\texttt{id} & \texttt{INTEGER} & \texttt{\textbf{PK}} & Identificador único del video.\\
-			\texttt{patient\_id} & \texttt{INTEGER} & \texttt{FK(patient.id)} & Clave foránea a la tabla Paciente. Indica el paciente asociado al video.\\
+			\texttt{patient\_id} & \texttt{INTEGER} & \texttt{FK
+			(patient.id)} & Clave foránea a la tabla Paciente. Indica el paciente asociado al video.\\
 			\texttt{hand} & \texttt{ENUM('left', 'right')} & \texttt{NOT NULL} & Mano usada en el vídeo (izquierda o derecha). \\
 			\texttt{date} & \texttt{DATE} & \texttt{NOT NULL} & Fecha de grabación del video. \\
 			\texttt{video\_data} & \texttt{LargeBinary} & \texttt{NOT NULL} & Datos binarios del vídeo. \\
-			\texttt{classification} & \texttt{VARCHAR(100)} & \texttt{NULL} & Clasificación del vídeo (opcional). \\
+			\texttt{amplitude} & \texttt{VARCHAR(100)} & \texttt{NOT NULL} & Amplitud clasificada para el video. \\
+			\texttt{slowness} & \texttt{VARCHAR(100)} & \texttt{NOT NULL} & Lentitud clasificada para el video. \\
 			\bottomrule
 		\end{tabular}
 	}
@@ -131,8 +133,10 @@ Se adjunta a continuación, para cada tabla, el diccionario de datos correspondi
 			\textbf{Nombre} & \textbf{Tipo} & \textbf{Columna} & \textbf{Descripción}\\
 			\midrule
 			\texttt{id} & \texttt{INTEGER} & \texttt{\textbf{PK}} & Identificador único de la asociación entre paciente y medicamento. \\
-			\texttt{patient\_id} & \texttt{INTEGER} & \texttt{FK(patient.id)} & Clave foránea a la tabla Paciente. Indica el paciente que toma el medicamento. \\
-			\texttt{medicine\_id} & \texttt{INTEGER} & \texttt{FK(medicine.id)} & Clave foránea a la tabla Medicamento. Indica el medicamento que toma el paciente. \\
+			\texttt{patient\_id} & \texttt{INTEGER} & \texttt{FK
+			(patient.id)} & Clave foránea a la tabla Paciente. Indica el paciente que toma el medicamento. \\
+			\texttt{medicine\_id} & \texttt{INTEGER} & \texttt{FK
+			(medicine.id)} & Clave foránea a la tabla Medicamento. Indica el medicamento que toma el paciente. \\
 			\texttt{dosage} & \texttt{VARCHAR(100)} & \texttt{NOT NULL} & Dosis del medicamento para el paciente. \\
 			\texttt{start\_date} & \texttt{DATE} & \texttt{NOT NULL} & Fecha de inicio del tratamiento con el medicamento. \\
 			\texttt{end\_date} & \texttt{DATE} & \texttt{NULL} & Fecha de fin del tratamiento con el medicamento (opcional). \\

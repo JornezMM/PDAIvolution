@@ -2,19 +2,22 @@ from flask import Flask, render_template, request, redirect, url_for, session, R
 from flask_font_awesome import FontAwesome
 from flask_login import LoginManager, login_user, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
-from model.base import db
-from model.admin import Admin
-from model.doctor import Doctor
-from model.patient import Patient
-from model.medicine import Medicine
-from model.patient_medicine import PatientMedicine
-from model.video import Video
+from models.base import db
+from models.admin import Admin
+from models.doctor import Doctor
+from models.patient import Patient
+from models.medicine import Medicine
+from models.patient_medicine import PatientMedicine
+from models.video import Video
 from flask_wtf.csrf import CSRFProtect
 import datetime
 from dotenv import load_dotenv, dotenv_values
 from paddel.preprocessing.input.features import extract_video_features
 from tempfile import NamedTemporaryFile
 import os
+from controllers.admin_controllers import register_patient, register_doctor, register_admin
+
+
 
 HOME = "home.html"
 LOGIN = "login.html"
@@ -158,61 +161,6 @@ def register_post():
             return render_template(REGISTER, error=True)
         return redirect(url_for("admin"))
     return redirect(url_for(REDIRECTHOME))
-
-
-def register_patient(form):
-    username = form["username"]
-    password = form["password"]
-    first_name = form["name"]
-    last_name = form["last_name"]
-    birth_date = datetime.datetime.strptime(form["birth_date"], "%Y-%m-%d").date()
-    gender = form["gender"]
-    doctor_id = form["doctor_id"]
-    handedness = form["handedness"]
-    hashed_password = generate_password_hash(password)
-    return Patient(
-        username=username,
-        password=hashed_password,
-        first_name=first_name,
-        last_name=last_name,
-        birth_date=birth_date,
-        gender=gender,
-        doctor_id=doctor_id,
-        handedness=handedness,
-    )
-
-
-def register_doctor(form):
-    username = form["username"]
-    if Doctor.query.filter_by(username=username).first():
-        return render_template(REGISTER, error=True)
-    password = form["password"]
-    first_name = form["name"]
-    last_name = form["last_name"]
-    hashed_password = generate_password_hash(password)
-    return Doctor(
-        username=username,
-        password=hashed_password,
-        first_name=first_name,
-        last_name=last_name,
-    )
-
-
-def register_admin(form):
-    username = form["username"]
-    if Admin.query.filter_by(username=username).first():
-        return render_template(REGISTER, error=True)
-    password = form["password"]
-    first_name = form["name"]
-    last_name = form["last_name"]
-    hashed_password = generate_password_hash(password)
-    return Admin(
-        username=username,
-        password=hashed_password,
-        first_name=first_name,
-        last_name=last_name,
-    )
-
 
 @app.route("/admin/", methods=["GET"])
 def admin():
@@ -439,6 +387,27 @@ def medicines(patient_username):
         else:
             return redirect(url_for(REDIRECTHOME))
 
+@app.route("/delete_medicine/<int:patient_medicine_id>", methods=["GET"])
+def delete_medicine(patient_medicine_id):
+    if current_user.is_authenticated and session.get("usertype") == "doctor":
+        patient_medicine = PatientMedicine.query.filter_by(id=patient_medicine_id).first()
+        patient = Patient.query.filter_by(id=patient_medicine.patient_id).first()
+        if patient.doctor_id == current_user.id:
+            db.session.delete(patient_medicine)
+            db.session.commit()
+        return redirect(url_for("medicines", patient_username=patient.username))
+    return redirect(url_for(REDIRECTHOME))
+
+@app.route("/end_treatment/<int:patient_medicine_id>", methods=["GET"])
+def end_treatment(patient_medicine_id):
+    if current_user.is_authenticated and session.get("usertype") == "doctor":
+        patient_medicine = PatientMedicine.query.filter_by(id=patient_medicine_id).first()
+        patient = Patient.query.filter_by(id=patient_medicine.patient_id).first()
+        if patient.doctor_id == current_user.id:
+            patient_medicine.end_date = datetime.datetime.now().date()
+            db.session.commit()
+        return redirect(url_for("medicines", patient_username=patient.username))
+    return redirect(url_for(REDIRECTHOME))
 
 @app.route("/add_medicine/<string:patient_username>", methods=["GET"])
 def add_medicine_get(patient_username):
@@ -499,10 +468,9 @@ def manage_video(patient_username):
                 patient = Patient.query.filter_by(username=patient_username).first()
                 videos = Video.query.filter_by(patient_id=patient.id).all()
                 for video in videos:
-
-                    file=NamedTemporaryFile(delete=False)
-                    file_path=file.name
-                    contents=video.video_data
+                    file = NamedTemporaryFile(delete=False)
+                    file_path = file.name
+                    contents = video.video_data
                     with open(file_path, "wb") as f:
                         f.write(contents)
                     video_features = extract_video_features(file_path)
@@ -556,6 +524,19 @@ def add_video_post(patient_username):
         db.session.commit()
         return redirect(url_for("manage_video", patient_username=patient_username))
     return redirect(url_for(REDIRECTHOME))
+
+@app.route("/delete_video/<int:video_id>", methods=["GET"])
+def delete_video(video_id):
+    if current_user.is_authenticated and session.get("usertype") == "doctor":
+        video = Video.query.filter_by(id=video_id).first()
+        patient = Patient.query.filter_by(id=video.patient_id).first()
+        if patient.doctor_id == current_user.id:
+            db.session.delete(video)
+            db.session.commit()
+        return redirect(url_for("manage_video", patient_username=patient.username))
+    return redirect(url_for(REDIRECTHOME))
+
+
 
 
 @app.route("/video/<int:video_id>", methods=["GET"])

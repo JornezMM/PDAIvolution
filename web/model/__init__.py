@@ -1,1 +1,0 @@
-__all__ = ["Admin", "db", "Doctor", "Patient", "Medicine", "PatientMedicine", "Video"]
