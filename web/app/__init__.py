@@ -476,9 +476,6 @@ def create_app():
                         contents = video.video_data
                         with open(file_path, "wb") as f:
                             f.write(contents)
-                        video_features = extract_video_features(file_path)
-                        for i in video_features:
-                            print(i)
                         file.close()
                         os.remove(file_path)
                     return render_template(
