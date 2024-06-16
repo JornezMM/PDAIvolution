@@ -32,7 +32,7 @@ SECRET_KEY="SECRET_KEY"
 def create_app():
     app = Flask(__name__)
     load_dotenv()
-    config = dotenv_values(".env")
+    config = dotenv_values("./app/.env")
     csrf = CSRFProtect()
     csrf.init_app(app)
     FontAwesome(app)

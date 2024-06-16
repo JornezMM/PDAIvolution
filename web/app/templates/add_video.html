@@ -46,7 +46,7 @@
             </div>
             <div class="col-12 mt-4">
               <label for="date" class="form-label">Fecha:</label>
-              <input type="date" id="date" name="date" class="form-control" required />
+              <input type="date" id="date" name="date" class="form-control" onfocus="this.max=new Date().toISOString().split('T')[0]" required />
             </div>
             <div class="col-12 mt-4">
               <label for="hand" class="form-label">Mano:</label>
