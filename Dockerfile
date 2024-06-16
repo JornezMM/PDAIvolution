@@ -35,6 +35,7 @@ RUN adduser \
     --uid "${UID}" \
     appuser
 
+
 # Download dependencies as a separate step to take advantage of Docker's caching.
 # Leverage a cache mount to /root/.cache/pip to speed up subsequent builds.
 # Leverage a bind mount to requirements.txt to avoid having to copy them into
@@ -49,7 +50,10 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 # Copy the source code into the container.
 COPY /web /usr/src/app
 
+# Change the ownership of the application code to the non-privileged user.
+RUN chown -R appuser /usr/src/app
 
+USER appuser
 # Expose the port that the application listens on.
 EXPOSE 8000
 
