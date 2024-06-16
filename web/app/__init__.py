@@ -34,9 +34,9 @@ def create_app():
     config = dotenv_values(".env")
     csrf = CSRFProtect()
     csrf.init_app(app)
-    font_awesome = FontAwesome(app)
+    FontAwesome(app)
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite"
-    app.config["SECRET_KEY"] = 'abc'
+    app.config["SECRET_KEY"] = config["SECRET_KEY"]
     login_manager = LoginManager()
     login_manager.init_app(app)
 
