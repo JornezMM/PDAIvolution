@@ -1,24 +1,3 @@
-\newcommand{\cu}[9]{
-    \begin{table}[p]
-        \centering
-        \begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
-            \toprule
-            \textbf{CU-#1} & \textbf{#2} \\
-            \toprule
-            \textbf{Versión} & 1.0 \\
-            \textbf{Autor} & \theauthor \\
-            \textbf{Requisitos asociados} & #3 \\
-            \textbf{Descripción} & #4 \\
-            \textbf{Precondición} & #5 \\
-            \textbf{Acciones} & #6 \\
-            \textbf{Postcondición} & #7 \\
-            \textbf{Excepciones} & #8 \\
-			\textbf{Importancia} & #9 \\
-            \bottomrule
-        \end{tabularx}
-        \caption{CU-#1 #2.}
-    \end{table}
-}
 
 \apendice{Especificación de Requisitos}
 
@@ -29,33 +8,47 @@ En este caso caso ha definido estas características utilizando UML como estánd
 
 
 \section{Objetivos generales}
-El objetivo principal de esta aplicación es mostrar, tanto a los pacientes como a sus respectivos médicos, su evolución mediante el uso de inteligencia artificial.
+El objetivo principal de esta aplicación es mostrar, tanto a los pacientes como a sus respectivos doctores, su evolución mediante el uso de inteligencia artificial.
 
-Además se busca que el usuario médico sea capaz de realizar comparaciones de múltiples pacientes de manera simultánea.
+Además se busca que el usuario doctor sea capaz de realizar comparaciones de múltiples pacientes de manera simultánea.
 
 \section{Catálogo de requisitos}
 A continuación se presentan los requisitos funcionales y no funcionales de la aplicación.
 \subsection{Requisitos funcionales}
 \begin{enumerate}[label=\textbf{RF\arabic*:}]
 
-\item El sistema debe permitir diferenciar entre tres tipos de roles: administrador, paciente y médico.
-\item El usuario con rol de paciente ha de ser capaz de agregar vídeos.
-\item El usuario con rol de paciente ha de ser capaz de eliminar sus vídeos.
-\item El usuario con rol de paciente ha de ser capaz de modificar sus vídeos.
-\item El paciente y el médico han de ser capaces de clasificar los vídeos.
+\item El sistema debe permitir diferenciar entre tres tipos de roles: administrador, paciente y doctor.
+\item El doctor ha de ser capaz de agregar vídeos a sus pacientes.
+\item El doctor ha de ser capaz de eliminar vídeos a sus pacientes.
+\item El doctor ha de ser capaz de visualizar el listado de vídeos de sus pacientes.
+\item El doctor ha de ser capaces de clasificar los vídeos de sus pacientes.
 \item Los usuarios han de ser capaces de iniciar sesión con sus correspondientes credenciales.
-\item Los usuarios deben ser capaces de poder finalizar sesión.
+\item Los usuarios deben ser capaces de poder cerrar sesión.
 \item El administrador ha de ser capaz de añadir usuarios.
 \item El administrador ha de ser capaz de eliminar usuarios.
 \item El administrador ha de ser capaz de modificar usuarios.
 \item El administrador ha de ser capaz de visualizar a los usuarios.
-\item Los médicos han de ser capaces de agregarse pacientes asociados.
-\item Los médicos han de ser capaces de eliminar sus pacientes asociados.
-\item El paciente y el médico han de ser capaces de ver la evolución del paciente.
-
+\item El administrador ha de ser capaz de asignar doctor a los pacientes.
+\item El administrador ha de ser capaz de desasignar doctor a los pacientes.
+\item El paciente y el doctor han de ser capaces de ver la evolución del paciente.
+\item El doctor ha de ser capaz de añadir medicinas a sus pacientes.
+\item El doctor ha de ser capaz de eliminar medicinas a sus pacientes.
+\item El doctor ha de ser capaz de visualizar el listado de medicinas de sus pacientes.
 
 \end{enumerate}
-\imagen{/DiagramaCasosDeUso.pdf}{Diagrama de casos de uso}
+\subsection{Requisitos no funcionales}
+\begin{enumerate}[label=\textbf{RNF\arabic*:}]
+    \item Todos los datos sensibles, incluyendo credenciales de usuario deben ser encriptados utilizando algoritmos seguros como SHA-256.
+    
+     \item Las operaciones básicas, como el inicio de sesión, la carga y visualización de vídeos, y la gestión de usuarios, deben completarse en menos de 2 segundos bajo condiciones normales de uso.
+
+    \item La interfaz de usuario ha de ser diseñada siguiendo principios de diseño centrado en el usuario para facilitar la usabilidad de esta.
+
+
+    \item La aplicación debe ser totalmente funcional en los navegadores más utilizados (Chrome, Firefox, Safari y Edge) en sus versiones más recientes. Debe tener un diseño responsivo que asegure una experiencia de usuario óptima en dispositivos de escritorio, tablets y móviles.
+
+\end{enumerate}
+
 
 
 
@@ -63,7 +56,38 @@ A continuación se presentan los requisitos funcionales y no funcionales de la a
 
 \section{Especificación de requisitos}
 
-En este apartado se especifican los casos de uso correspondientes  a los requisitos funcionales previamente expuestos.
+En este apartado se especifican los casos de uso correspondientes  a los requisitos funcionales previamente expuestos así como los actores de la aplicación.
+\subsection{Actores}
+En esta aplicación se pueden distinguir tres actores:
+\begin{itemize}
+\item Administrador: Usuario con sesión de administrador iniciada que tiene acceso a funcionalidades de añadir, modificar y eliminar usuarios.
+\item Doctor: Usuario con sesión de doctor que tiene acceso a funcionalidades de gestión de pacientes y medicinas así como de visualización de evolución del paciente.
+\item Paciente: Usuario con sesión de paciente acceso a la funcionalidad de visualizar su evolución.
+\end{itemize}
+
+
+
+Además en este apartado se muestra el diagrama de casos de uso (ver figura~\ref{fig:/DiagramaCasosDeUso.pdf}) y las siguientes tablas:
+\begin{itemize}
+\item La tabla~\ref{cu1} contiene el caso de uso Iniciar sesión.
+\item La tabla~\ref{cu2} contiene el caso de uso Cerrar sesión.
+\item La tabla~\ref{cu3} contiene el caso de uso Visualizar evolución.
+\item La tabla~\ref{cu4.1} contiene el caso de uso Dar de alta a usuarios.
+\item La tabla~\ref{cu4.2} contiene el caso de uso Dar de baja a usuarios.
+\item La tabla~\ref{cu4.3} contiene el caso de uso Modificar usuarios.
+\item La tabla~\ref{cu4.4} contiene el caso de uso Visualizar listado de usuarios.
+\item La tabla~\ref{cu5.1} contiene el caso de uso Añadir vídeos.
+\item La tabla~\ref{cu5.2} contiene el caso de uso Eliminar vídeos.
+\item La tabla~\ref{cu5.3} contiene el caso de uso Clasificar vídeos.
+\item La tabla~\ref{cu6.1} contiene el caso de uso Asignar paciente.
+\item La tabla~\ref{cu6.2} contiene el caso de uso Desasignar paciente.
+\item La tabla~\ref{cu7.1} contiene el caso de uso Añadir medicina.
+\item La tabla~\ref{cu7.2} contiene el caso de uso Eliminar medicina.
+\item La tabla~\ref{cu7.3} contiene el caso de uso Visualizar listado de medicinas de un paciente.
+\end{itemize}
+\imagenAmpliada{/DiagramaCasosDeUso.pdf}{Diagrama de casos de uso}
+
+
 
 \cu{1}{Iniciar sesión}
 {RF-1,RF-6}
@@ -72,7 +96,8 @@ En este apartado se especifican los casos de uso correspondientes  a los requisi
 	\def\labelenumi{\arabic{enumi}.}
 	\tightlist
 	\item El usuario debe estar dado de alta en la base de datos.
-	\item Estar en la página de inicio de sesión.
+	\item El usuario debe estar en la página de inicio de sesión.
+	\item El usuario no debe tener una sesión iniciada.
 	\end{itemize}}
 {
 	\begin{itemize}
@@ -81,6 +106,7 @@ En este apartado se especifican los casos de uso correspondientes  a los requisi
 
     \item El usuario introduce su nombre de usuario.
     \item El usuario introduce su contraseña.
+    \item El usuario selecciona su rol.
     \item El usuario hace clic en el botón de iniciar sesión.
     \end{itemize}
 }
@@ -94,9 +120,9 @@ En este apartado se especifican los casos de uso correspondientes  a los requisi
     \end{itemize}}
 {Alta}
 
-\cu{2}{Finalizar sesión}
+\cu{2}{Cerrar sesión}
 {RF-1,RF-7}
-{Los usuarios deben ser capaces de iniciar sesión}
+{Los usuarios deben ser capaces de cerrar sesión}
 {	\begin{itemize}
 	\def\labelenumi{\arabic{enumi}.}
 	\tightlist
@@ -110,18 +136,19 @@ En este apartado se especifican los casos de uso correspondientes  a los requisi
     \item El usuario hace clic en el botón de finalizar sesión.
     \end{itemize}
 }
-{El usuario será redirijo a su página de perfil correspondiente}
+{El usuario será redirijo a la página de inicio}
 {}
 {Alta}
 
 \cu{3}{Visualizar evolución}
 {RF-14}
-{El paciente y el médico han de ser capaces de visualizar la evolución del paciente}
+{El paciente y el doctor han de ser capaces de visualizar la evolución del paciente}
 {	\begin{itemize}
 	\def\labelenumi{\arabic{enumi}.}
 	\tightlist
+	\item El usuario debe de tener una sesión de doctor o paciente iniciada.
 	\item El paciente debe estar dado de alta en la base de datos.
-	\item El paciente debe de tener al menos 2 vídeos para ver la gráfica.
+	\item El doctor debe ser el que esta asignado al paciente.
 	\end{itemize}}
 {
 	\begin{itemize}
@@ -133,7 +160,11 @@ En este apartado se especifican los casos de uso correspondientes  a los requisi
     \end{itemize}
 }
 {Se muestra al usuario su gráfico correspondiente}
-{}
+{\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+	\item El doctor no corresponde con el del paciente.
+	\end{itemize}}
 {Alta}
 
 \cu{4.1}{Dar de alta a usuarios}
@@ -142,7 +173,8 @@ En este apartado se especifican los casos de uso correspondientes  a los requisi
 {	\begin{itemize}
 	\def\labelenumi{\arabic{enumi}.}
 	\tightlist
-	\item El usuario no debe estar dado de alta.
+	\item El usuario debe de tener una sesión de administrador iniciada.
+	\item El usuario que se desea añadir no debe estar dado de alta.
 	\end{itemize}}
 {
 	\begin{itemize}
@@ -150,7 +182,7 @@ En este apartado se especifican los casos de uso correspondientes  a los requisi
 	\tightlist
 
     \item El administrador pulsa el botón de <<añadir usuario>>.
-    \item El administrador introduce los datos del paciente.
+    \item El administrador introduce los datos del nuevo usuario.
     \item El administrador confirma los datos y pulsa el botón <<añadir>>.
     \end{itemize}
 }
@@ -158,9 +190,8 @@ En este apartado se especifican los casos de uso correspondientes  a los requisi
 {\begin{itemize}
 	\def\labelenumi{\arabic{enumi}.}
 	\tightlist
-
     \item El usuario ya existe.
-    \item Los datos introducidos son erróneos.
+    \item Los datos introducidos son erróneos o incompletos.
     \end{itemize}}
 {Alta}
 
@@ -170,13 +201,13 @@ En este apartado se especifican los casos de uso correspondientes  a los requisi
 {	\begin{itemize}
 	\def\labelenumi{\arabic{enumi}.}
 	\tightlist
-	\item El usuario debe estar dado de alta.
+	\item El usuario debe de tener una sesión de administrador iniciada.
+	\item El usuario que se desea eliminar debe estar dado de alta.
 	\end{itemize}}
 {
 	\begin{itemize}
 	\def\labelenumi{\arabic{enumi}.}
 	\tightlist
-
     \item El administrador pulsa el botón de <<eliminar usuario>>.
     \item El administrador confirma el usuario y pulsa el botón <<eliminar>>.
     \end{itemize}
@@ -185,8 +216,9 @@ En este apartado se especifican los casos de uso correspondientes  a los requisi
 {\begin{itemize}
 	\def\labelenumi{\arabic{enumi}.}
 	\tightlist
-
     \item El usuario no existe.
+    \item El usuario es un doctor y tiene pacientes asignados.
+    \item El usuario que se desea eliminar es el mismo que el usuario de la sesión.
     \end{itemize}}
 {Alta}
 
@@ -196,6 +228,7 @@ En este apartado se especifican los casos de uso correspondientes  a los requisi
 {	\begin{itemize}
 	\def\labelenumi{\arabic{enumi}.}
 	\tightlist
+	\item El usuario debe de tener una sesión de administrador iniciada.
 	\item El usuario debe estar dado de alta.
 	\end{itemize}}
 {
@@ -211,24 +244,23 @@ En este apartado se especifican los casos de uso correspondientes  a los requisi
 {\begin{itemize}
 	\def\labelenumi{\arabic{enumi}.}
 	\tightlist
-
     \item El usuario modificado coincide con otro que ya existe.
     \end{itemize}}
 {Alta}
 
-\cu{4.4}{Visualizar usuarios}
+\cu{4.4}{Visualizar listado de usuarios}
 {RF-11}
-{El administrador debe poder visualizar la vista de usuarios.}
+{El administrador debe poder visualizar la lista de usuarios.}
 {	\begin{itemize}
 	\def\labelenumi{\arabic{enumi}.}
 	\tightlist
+	\item El usuario debe de tener una sesión de administrador iniciada.
 	\item Debe existir al menos 1 usuario.
 	\end{itemize}}
 {
 	\begin{itemize}
 	\def\labelenumi{\arabic{enumi}.}
 	\tightlist
-
     \item El administrador visualiza la lista de usuarios.
     \end{itemize}
 }
@@ -238,17 +270,18 @@ En este apartado se especifican los casos de uso correspondientes  a los requisi
 
 \cu{5.1}{Añadir vídeos}
 {RF-2}
-{Tanto los médicos como los pacientes han de ser capaces de añadir nuevos vídeos.}
+{Los doctores han de ser capaces de añadir nuevos vídeos a sus pacientes.}
 {	\begin{itemize}
 	\def\labelenumi{\arabic{enumi}.}
 	\tightlist
+	\item El usuario debe de tener una sesión de doctor iniciada.
+	\item El doctor del paciente ha de ser el mismo que el doctor de la sesión.
 	\item Debe existir el paciente al que se le quiere añadir el vídeo.
 	\end{itemize}}
 {
 	\begin{itemize}
 	\def\labelenumi{\arabic{enumi}.}
 	\tightlist
-
     \item El usuario pulsa el botón <<añadir vídeo>>.
     \item Se rellenan los datos correspondientes del vídeo como la mano.
     \item Se añade el fichero con el vídeo que se quiere subir.
@@ -266,10 +299,12 @@ En este apartado se especifican los casos de uso correspondientes  a los requisi
 
 \cu{5.2}{Eliminar vídeos}
 {RF-3}
-{Tanto los médicos como los pacientes han de ser capaces de eliminar vídeos.}
+{Los doctores han de ser capaces de eliminar vídeos de sus pacientes.}
 {	\begin{itemize}
 	\def\labelenumi{\arabic{enumi}.}
 	\tightlist
+	\item El usuario debe de tener una sesión de doctor iniciada.
+	\item El doctor del paciente ha de ser el mismo que el doctor de la sesión.
 	\item Debe existir el paciente al que se le quiere eliminar el vídeo.
 	\item El paciente debe tener al menos un vídeo.
 	\end{itemize}}
@@ -277,122 +312,162 @@ En este apartado se especifican los casos de uso correspondientes  a los requisi
 	\begin{itemize}
 	\def\labelenumi{\arabic{enumi}.}
 	\tightlist
-
     \item El usuario pulsa el botón <<eliminar vídeo>> al lado del vídeo que desea eliminar.
-    \item Se pulsa el botón <<confirmar>>.
+    \item El usuario confirma que se desea eliminar el vídeo.
     \end{itemize}
 }
 {El vídeo ya no esta en la lista de vídeos del paciente correspondiente.}
 {}
 {Media}
 
-\cu{5.3}{Modificar vídeos}
-{RF-4}
-{Tanto los médicos como los pacientes han de ser capaces de modificar datos de los vídeos del paciente.}
-{	\begin{itemize}
-	\def\labelenumi{\arabic{enumi}.}
-	\tightlist
-	\item Debe existir el paciente al que se le quiere modificar el vídeo.
-	\item El paciente debe tener al menos un vídeo.
-	\end{itemize}}
-{
-	\begin{itemize}
-	\def\labelenumi{\arabic{enumi}.}
-	\tightlist
 
-    \item El usuario pulsa el botón <<editar vídeo>> al lado del vídeo que desea modificar.
-    \item El usuario modifica los datos que sean necesarios del vídeo seleccionado.
-    \item El usuario pulsa el botón <<confirmar>>.
-    
-    \end{itemize}
-}
-{El vídeo debe aparecer con las modificaciones realizadas en la lista de vídeos del paciente correspondiente.}
-{}
-{Baja}
-
-\cu{5.4}{Clasificar vídeos}
+\cu{5.3}{Clasificar vídeos}
 {RF-5}
-{Tanto los médicos como los pacientes han de ser capaces de clasificar los vídeos del paciente.}
+{Los doctores han de ser capaces de clasificar los vídeos del paciente.}
 {	\begin{itemize}
 	\def\labelenumi{\arabic{enumi}.}
 	\tightlist
+	\item El usuario debe de tener una sesión de doctor iniciada.
+	\item El doctor del paciente ha de ser el mismo que el doctor de la sesión.
 	\item Debe existir el paciente al que se le quiere clasificar el vídeo.
-	\item El paciente debe tener al menos un vídeo.
 	\end{itemize}}
 {
 	\begin{itemize}
 	\def\labelenumi{\arabic{enumi}.}
 	\tightlist
-
-    \item El usuario pulsa el botón <<clasificar vídeo>>.
-    \item Se clasificará el vídeo correspondiente.
-
-    
+    \item El doctor pulsa el botón <<añadir vídeo>>.
+    \item Se clasificará el vídeo correspondiente.   
     \end{itemize}
 }
 {Aparecerá la clasificación del vídeo.}
 {}
 {Alta}
 
-\cu{6.1}{Añadir paciente}
+\cu{6.1}{Asignar paciente}
 {RF-12}
-{El médico a de ser capaz de añadir pacientes a su lista de pacientes.}
+{El administrador ha de ser capaz de asignar pacientes a la lista de pacientes de un doctor.}
 {	\begin{itemize}
 	\def\labelenumi{\arabic{enumi}.}
 	\tightlist
-	\item Debe existir el paciente que se desea añadir.
+	\item El usuario debe de tener una sesión de administrador iniciada.
+	\item Debe existir al menos un doctor.
 	\end{itemize}}
 {
 	\begin{itemize}
 	\def\labelenumi{\arabic{enumi}.}
 	\tightlist
-
-    \item El médico pulsa el botón <<añadir paciente>>.
-    \item Se deberá rellenar los datos del paciente que se desea agregar.
-    \item El paciente se agregará a la lista de pacientes.
+    \item El administrador registra un nuevo paciente.
+    \item El administrador selecciona al doctor correspondiente.
+    \item El administrador registra al paciente.
     
     \end{itemize}
 }
-{Aparecerá el paciente en la lista del médico.}
+{Aparecerá el paciente en la lista del doctor.}
 {	\begin{itemize}
 	\def\labelenumi{\arabic{enumi}.}
 	\tightlist
-
     \item El paciente no existe.
-    \item El paciente ya se encuentra en la lista del médico.
     
     \end{itemize}}
 {Alta}
 
-\cu{6.2}{Eliminar paciente}
+\cu{6.2}{Desasignar paciente}
 {RF-13}
-{El médico a de ser capaz de eliminar pacientes a su lista de pacientes.}
+{El administrador ha de ser capaz de desasignar pacientes de la lista de un doctor.}
 {	\begin{itemize}
 	\def\labelenumi{\arabic{enumi}.}
 	\tightlist
 	\item Debe existir el paciente que se desea eliminar.
-	\item El paciente debe estar incluido en la lista de pacientes del médico.
+	\item El paciente debe estar incluido en la lista de pacientes del doctor.
+	\end{itemize}}
+{
+	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+    \item El administrador pulsa el botón <<eliminar paciente>>.
+    \item Se selecciona el paciente que se desea eliminar.
+	\item Se confirma que se desea eliminar a ese paciente.
+    \end{itemize}
+}
+{Ya no aparecerá el paciente en la lista del doctor.}
+{	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+    \item El paciente no se encuentra en la lista del doctor.
+    \end{itemize}}
+{Media}
+
+\cu{7.1}{Añadir medicina}
+{RF-15}
+{El administrador debe poder dar de alta a nuevos usuarios.}
+{	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+	\item El usuario debe de tener una sesión de doctor iniciada.
+	\item El doctor del paciente ha de ser el mismo que el doctor de la sesión.
+	\item Debe existir el paciente al que se le quiere añadir la medicina.
 	\end{itemize}}
 {
 	\begin{itemize}
 	\def\labelenumi{\arabic{enumi}.}
 	\tightlist
 
-    \item El médico pulsa el botón <<eliminar paciente>>.
-    \item Se selecciona el paciente que se desea eliminar.
-	\item Se confirma que se desea eliminar a ese paciente.
-    
+    \item El doctor pulsa el botón de <<añadir medicina>>.
+    \item El doctor introduce los datos de la nueva medicina.
+    \item El doctor confirma los datos y pulsa el botón <<añadir>>.
     \end{itemize}
 }
-{Ya no aparecerá el paciente en la lista del médico.}
+{Se muestra la nueva medicina en la lista de medicinas del paciente.}
+{\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+    \item Los datos introducidos son erróneos o incompletos.
+    \end{itemize}}
+{Media}
+
+\cu{7.2}{Eliminar medicina}
+{RF-9}
+{El administrador debe poder dar de baja a usuarios.}
 {	\begin{itemize}
 	\def\labelenumi{\arabic{enumi}.}
 	\tightlist
+	\item El usuario debe de tener una sesión de doctor iniciada.
+	\item El doctor del paciente ha de ser el mismo que el doctor de la sesión.
+	\item Debe existir el paciente al que se le quiere añadir la medicina.
+	\item El paciente ha de tener al menos una medicina.
+	\end{itemize}}
+{
+	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+    \item El doctor pulsa el botón de <<eliminar usuario>>.
+    \item El doctor confirma el usuario y pulsa el botón <<eliminar>>.
+    \end{itemize}
+}
+{Ya no se muestra la medicina en la lista de medicinas}
+{}
+{Media}
 
-    \item El paciente no existe.
-    \item El paciente no se encuentra en la lista del médico.
-    
-    \end{itemize}}
+
+\cu{7.3}{Visualizar listado de medicinas de un paciente}
+{RF-11}
+{El administrador debe poder visualizar la lista de usuarios.}
+{	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+	\item El usuario debe de tener una sesión de doctor iniciada.
+	\item El doctor del paciente ha de ser el mismo que el doctor de la sesión.
+	\item Debe existir el paciente al que se le quiere añadir la medicina.
+	\end{itemize}}
+{
+	\begin{itemize}
+	\def\labelenumi{\arabic{enumi}.}
+	\tightlist
+    \item El doctor visualiza la lista de medicinas del paciente seleccionado.
+    \end{itemize}
+}
+{Se muestra la lista de medicinas del paciente.}
+{}
 {Media}
 
 

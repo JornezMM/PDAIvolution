@@ -1,12 +1,5 @@
 \apendice{Especificación de diseño}
-\newcommand{\imagenAmpliada}[2]{
-	\begin{figure}[!h]
-		\centering
-		\includegraphics[width=1.3\textwidth]{#1}
-		\caption{#2}\label{fig:#1}
-	\end{figure}
-	\FloatBarrier
-}
+
 \section{Introducción}
 En el siguiente apartado se describen los detalles de la estructura del \textit{software}: el comportamiento y la interacción entre los distintos componentes.
 
@@ -30,7 +23,7 @@ El rol de administrador es un rol que pese a que no se relacione con ninguna otr
 \subsection{Diccionario de datos}
 Se adjunta a continuación, para cada tabla, el diccionario de datos correspondiente.
 \begin{itemize}
-\item \textbf{Administradores}: la tabla ~\ref{datadic:admin} contiene la información correspondiente a los administradores de la aplicación.
+\item \textbf{Administradores}: la tabla~\ref{datadic:admin} contiene la información correspondiente a los administradores de la aplicación.
 \begin{table}
 	\scalebox{0.80}{
 		\begin{tabular}{@{}p{5em} p{6em} p{6em} p{20em}@{}}
@@ -48,7 +41,7 @@ Se adjunta a continuación, para cada tabla, el diccionario de datos correspondi
 	\caption[Diccionario de datos: \texttt{Admin}]{Diccionario de datos. Tabla correspondiente a la clase \texttt{Admin}.}
 	\label{datadic:admin}
 \end{table}
-\item \textbf{Doctores}: la tabla ~\ref{datadic:doctor} contiene la información correspondiente a los doctores.
+\item \textbf{Doctores}: la tabla~\ref{datadic:doctor} contiene la información correspondiente a los doctores.
 \begin{table}
 	\scalebox{0.80}{
 		\begin{tabular}{@{}p{5em} p{6em} p{6em} p{20em}@{}}
@@ -66,7 +59,7 @@ Se adjunta a continuación, para cada tabla, el diccionario de datos correspondi
 	\caption[Diccionario de datos: \texttt{Doctor}]{Diccionario de datos. Tabla correspondiente a la clase \texttt{Doctor}.}
 	\label{datadic:doctor}
 \end{table}
-\item \textbf{Pacientes}: la tabla ~\ref{datadic:patient} contiene la información correspondiente a los pacientes.
+\item \textbf{Pacientes}: la tabla~\ref{datadic:patient} contiene la información correspondiente a los pacientes.
 \begin{table}
 \scalebox{0.80}{
 	\begin{tabular}{@{}p{5em} p{6em} p{6em} p{20em}@{}}
@@ -88,7 +81,7 @@ Se adjunta a continuación, para cada tabla, el diccionario de datos correspondi
 \caption[Diccionario de datos: \texttt{Patient}]{Diccionario de datos. Tabla correspondiente a la clase \texttt{Patient}.}
 \label{datadic:patient}
 \end{table}
-\item \textbf{Vídeos}: la tabla ~\ref{datadic:video} contiene la información correspondiente a los vídeos de los pacientes pacientes.
+\item \textbf{Vídeos}: la tabla~\ref{datadic:video} contiene la información correspondiente a los vídeos de los pacientes pacientes.
 \begin{table}
 	\scalebox{0.80}{
 		\begin{tabular}{@{}p{5em} p{6em} p{6em} p{20em}@{}}
@@ -110,7 +103,7 @@ Se adjunta a continuación, para cada tabla, el diccionario de datos correspondi
 	\label{datadic:video}
 \end{table}
 
-\item \textbf{Medicinas}: la tabla ~\ref{datadic:medicine} contiene la información de las medicinas.
+\item \textbf{Medicinas}: la tabla~\ref{datadic:medicine} contiene la información de las medicinas.
 \begin{table}
 	\scalebox{0.80}{
 		\begin{tabular}{@{}p{5em} p{6em} p{6em} p{20em}@{}}
@@ -125,7 +118,7 @@ Se adjunta a continuación, para cada tabla, el diccionario de datos correspondi
 	\caption[Diccionario de datos: \texttt{Medicine}]{Diccionario de datos. Tabla correspondiente a la clase \texttt{Medicine}.}
 	\label{datadic:medicine}
 \end{table}
-\item \textbf{PacienteMedicinas}: la tabla ~\ref{datadic:patientmedicine} contiene la información de las medicinas administradas a cada paciente incluyendo la fecha de inicio del tratamiento así como la fecha de finalización.
+\item \textbf{PacienteMedicinas}: la tabla~\ref{datadic:patientmedicine} contiene la información de las medicinas administradas a cada paciente incluyendo la fecha de inicio del tratamiento así como la fecha de finalización.
 \begin{table}
 	\scalebox{0.80}{
 		\begin{tabular}{@{}p{5em} p{6em} p{6em} p{20em}@{}}
