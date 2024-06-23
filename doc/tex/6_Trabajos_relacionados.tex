@@ -11,46 +11,73 @@ Se emplea un método en el que se emplea el uso de la cara para la calibración 
 El estudio se realizó con 387 vídeos de \textit{rapid finger-tapping test} (RFT) de 13 pacientes diagnosticados con Enfermedad del Parkinson en estado avanzado y 84 vídeos de \textit{rapid finger-tapping test} de 6 personas de control sanas. En total 471 vídeos.
 
 \subsection{Metodología}
-\begin{enumerate}
+\begin{itemize}
 	\item Se realiza un reconocimiento facial del individuo y se crea a partir de el 2 cuadrados en los costados de la cara para realizar la medición de la amplitud.
 	\item Se genera una serie temporal que representa la distancia desde el dedo indice al pulgar siendo esta la amplitud del movimiento.
 	\item Se extraen algunas características de la serie temporal, por ejemplo, la velocidad media de apertura y cierre de dedos, el número total de toques de los dedos, la amplitud máxima...
 	\item Se selección las características no redundantes mediante el algoritmo chi-cuadrado
 	\item Se entrena una máquina de vectores de soporte (SVM) mediante las características obtenidas para realizar la clasificación.
 
-\end{enumerate}
+\end{itemize}
 \subsection{Resultados}
 Se encontró una nueva característica representativa del ritmo de golpeteo llamada <<correlación cruzada entre los picos normalizados>>, la cual mostró una fuerte correlación de Guttman con las valoraciones clínicas. Al utilizar el clasificador de máquina de vectores de soporte y una validación cruzada de 10 grupos, se logró categorizar las muestras de pacientes en los niveles UPDRS-FT con una precisión del 88\%. Este mismo esquema de clasificación también permitió discriminar entre las muestras \textbf{RFT} de los controles sanos y los pacientes con \textbf{EP}, logrando una precisión del 95\%.
 
 
 \section{The discerning eye of computer vision}
-Este artículo \cite{williams2020discerning} utilizan 133 vídeos de manos realizando el \textbf{RFT} procedentes de 39 pacientes de enfermedad de Parkinson y 30 pacientes de control.
+Este artículo~\cite{williams2020discerning} utilizan 133 vídeos de manos realizando el \textbf{RFT} procedentes de 39 pacientes de enfermedad de Parkinson y 30 pacientes de control.
 
 A través de estos vídeos se han logrado extraer características y comprobar la relación que existe entre estas y la gravedad de la enfermedad en un paciente siendo esta valorada desde 0 (normal) hasta 4 (enfermedad muy grave).
 
 
 \subsection{Metodología}
-\begin{enumerate}
+\begin{itemize}
+
+
 	\item Se utiliza la librería de DeepCutLab la cual se trata de una librería de visión por computador para obtener la serie temporal de la amplitud.
 	\item Se normaliza la serie con la amplitud máxima siendo igual a 1 y escalando los valores conforme a esta medida.
 	\item Al igual que en el estudio anterior se extraen ciertas características de la serie siendo estas la velocidad, la amplitud y el ritmo.
-
-\end{enumerate}
+\end{itemize}
 \subsection{Resultados}
 DeepLabCut rastreó y midió con fiabilidad el \textit{finger-tap} en un vídeo estándar de smartphone. Las medidas del ordenador se relacionaron bien con las valoraciones clínicas de la bradicinesia.
 
 
 \section{Supervised classification of bradykinesia}
-Este artículo  \cite{williams2020supervised} utiliza 70 vídeos de evaluaciones de \textit{finger-tap} en un entorno clínico (40 manos con \textbf{Parkinson}, 30 manos de control).
+Este artículo~\cite{williams2020supervised} utiliza 70 vídeos de evaluaciones de \textit{finger-tap} en un entorno clínico (40 manos con \textbf{Parkinson}, 30 manos de control).
 Dos expertos clínicos en \textbf{Parkinson}, que desconocían los diagnósticos, evaluaron los vídeos para dar un grado de gravedad de la bradicinesia entre 0 y 4 utilizando la Escala Unificada de Calificación de la Enfermedad de Parkinson (UPDRS, por sus siglas en inglés)
 
 
 \subsection{Metodología}
-\begin{enumerate}
+\begin{itemize}
 	\item Extraer la frecuencia: La frecuencia de intervención se estimó como la frecuencia correspondiente al pico de amplitud máxima en el espectro de la transformada rápida de Fourier (FFT). 
 	\item La densidad espectral de energía se calculó como la integral al cuadrado del espectro FFT, una medida que se espera que aumente con la amplitud del golpeteo.
-\end{enumerate}
+\end{itemize}
 \subsection{Resultados}
 Una máquina de vectores de soporte con núcleos de función de base radial predijo la presencia de bradicinesia leve/moderada/grave con una precisión de prueba estimada del 0,8 \%.
 Un modelo Naïve Bayes predijo la presencia de la enfermedad de Parkinson con una precisión de prueba estimada de 0,67. 
 
+\section{Paddel}
+
+Este proyecto~\cite{paddelRepo} utiliza 158 vídeos de evaluación etiquetados para determinar la presencia o ausencia de Parkinson. El objetivo es realizar una predicción binaria sobre si una persona padece la enfermedad de Parkinson.
+
+\subsection{Metodología}
+\begin{itemize}
+
+
+\item Extracción de «landmarks»: Convertir el vídeo de la prueba de «finger-tapping» en una secuencia temporal de puntos de referencia de la mano.
+
+\item Lectura de imágenes del vídeo: haciendo uso de la librería OpenCV en Python para leer las imágenes del vídeo sin cargar todo el archivo en memoria.
+
+\item Extracción de «landmarks» de las imágenes: Utilizar Mediapipe Hands para obtener puntos de referencia de la mano en cada imagen del vídeo.
+
+\item Manejo de oclusión de «landmarks»: Descartar puntos de referencia no fiables debido a la perspectiva de los vídeos de «finger-tapping».
+
+\item Extracción precisa de «landmarks»: Elegir no paralelizar el proceso para obtener resultados más precisos en la aplicación web.
+
+\item Extracción de series temporales: Generar una secuencia de datos que represente la pose de la mano en cada fotograma del vídeo.
+
+\item Extracción de características: Obtener atributos útiles para entrenar el modelo de aprendizaje a partir de las series temporales.
+
+
+\end{itemize}
+\subsection{Resultados}
+Una máquina de vectores de soporte con los hiperparametros optimizados por medio de <<gridsearch>> da una precisión media del 78,85\%.

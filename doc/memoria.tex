@@ -9,6 +9,7 @@
 \usepackage{microtype}
 \usepackage{placeins}
 
+
 \RequirePackage{booktabs}
 \RequirePackage[table]{xcolor}
 \RequirePackage{xtab}
@@ -33,6 +34,14 @@
 \widowpenalty100000
 \clubpenalty100000
 
+\newcommand\Node[2]{
+  \fbox{\lower0.75cm
+    \vbox to 2.75cm{\vfil
+      \hbox to 2.75cm{\hfil\parbox{1.4cm}{#1\\#2}\hfil}
+      \vfil}%
+  }%
+}
+
 % Imágenes
 
 % Comando para insertar una imagen en un lugar concreto.
@@ -56,7 +65,7 @@
 % 2 --> Texto a pie de figura
 % 3 --> Tamaño en tanto por uno relativo al ancho de página
 \newcommand{\imagenflotante}[3]{
-	\begin{figure}
+	\begin{figure}[!h]
 		\centering
 		\includegraphics[width=#3\textwidth]{#1}
 		\caption{#2}\label{fig:#1}
