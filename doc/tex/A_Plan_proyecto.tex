@@ -281,9 +281,196 @@ Este \textsl{sprint} se desarrolló entre el 1 de junio de 2024 y el 13 de junio
 Se cumplieron todos los objetivos del sprint.
 \end{itemize}
 \section{Estudio de viabilidad}
+En este apartado se estudian los criterios a tener en cuenta a nivel económico y legal para determinar si es factible y si cumple los objetivos propuestos.
 
 \subsection{Viabilidad económica}
+En el siguiente subapartado se expone la viabilidad del proyecto a nivel económico.
+
+\subsubsection{Costes}
+Se entiende por coste todo aquel gasto necesario para poder llevar acabo un proyecto desde su inicio hasta su finalización. Para el análisis de los costes del proyecto y el calculo de la amortización se ha tenido en cuenta la duración total del proyecto (40 semanas o entorno a 9 meses).
+\begin{enumerate}
+\item \textbf{Costes de empleados}: en este caso se cuenta con dos empleados que han sido el desarrollador (el alumno) y el \textit{product owner} (tutor académico).
+Se estima que el tiempo real invertido por parte del desarrollador es de entorno a las 550 horas a lo largo de 9 meses. Teniendo en cuenta que el sueldo promedio de un programador junior en España es de entorno a 23.700€\footnote{Fuente:~\url{https://es.indeed.com/career/programador-junior/salaries}} y la jornada laboral completa son aproximadamente 1820 horas, el salario medio bruto por hora es de 13€. Por tanto el salario del desarrollador estará entorno a 550 horas x 13 \(\frac{\text{€}}{\text{hora}}\) = 7150€ o aproximadamente 795\(\frac{\text{€}}{\text{mes}}\)
+A esta cantidad se le ha de añadir los impuestos que se han de pagar como empresa por el empleado\footnote{Fuente:~\url{https://www.seg-social.es/wps/portal/wss/internet/Trabajadores/CotizacionRecaudacionTrabajadores/10721/10957/9932/4315}}
+\begin{itemize}
+\item \textbf{Contingencias Comunes}: correspondiente al 23,60\%.
+\item \textbf{Desempleo}: correspondiente al 6,70\%.
+\item \textbf{FOGASA}: fondo de garantía salarial. Correspondiente al 0,20\%.
+\item \textbf{Formación profesional}: correspondiente al 0,60\%.
+\item \textbf{Accidentes de Trabajo y Enfermedades Profesionales}: correspondiente al 1,50\%.
+\end{itemize}
+Por tanto, tras realizar los cálculos añadiendo los impuestos correspondientes, la empresa debe pagar 1.179,52 \(\frac{\text{€}}{mes}\) por el desarrollador.
+\begin{equation}
+\frac{795\frac{\text{€}}{mes}}{\text{(1 - (0.236 + 0.067 + 0.002 + 0.006 + 0.015))}} = \text{1.179,52} \frac{\text{€}}{mes}
+\end{equation}
+
+Por otro lado el \textit{product owner}, suponiendo un sueldo bruto anual de 39000€\footnote{Fuente:~\url{https://www.glassdoor.es/Sueldos/product-owner-sueldo-SRCH_KO0,13.htm}} , se calcula que el salario bruto hora es de 
+21,43€. Teniendo en cuenta que el tutor ha dedicado entorno a 3 horas por semana al proyecto, cobraría 257,16€ brutos al mes. Aplicando la formula al igual que para el desarrollador:
+\begin{equation}
+\frac{257,16\frac{\text{€}}{mes}}{\text{(1 - (0.236 + 0.067 + 0.002 + 0.006 + 0.015))}} = \text{381,54} \frac{\text{€}}{mes}
+\end{equation}
+Por lo tanto, y teniendo en cuenta que la duración del proyecto ha sido de 9 meses, el total que ha de pagar la empresa es de 14.049,54€ por los empleados.
+
+\[
+381.54\frac{\text{€}}{\text{mes}} \times 9\,\text{meses} + 1179.52\frac{\text{€}}{\text{mes}} \times 9\,\text{meses} = 14049.54\,\text{€}
+\]
+
+
+\item \textbf{Hardware}: para el hardware solo se ha hecho uso del equipo del alumno. Este equipo se trata de un PcCom Gold Élite con un Intel Core i5-11400F, 16 GB de RAM y NVIDIA Geforce RTX 3070 con un P.V.P \footnote{Fuente:~\url{https://www.pccomponentes.com/pccom-gold-elite-intel-core-i5-11400f-16gb-1tb-ssd-rtx-3070}} de 1199,18€. Se calcula que el ordenador será amortizado en 4 años por lo que se debe calcular el precio amortizado para la duración del proyecto. En total son 224,84€.
+
+\[
+\frac{1199,18\text{€}\times 9 \text{meses}}{4 \text{años} \times 12 \text{meses}}= 224,85\text{€}
+\]
+
+\item \textbf{Software}: la mayoría de programas y \textit{sofware} utilizado durante el desarrollo son gratuitos a excepción de GitHub Copilot cuyo coste de la versión \textit{entreprise} es de 36,35€ al mes. Teniendo en cuenta la duración del proyecto, esto nos da un coste total de 327,15€.
+
+\end{enumerate}
+
+\subsubsection{Costes totales}
+A continuación se muestra la tabla con los costes totales.
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{| c | c |}
+	\hline
+	\textbf{Concepto} & \textbf{Coste(€)} \\ \hline
+	\textbf{Empleados} & 14.049,54 \\
+	\textbf{Hardware} & 224,84 \\
+	\textbf{Software} & 327,15 \\ \hline
+	\hline
+	\textbf{Total} & 14.601,53 \\
+	\hline
+\end{tabular}
+\caption{Tabla de costes totales}
+\end{center}
+\end{table}
+
+\subsubsection{Ingresos}
+Dado que este proyecto pretende ser accesible, su uso va a ser completamente gratuito. Debido a esto una de las principales formas en las que se podría obtener rédito económico de esta aplicación sería mediante la implementación de anuncios. Dado que es proyecto pretende ser una herramienta para facilitar el trabajo a pacientes y médicos no se ha considerado oportuno y por tanto no se ha estudiado esta opción. Otra forma en la que se podría sacar ingresos sería mediante donaciones o ayudas que permitiesen cubrir los gastos de mantenimiento y desarrollo del proyecto.
 
 \subsection{Viabilidad legal}
+
+A continuación se muestra una tabla recopilando las licencias de las dependencias utilizadas durante el desarrollo del proyecto.
+
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.3\textwidth} >{\centering\arraybackslash}p{0.15\textwidth} >{\raggedright\arraybackslash}p{0.55\textwidth}}
+
+
+\toprule
+\textbf{Dependencia} & \textbf{Versión} & \textbf{Licencia} \\
+\midrule
+\endfirsthead
+
+\multicolumn{3}{c}%
+{\tablename\ \thetable\ -- \textit{Continuación}} \\
+\toprule
+\textbf{Dependencia} & \textbf{Versión} & \textbf{Licencia} \\
+\midrule
+\endhead
+
+\midrule
+\multicolumn{3}{r}{\textit{Continúa en la siguiente página}} \\
+\endfoot
+
+\bottomrule
+\caption[Licencias: dependencias o utilidades]{Dependencias del proyecto y licencias bajo las cuales están registradas. Extraídas mediante la librería pip-licenses\footnotemark .} \\
+
+\endlastfoot
+
+\texttt{Flask} & 3.0.2 & BSD License \\
+\texttt{Flask-Login} & 0.6.3 & MIT License \\
+\texttt{Flask-SQLAlchemy} & 3.1.1 & BSD License \\
+\texttt{Flask-WTF} & 1.2.1 & BSD License \\
+\texttt{Font-Awesome-Flask} & 0.1.4 & GNU General Public License v3 or later (GPLv3+) \\
+\texttt{Jinja2} & 3.1.3 & BSD License \\
+\texttt{MarkupSafe} & 2.1.5 & BSD License \\
+\texttt{PyYAML} & 6.0.1 & MIT License \\
+\texttt{Pygments} & 2.18.0 & BSD License \\
+\texttt{SQLAlchemy} & 2.0.27 & MIT License \\
+\texttt{WTForms} & 3.1.2 & BSD License \\
+\texttt{Werkzeug} & 3.0.1 & BSD License \\
+\texttt{absl-py} & 2.1.0 & Apache Software License \\
+\texttt{annotated-types} & 0.6.0 & MIT License \\
+\texttt{attrs} & 23.2.0 & MIT License \\
+\texttt{blinker} & 1.7.0 & MIT License \\
+\texttt{certifi} & 2024.2.2 & Mozilla Public License 2.0 (MPL 2.0) \\
+\texttt{cffi} & 1.16.0 & MIT License \\
+\texttt{charset-normalizer} & 3.3.2 & MIT License \\
+\texttt{click} & 8.1.7 & BSD License \\
+\texttt{cloudpickle} & 3.0.0 & BSD License \\
+\texttt{colorama} & 0.4.6 & BSD License \\
+\texttt{contourpy} & 1.2.1 & BSD License \\
+\texttt{cycler} & 0.12.1 & BSD License \\
+\texttt{dask} & 2024.5.0 & BSD License \\
+\texttt{dask-expr} & 1.1.0 & BSD License \\
+\texttt{distributed} & 2024.5.0 & BSD License \\
+\texttt{flatbuffers} & 24.3.25 & Apache Software License \\
+\texttt{fonttools} & 4.51.0 & MIT License \\
+\texttt{fsspec} & 2024.3.1 & BSD License \\
+\texttt{greenlet} & 3.0.3 & MIT License \\
+\texttt{gunicorn} & 22.0.0 & MIT License \\
+\texttt{idna} & 3.7 & BSD License \\
+\texttt{importlib\_metadata} & 7.1.0 & Apache Software License \\
+\texttt{itsdangerous} & 2.1.2 & BSD License \\
+\texttt{jax} & 0.4.27 & Apache-2.0 \\
+\texttt{jaxlib} & 0.4.27 & Apache-2.0 \\
+\texttt{joblib} & 1.4.2 & BSD License \\
+\texttt{kiwisolver} & 1.4.5 & BSD License \\
+\texttt{llvmlite} & 0.42.0 & BSD \\
+\texttt{locket} & 1.0.0 & BSD License \\
+\texttt{matplotlib} & 3.8.4 & Python Software Foundation License \\
+\texttt{mediapipe} & 0.10.13 & Apache Software License \\
+\texttt{ml-dtypes} & 0.4.0 & Apache Software License \\
+\texttt{msgpack} & 1.0.8 & Apache Software License \\
+\texttt{numba} & 0.59.1 & BSD License \\
+\texttt{numpy} & 1.26.4 & BSD License \\
+\texttt{opencv-contrib-python} & 4.9.0.80 & Apache Software License \\
+\texttt{opencv-python} & 4.9.0.80 & Apache Software License \\
+\texttt{opt-einsum} & 3.3.0 & MIT \\
+\texttt{packaging} & 24.0 & Apache Software License; BSD License \\
+\texttt{pandas} & 2.2.2 & BSD License \\
+\texttt{partd} & 1.4.2 & BSD \\
+\texttt{patsy} & 0.5.6 & BSD License \\
+\texttt{pillow} & 10.3.0 & Historical Permission Notice and Disclaimer (HPND) \\
+\texttt{pip-licenses} & 4.4.0 & MIT License \\
+\texttt{protobuf} & 4.25.3 & 3-Clause BSD License \\
+\texttt{psutil} & 5.9.8 & BSD License \\
+\texttt{pure-eval} & 0.2.2 & MIT License \\
+\texttt{pyarrow} & 16.0.0 & Apache Software License \\
+\texttt{pycparser} & 2.22 & BSD License \\
+\texttt{pydantic} & 2.7.1 & MIT License \\
+\texttt{pydantic-settings} & 2.2.1 & MIT License \\
+\texttt{pydantic\_core} & 2.18.2 & MIT License \\
+\texttt{pyparsing} & 3.1.2 & MIT License \\
+\texttt{python-dateutil} & 2.9.0.post0 & Apache Software License; BSD License \\
+\texttt{python-dotenv} & 1.0.1 & BSD License \\
+\texttt{pytz} & 2024.1 & MIT License \\
+\texttt{pywin32} & 306 & Python Software Foundation License \\
+\texttt{pyzmq} & 26.0.3 & BSD License \\
+\texttt{requests} & 2.31.0 & Apache Software License \\
+\texttt{scikit-learn} & 1.4.2 & BSD License \\
+\texttt{scipy} & 1.13.0 & BSD License \\
+\texttt{six} & 1.16.0 & MIT License \\
+\texttt{sortedcontainers} & 2.4.0 & Apache Software License \\
+\texttt{sounddevice} & 0.4.6 & MIT License \\
+\texttt{statsmodels} & 0.14.2 & BSD License \\
+\texttt{stumpy} & 1.12.0 & BSD License \\
+\texttt{tblib} & 3.0.0 & BSD License \\
+\texttt{threadpoolctl} & 3.5.0 & BSD License \\
+\texttt{toolz} & 0.12.1 & BSD License \\
+\texttt{tornado} & 6.4 & Apache Software License \\
+\texttt{tqdm} & 4.66.4 & MIT License; Mozilla Public License 2.0 (MPL 2.0) \\
+\texttt{traitlets} & 5.14.3 & BSD License \\
+\texttt{tsfresh} & 0.20.2 & MIT \\
+\texttt{typing\_extensions} & 4.9.0 & Python Software Foundation License \\
+\texttt{tzdata} & 2024.1 & Apache Software License \\
+\texttt{urllib3} & 2.2.1 & MIT License \\
+\texttt{zict} & 3.0.0 & BSD License \\
+\texttt{zipp} & 3.18.1 & MIT License \\
+
+\end{longtable}
+
+\footnotetext{\url{https://pypi.org/project/pip-licenses/}}
+
+
+
 
 
