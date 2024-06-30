@@ -6,14 +6,14 @@ En este capítulo se definirán algunos conceptos teóricos para facilitar la co
 
 La enfermedad de Parkinson (EP) es una  enfermedad neurodegenerativa multisistémica progresiva que cada afecta principalmente a a gente de avanzada edad~\cite{pdsymptoms}. 
 Entre los síntomas principales de esta enfermedad podemos encontrar:
-Perdida significativa de parte de las células productoras de dopamina lo que produce que aparezcan mucho antes los síntomas relacionados con el movimiento que presenta la EP. Otro de los síntomas que podemos encontrar en la EP es la bradicinesia ña cual se caracteriza por la lentitud al realizar movimientos voluntarios así como la ralentización y decremento de amplitud a la hora de realizar movimientos repetitivos.
+Perdida significativa de parte de las células productoras de dopamina lo que produce que aparezcan mucho antes los síntomas relacionados con el movimiento que presenta la EP. Otro de los síntomas que podemos encontrar en la EP es la bradicinesia, el cual se caracteriza por la lentitud al realizar movimientos voluntarios así como la ralentización y decremento de amplitud a la hora de realizar movimientos repetitivos.
 El diagnóstico de la EP, se basa en criterios específicos. Los síntomas iniciales incluyen lentitud de movimientos, junto con rigidez muscular, temblores o problemas de equilibrio. Los controles posteriores descartan otras posibles causas y confirman la presencia de factores que sugieren claramente la EP.
 La EP suele empezar en un lado del cuerpo y extenderse a lo largo de unos años. Los síntomas incluyen postura encorvada, rigidez, letra más pequeña y marcha arrastrando los pies. Los temblores son frecuentes.
 Las alteraciones de la marcha (como pasos indecisos o congelación repentina) se vuelven habituales. La pérdida de equilibrio es un problema importante, que aumenta el riesgo de caídas y lesiones.
 
 \subsection{Rapid finger tapping test}
 
-El test de golpeteo rápido de los dedos, también conocido como <<rapid finger tapping test>> o RFTT es un procedimiento por el cual el paciente realiza golpeteos de manera repetitiva durante un periodo de entre 10 y 15 segundos en los cuales ha de intentar generar la mayor amplitud posible entre el dedo indice y el pulgar sin bajar la frecuencia a la que lo realiza. Este test es usado comúnmente para el diagnostico de personas con la EP ya que como se explicó anteriormente uno de los síntomas que presenta esta enfermedad el la bradicisnesia el cual produce que una persona con EP al realizar este test muestre deteriodo ya sea en la amplitud o en la frecuencia según avanza la prueba. Este test será el que se utilizará en este proyecto para determinar el grado de EP en el que se encuentra el paciente.
+El test de golpeteo rápido de los dedos, también conocido como <<rapid finger tapping test>> o RFTT es un procedimiento por el cual el paciente realiza un golpeteo de manera repetitiva durante un periodo de entre 10 y 15 segundos en los cuales ha de intentar generar la mayor amplitud posible entre el dedo indice y el pulgar sin bajar la frecuencia a la que lo realiza. Este test es usado comúnmente para el diagnostico de personas con la EP ya que como se explicó anteriormente uno de los síntomas que presenta esta enfermedad el la bradicisnesia el cual produce que una persona con EP al realizar este test muestre deterioro ya sea en la amplitud o en la frecuencia según avanza la prueba. Este test será el que se utilizará en este proyecto para determinar el grado de EP en el que se encuentra el paciente.
 
 \subsection{Unified parkinson disease rating scale}
 
@@ -30,7 +30,7 @@ Dentro del aprendizaje automático podemos distinguir tres tipos principales:
 \begin{itemize}
 \item Aprendizaje supervisado: a este aprendizaje se le proporciona un con junto de datos completo con ejemplos etiquetados, y es mediante estos ejemplos con los que aprende a clasificar nuevos datos o realizar predicciones. Se puede dividir en regresión (predicción de datos numéricos) o clasificación (predicción de datos categóricos)
 \item Aprendizaje no supervisado: este aprendizaje a diferencia del supervisado se le entregan los datos sin clasificar de manera que tiene que ser él el que encuentre las relaciones. Se puede dividir en: clustering (agrupación de datos por su similitud) y reducción dimensional (disminuye el número de variables en un conjunto de datos sin perder información importante).
-\item Aprendizaje semi-supervisado: este aprendizaje es una combinación de los dos aprendizajes anteriores ya que se le proporcionan dos conjuntos de datos. En el primer conjuntos los datos están etiquetados, este conjunto es el conocido como entrenamiento (training) que es con el cual el modelo se entrena para encontrar la relación entre los datos. En el segundo conjunto los datos no están etiquetados, este conjunto es conocido como test que es el que permite al modelo comparar como de precisas son las predicciones que se realizan ya que, pese a que al modelo se le introduzcan los datos sin etiquetar, el <<dataset>> si contiene las etiquetas de estas instancias. Al igual que el aprendizaje supervisado su objetivo principal es la creación de clasificadores o regresores.
+\item Aprendizaje semi-supervisado: este aprendizaje es una combinación de los dos aprendizajes anteriores ya que se le proporcionan dos conjuntos de datos. En el primer conjuntos los datos están etiquetados, este conjunto es el conocido como entrenamiento (\textit{training}) que es con el cual el modelo se entrena para encontrar la relación entre los datos. En el segundo conjunto los datos no están etiquetados, este conjunto es conocido como test que es el que permite al modelo comparar como de precisas son las predicciones que se realizan ya que, pese a que al modelo se le introduzcan los datos sin etiquetar, el <<dataset>> si contiene las etiquetas de estas instancias. Al igual que el aprendizaje supervisado su objetivo principal es la creación de clasificadores o regresores.
 \end{itemize}
 
 \section{Minería de datos}
@@ -45,7 +45,7 @@ El objetivo principal de esta fase es recopilar y organizar la información nece
 En esta fase se limpian y transforman los datos para prepararlos para el análisis. Dentro de esta fase podemos encontrar distintas subfases para cada preprocesado.
 
 \subsubsection{Extracción de características}
-En muchos casos, los datos que se recopilan para realizar un estudio no se pueden analizar de forma directa. Es por ello que es necesario transformar estos datos para que se comporten de forma numérica. En este proyecto al utilizar archivos de vídeo como fuente de información de los datos, se ha tenido que extraer las características en forma de series temporales para luego poder ser analizadas ya que los modelos no son capaces de procesar un vídeo de forma automática y saber como ha de analizarlo.
+En muchos casos, los datos que se recopilan para realizar un estudio no se pueden analizar de forma directa. Es por ello que es necesario transformar estos datos para que sean numéricos. En este proyecto al utilizar archivos de vídeo como fuente de información de los datos, se ha tenido que extraer las características en forma de series temporales para luego poder ser analizadas ya que los modelos no son capaces de procesar un vídeo de forma automática y saber cómo ha de analizarlo.
 
 Dependiendo del conjunto de datos con el que se este tratando, la extracción de características puede variar bien sea por el tipo de datos, los modelos que se quieran aplicar o los recursos que dispongan.
 
@@ -61,13 +61,13 @@ En conjuntos de datos muy grandes, es recomendable eliminar las instancias con v
 
 \subsubsection{Desbalanceo de las clases}
 
-En el análisis de los datos se puede dar la situación en el que una clase este desbalanceada. Esto quiere decir que el número de instancias de ese subgrupo dentro del atributo o clase sea considerablemente menor que el resto de subgrupos. Estas situaciones pueden dar problemas tanto a la hora de realizar el entrenamiento del modelo, puede dar resultados erróneos ya que los modelos clasifican correctamente las clases mayoritarias mientras que las minoritarias no.
+En el análisis de los datos se puede dar la situación en el que una clase este desbalanceada. Esto quiere decir que el número de instancias de ese subgrupo dentro del atributo o clase sea considerablemente menor que el resto de subgrupos. Estas situaciones pueden dar problemas puesto que los algoritmos tienden a centrarse en las clases mayoritarias e ignorar las minoriatiras.
 
 Este problema se puede resolver de distintas maneras:
 \begin{itemize}
 \item \textit{Oversampling}: el sobremuestro también conocido como \textit{oversampling} consiste en crear nuevas instancias de las clases minoritarias de forma sintética para que exista el mismo número de instancias de cada clase. Esta solución trae consigo dos problemas principales que son el sobreajuste y la duplicación de instancias.
 \item \textit{Undersampling}: el submuestro o \textit{undersampling} consiste en reducir el número de instancias de cada clase hasta lograr que todas tengan el mismo número de instancias. El gran problema que acarrea este método es la perdida de información debido a que al reducir el número total de instancias podríamos estar eliminando algunas con información relevante para el modelo.
-\item Eliminar la clase: en el caso en el que tengamos un reducidisimo número de instancias de una clase, por ejemplo una o dos, no es viable realizar ninguna de las técnicas anteriormente nombradas ya que el sobremuestro va a llevar consigo un sobreajuste muy elevado debido a que el número de instancias es insuficiente para crear nuevas instancias sintéticas de la clase, creando instancias duplicadas. Asimismo utilizar el subajuste solo hará que perdamos información de del resto de las clases lo cual dificultará a la hora de entrenar al modelo. Es por ello que hay situaciones en las que la mejor opción es ignorar esta clase minoritaria, bien sea mediante la reevaluación de las instancias de esa clase o su eliminación del dataset.
+\item Eliminar la clase: en el caso en el que tengamos un reducidísimo número de instancias de una clase, por ejemplo una o dos, no es viable realizar ninguna de las técnicas anteriormente nombradas ya que el sobremuestro va a llevar consigo un sobreajuste muy elevado debido a que el número de instancias es insuficiente para crear nuevas instancias sintéticas de la clase, creando instancias duplicadas. Asimismo utilizar el submuestreo solo hará que perdamos información de del resto de las clases lo cual dificultará a la hora de entrenar al modelo. Es por ello que hay situaciones en las que la mejor opción es ignorar esta clase minoritaria, bien sea mediante la reevaluación de las instancias de esa clase o su eliminación del dataset.
 \end{itemize}
 
 \subsection{Creación del modelo}
@@ -93,14 +93,14 @@ Una vez se han analizado los datos y se ha identificado la clase objetivo se ha 
 Una vez se ha identificado la categoría del problema, se debe seleccionar el modelo adecuado. Para cada categoría de problema, existen modelos concretos que pueden ser útiles. Debido a la extensa variedad de modelos que existen, solo se explicarán aquellos que se han utilizado durante el desarrollo del proyecto.
 
 \begin{itemize}
-\item \textbf{Vecinos más cercanos}: también conocido como KNN (\textit{K-Nearest Neighbors}) es un algoritmo de aprendizaje básico que sirve tanto para regresión como para clasificación. Este algoritmo trata de clasificar una instancia por medio de obtener la clase más frecuente entre los \textit{k} vecinos más cercanos. En el caso de la regresión KNN predice el valor objetivo a partir de la media de los \textit{k} vecinos más cercanos. A diferencia del resto de algoritmos KNN no necesita una fase de entrenamiento, entre en la categoría de los método denominado \textit{Lazy Learning}, ya que usa directamente el dataset entero para realizar las predicciones, es decir, no tiene que optimizar pesos. La forma en la que este algoritmo calcula las distancias dependerá del parámetro que le indiquemos.
-\item \textbf{Máquina de vectores de estado}: una máquina de vectores de estado o SVM (\textit{State Vector Machine}), es un algoritmo que, al igual que vecinos más cercanos, se puede usar para problemas tanto de regresión como de clasificación. El objetivo de este algoritmo es encontrar el hiperplano que separa las instancias en cada clase. El hiperplano se puede interpretar como un borde entre una o varias clases. 
-\item \textbf{Random forest}: este algoritmo combina varios arboles de decisión para mejorar la precisión y robustez de las predicciones. Su funcionamiento se basa en crear múltiples grupos de datos, por cada set se creará un árbol de decisiones en el que se escogerán de manera aleatoria un subgrupo de características. Una vez creado cada árbol se hace lo que se conoce como una votación, en la que cada uno de los arboles predice una clase para la instancia. En el caso de los problemas regresivos el resultado de la votación es la media de los resultados de los distintos arboles. Por otro lado, en el caso de los problemas de clasificación, la clase ganadora es la más votada.
-\item \textbf{XGBoost}: este algoritmos busca, mediante la combinación de múltiples modelos de aprendizaje, construir modelos secuenciales de forma que cada nueva iteración intente corregir los errores de la iteración anterior. Se basa en el descenso de gradiente, ajustando los modelos para reducir el error.
+\item \textbf{Vecinos más cercanos}: también conocido como KNN (\textit{K-Nearest Neighbors}) es un algoritmo de aprendizaje básico que sirve tanto para regresión como para clasificación. Este algoritmo trata de clasificar una instancia por medio de obtener la clase más frecuente entre los \textit{k} vecinos más cercanos. En el caso de la regresión KNN predice el valor objetivo a partir de la media de los \textit{k} vecinos más cercanos. A diferencia del resto de algoritmos KNN, no necesita una fase de entrenamiento, por ello se ubica en la categoría de los método denominado \textit{Lazy Learning}, ya que usa directamente el \textit{dataset} entero para realizar las predicciones, es decir, no tiene que optimizar pesos. La forma en la que este algoritmo calcula las distancias dependerá del parámetro que se le indique.
+\item \textbf{Máquina de vectores de soporte}: una máquina de vectores de estado o SVM (\textit{Support Vector Machine}), es un algoritmo que, al igual que vecinos más cercanos, se puede usar para problemas tanto de regresión como de clasificación. El objetivo de este algoritmo es encontrar el hiperplano que separa las instancias en cada clase. El hiperplano se puede interpretar como un borde entre una o varias clases. 
+\item \textbf{Random forest}: este algoritmo combina varios árboles de decisión para mejorar la precisión y robustez de las predicciones. Su funcionamiento se basa en crear múltiples grupos de datos, por cada set se creará un árbol de decisiones en el que se escogerán de manera aleatoria un subgrupo de características. Una vez creado cada árbol se hace lo que se conoce como una votación, en la que cada uno de los arboles predice una clase para la instancia. En el caso de los problemas de regresión el resultado de la votación es la media de los resultados de los distintos árboles. Por otro lado, en el caso de los problemas de clasificación, la clase ganadora es la más votada.
+\item \textbf{XGBoost}: este algoritmo busca, mediante la combinación de múltiples modelos de aprendizaje, construir modelos secuenciales de forma que cada nueva iteración intente corregir los errores de la iteración anterior. Se basa en el descenso de gradiente, ajustando los modelos para reducir el error.
 \end{itemize}
-\subsubsection{Selección de hiperparametros}
+\subsubsection{Selección de hiperparámetros}
 
-Una vez elegido el modelo, se han de encontrar los hiperparametros que más se adecuen al problema. Para ello existen varias técnicas, entre ellas se encuentra el \textit{GridSearch} (la utilizada en el proyecto). Esta técnica consiste en proveer al modelo una lista de hiperparametros y que, con todas las posibles combinaciones entre los diferentes hiperparametros, devuelva tanto el mejor resultado obtenido para la métrica que se ha solicitado como los hiperparametros óptimos que dan ese resultado.
+Una vez elegido el modelo, se han de encontrar los hiperparámetros que más se adecúen al problema. Para ello existen varias técnicas, entre ellas se encuentra el \textit{GridSearch} (la utilizada en el proyecto). Esta técnica consiste en proveer al modelo una lista de hiperparámetros y que, con todas las posibles combinaciones entre los diferentes hiperparámetros, devuelva tanto el mejor resultado obtenido para la métrica que se ha solicitado como los hiperparámetros óptimos que dan ese resultado.
 
 
 
@@ -108,12 +108,12 @@ Una vez elegido el modelo, se han de encontrar los hiperparametros que más se a
 \subsection{Evaluación del modelo}
 
 
-A la hora de hacer la evaluación del modelo hay distintos métodos y métricas que permiten hacerse una idea de la eficacia del modelo. Uno de los métodos más usados es la matriz de confusión (ver tabla~\ref{ConfMatrix}).Esta matriz se utiliza principalmente en clasificación binaria. Este método se trata de una matriz de dimensiones 2 x 2 en la cual se reflejan los siguientes datos:
+A la hora de hacer la evaluación del modelo hay distintos métodos y métricas que permiten hacerse una idea de la eficacia del mismo. Uno de los métodos más usados es la matriz de confusión (ver tabla~\ref{ConfMatrix}). Esta matriz se utiliza principalmente en clasificación binaria. Este método se trata de una matriz de dimensiones $2\times2$ en la cual se reflejan los siguientes datos:
 \begin{itemize}
-\item True positives (TP): los true positives o verdaderos positivos son aquellas instancias en las que el valor predicho para su clase y el valor real de su clase coinciden, siendo esta la clase positiva. 
-\item False positives (FP): los false positives o falsos positivos son aquellas instancias que han sido predichos como una clase positiva pero realmente pertenecen a la clase negativa.
-\item False negatives (FN): los false negatives o falsos negativos son aquellas instancias que han sido predichos como una clase negativa pero realmente pertenecen a la clase positiva.
-\item True negatives (TN): los true negatives o verdaderos negativos son aquellas instancias en las que el valor predicho para su clase y el valor real de su clase coinciden,siendo esta la clase negativa. 
+\item True positives (TP): los \textit{true positives} o verdaderos positivos son aquellas instancias en las que el valor predicho para su clase y el valor real de su clase coinciden, siendo esta la clase positiva. 
+\item False positives (FP): los \textit{false positives} o falsos positivos son aquellas instancias que han sido predichos como una clase positiva pero realmente pertenecen a la clase negativa.
+\item False negatives (FN): los \textit{false negatives} o falsos negativos son aquellas instancias que han sido predichos como una clase negativa pero realmente pertenecen a la clase positiva.
+\item True negatives (TN): los \textit{true negatives} o verdaderos negativos son aquellas instancias en las que el valor predicho para su clase y el valor real de su clase coinciden,siendo esta la clase negativa. 
 \end{itemize} 
 
 
@@ -140,8 +140,7 @@ A la hora de hacer la evaluación del modelo hay distintos métodos y métricas 
 Una vez facilitados los conceptos anteriores se exponen y explican algunas de las métricas más comunes y las utilizadas durante en proyecto.
 \begin{itemize}
 
-\item \textbf{\textit{Accuracy} o Exactitud}: esta medida es la más común en la clasificación binaria ya que proporciona una buena visión general de como de eficaz es el modelo. No obstante, esta medida 
-en problemas de clasificación multiclase no siempre es útil ya que, en caso de que exista desbalanceo de clases o el modelo no sea capaz de predecir correctamente una clase, no se puede distinguir como de eficaz es para cada clase.
+\item \textbf{\textit{Accuracy} o Exactitud}: esta medida es la más común en la clasificación binaria ya que proporciona una buena visión general de como de eficaz es el modelo. No obstante, esta medida no siempre es útil ya que, en caso de que exista desbalanceo de clases o el modelo no sea capaz de predecir correctamente una clase, no se puede distinguir como de eficaz es para cada clase.
 \begin{equation}
 \text{Exactitud} = \frac{TP + TN}{TP + TN + FP + FN}
 \end{equation}
@@ -154,7 +153,7 @@ en problemas de clasificación multiclase no siempre es útil ya que, en caso de
 \begin{equation}
 \text{Recall} = \frac{TP}{TP + FN}
 \end{equation}
-\item \textbf{\textit{Specificity} o Especificidad }: mide el número de negativos predichos correctamente  frente al número total de negativos reales.
+\item \textbf{\textit{Specificity} o Especificidad}: mide el número de negativos predichos correctamente  frente al número total de negativos reales.
 
 \begin{equation}
 \text{Especificidad} = \frac{TN}{TN + FP}
@@ -172,16 +171,15 @@ en problemas de clasificación multiclase no siempre es útil ya que, en caso de
 \end{itemize} 
 
 \subsubsection{Técnicas de evaluación}
-La validación cruzada es un proceso mediante el que se evalúa un modelo comprobando que no depende de la partición de datos asignada al entrenamiento. Para realizar esta evaluación existen varias técnicas pero la más común (y la utilizada en este proyecto) es la conocida como \textit{K-folds} en la que se divide el \textit{dataset} en \textit{k} pliegues o \textit{folds}. Cada uno de estos pliegues se compone del mismo número de instancias. La forma en la que se seleccionan las instancias depende de los parámetros que se indiquen. Por ejemplo, existe una separación balanceada que procura que en cada pliegue exista el mismo número de instancias de cada clase. Otra forma de seleccionar estas instancias es de manera aleatoria.
+La validación cruzada es un proceso mediante el que se evalúa un modelo comprobando que no depende de la partición de datos asignada al entrenamiento. Para realizar esta evaluación existen varias técnicas pero la más común (y la utilizada en este proyecto) es la conocida como \textit{K-folds} en la que se divide el \textit{dataset} en \textit{k} grupos o \textit{folds}. Cada uno de estos grupos se compone del mismo número de instancias. La forma en la que se seleccionan las instancias depende de los parámetros que se indiquen. Por ejemplo, existe una separación balanceada que procura que en cada grupo exista el mismo número de instancias de cada clase conocido como muestreo estratificado. Otra forma de seleccionar estas instancias es de manera aleatoria.
 \begin{figure}[h]
 
 	\label{img:k-fold}
 	\centering
 	\includegraphics[scale=0.5]{./img/concepts/K-Fold.png}
-	\caption{Diagrama K-fold cross-validation extraído de <<Predicting Mechanical Properties of High-Performance Fiber-Reinforced Cementitious Composites by Integrating Micromechanics and Machine Learning>>~\cite{Guo2021}}
+	\caption[Diagrama K-fold cross-validation]{Diagrama K-fold cross-validation extraído de <<Predicting Mechanical Properties of High-Performance Fiber-Reinforced Cementitious Composites by Integrating Micromechanics and Machine Learning>>~\cite{Guo2021}}
 \end{figure}
 
-Una vez divido el \textit{dataset} se realiza un entrenamiento y prueba por cada pliegue de manera que en cada iteración se selecciona uno de los pliegues como validación y el resto sirven como entrenamiento. Tras realizar cada uno de las iteraciones se extraen las métricas que se correspondientes y se realiza una media aritmética siendo esta el resultado deseado.
-
+Una vez divido el \textit{dataset} se realiza un entrenamiento y prueba por cada grupo de manera que en cada iteración se selecciona uno de los grupos como validación y el resto sirven como entrenamiento. Tras realizar cada una de las iteraciones se extraen las métricas necesarias y se realiza una media aritmética siendo esta el resultado deseado.
 
 
