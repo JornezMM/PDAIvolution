@@ -46,10 +46,10 @@
               <tbody>
                 {% for video in videos %}
                 <tr>
-                  <td>{{ video.name }}</td>
+                  <td>Video de la mano {%if video.hand==right %} derecha {% else %} izquierda {%endif%} del {{ video.date }}</td>
                   <td>{{ video.date }}</td>
                   <td>
-                    {%if video.hand==right %} Derecha {% else %} Izquierda {%
+                    {%if video.hand=="right" %} Derecha {% elif video.hand=="left" %} Izquierda {%
                     endif%}
                   </td>
                   <td>{{ video.amplitude }}</td>

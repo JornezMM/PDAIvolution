@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"
+    <a class="navbar-brand" href="/"
       ><img
         src="{{ url_for('static', filename='icon-big.png') }}"
         width="70"
@@ -19,9 +19,20 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+      </ul>
+      <ul class="navbar-nav me-auto">
+      </ul>
+        <h1 class="navbar-text mx-auto" style="color: white;">PDAIVOLUTION</h1>
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link" href="#">Inicio</a>
+          <a class="nav-link" href="/">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/login/">Iniciar sesión</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about/">Acerca de</a>
         </li>
       </ul>
     </div>

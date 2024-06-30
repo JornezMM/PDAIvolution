@@ -101,7 +101,7 @@
         </div>
       </div>
     </div>
-
+    {% block javascript %}
     <script type="module">
       const margin = { top: 10, right: 40, bottom: 40, left: 40 };
       const width =
@@ -127,136 +127,150 @@
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
       // Create a fake dataset
+      const amp = []
+      const slowness = []
+      const dates = []
+      '{% for a in amplitude %}'
+      amp.push('{{ a }}');
+      '{% endfor %}'
+      '{% for s in slowness %}'
+      slowness.push('{{ s }}');
+      '{% endfor %}'
+      '{% for d in dates %}'
+      dates.push('{{ d }}');
+      '{% endfor %}'
 
-      const dataset = [
-        { date: new Date("2022-01-01"), value: 1 },
-        { date: new Date("2022-02-01"), value: 1 },
-        { date: new Date("2022-03-01"), value: 2 },
-        { date: new Date("2022-04-08"), value: 2 },
-        { date: new Date("2022-05-01"), value: 3 },
-        { date: new Date("2022-06-01"), value: 4 },
-        { date: new Date("2022-07-01"), value: 4 },
-        { date: new Date("2022-08-01"), value: 4 },
-        { date: new Date("2022-09-01"), value: 6 },
-        { date: new Date("2022-10-01"), value: 5 },
-        { date: new Date("2022-11-01"), value: 6 },
-        { date: new Date("2022-12-01"), value: 6 },
-        { date: new Date("2023-01-01"), value: 6 },
-        { date: new Date("2023-02-01"), value: 6 },
-        { date: new Date("2023-03-01"), value: 6 },
-        { date: new Date("2023-04-01"), value: 6 },
-        { date: new Date("2023-05-01"), value: 6 },
-        { date: new Date("2023-06-01"), value: 6 },
-        { date: new Date("2023-07-01"), value: 6 },
-        { date: new Date("2023-08-01"), value: 6 },
-        { date: new Date("2023-09-01"), value: 6 },
-        { date: new Date("2023-10-01"), value: 6 },
-        { date: new Date("2023-11-01"), value: 6 },
-        { date: new Date("2023-12-01"), value: 6 },
-        { date: new Date("2024-01-01"), value: 6 },
-      ];
-      const dataset2 = [
-        { date: new Date("2022-01-01"), value: 2 },
-        { date: new Date("2022-02-01"), value: 2 },
-        { date: new Date("2022-03-01"), value: 3 },
-        { date: new Date("2022-04-08"), value: 3 },
-        { date: new Date("2022-05-01"), value: 4 },
-        { date: new Date("2022-06-01"), value: 5 },
-        { date: new Date("2022-07-01"), value: 6 },
-        { date: new Date("2022-08-01"), value: 6 },
-        { date: new Date("2022-09-01"), value: 5 },
-        { date: new Date("2022-10-01"), value: 4 },
-        { date: new Date("2022-11-01"), value: 3 },
-        { date: new Date("2022-12-01"), value: 3 },
-        { date: new Date("2022-12-01"), value: 3 },
-      ];
+      console.log(dates.length);
+      console.log(amp);
+      const amplitude = []
+      for (let i = 0; i < dates.length; i++) {
+        console.log(dates[i]);
+        amplitude.push({
+          date: new Date(dates[i]),
+          value: amp[i],
+        });
+      }
+      console.log(amplitude);
+      const lent = []
+      for (let i = 0; i < dates.length; i++) {
+        lent.push({
+          date: new Date(dates[i]),
+          value: slowness[i],
+        });
+      }
       // Order the dataset by date
-      dataset.sort((a, b) => a.date - b.date);
+      amplitude.sort((a, b) => a.date - b.date);
+      lent.sort((a, b) => a.date - b.date);
+      console.log(amplitude);
+      console.log(lent);
 
-      // Define the x and y domains
-
-      x.domain(d3.extent(dataset, (d) => d.date));
-      y.domain([0, d3.max(dataset, (d) => d.value)]);
-
-      // Add the x-axis
-
-      svg
-        .append("g")
-        .attr("transform", `translate(0,${height})`)
-        .call(
-          d3
-            .axisBottom(x)
-            .ticks(d3.timeMonth.every(1))
-            .tickFormat(d3.timeFormat("%m %Y"))
-        )
-        .selectAll("text")
-        .style("font-size", "10px"); // Set the font size
-
-      // Add the y-axis
-
-      svg
-        .append("g")
-        .call(d3.axisLeft(y))
-        .selectAll("text")
-        .style("font-size", "14px"); // Set the font size
-
+      const xPadding = 10 * 24 * 60 * 60 * 1000; // 10 days padding for x-axis
+      const yPadding = (d3.max([...amplitude, ...lent], d => d.value) - d3.min([...amplitude, ...lent], d => d.value)) * 0.1; // 10% padding for y-axis
+      
+      // Update the x scale with padding
+      x.domain([
+          d3.min([...amplitude, ...lent], d => d.date) - xPadding,
+          d3.max([...amplitude, ...lent], d => d.date)
+      ]);
+      
+      // Update the y scale with padding
+      y.domain([
+          d3.min([...amplitude, ...lent], d => d.value) - yPadding,
+          d3.max([...amplitude, ...lent], d => d.value)
+      ]);
+      
+      // Append the X axis
+      svg.append("g")
+          .attr("transform", `translate(0,${height})`)
+          .call(
+              d3.axisBottom(x)
+              .ticks(d3.timeYear.every(1))
+              .tickFormat(d3.timeFormat("%Y"))
+          )
+          .selectAll("text")
+          .style("font-size", "10px"); // Set the font size
+      
+      // Append the Y axis
+      svg.append("g")
+          .call(d3.axisLeft(y))
+          .selectAll("text")
+          .style("font-size", "14px"); // Set the font size
+      
       // Create the line generator
-
-      const line = d3
-        .line()
-        .x((d) => x(d.date))
-        .y((d) => y(d.value));
-
-      // Add the line path to the SVG element
-
-      svg
-        .append("path")
-        .datum(dataset)
-        .attr("fill", "none")
-        .attr("stroke", "steelblue")
-        .attr("stroke-width", 1)
-        .attr("d", line);
-      svg
-        .append("path")
-        .datum(dataset2)
-        .attr("fill", "none")
-        .attr("stroke", "red")
-        .attr("stroke-width", 1)
-        .attr("d", line);
+      const line = d3.line()
+          .x(d => x(d.date))
+          .y(d => y(d.value));
+      
+      // Add the line path for amplitude
+      svg.append("path")
+          .datum(amplitude)
+          .attr("fill", "none")
+          .attr("stroke", "steelblue")
+          .attr("stroke-width", 1)
+          .attr("d", line);
+      
+      // Add circles for each point in amplitude
+      svg.selectAll("circle.amplitude")
+          .data(amplitude)
+          .enter()
+          .append("circle")
+          .attr("class", "amplitude")
+          .attr("cx", d => x(d.date))
+          .attr("cy", d => y(d.value))
+          .attr("r", 3) // Set the radius of the circles
+          .attr("fill", "steelblue");
+      
+      // Add the line path for lent
+      svg.append("path")
+          .datum(lent)
+          .attr("fill", "none")
+          .attr("stroke", "red")
+          .attr("stroke-width", 1)
+          .attr("d", line);
+      
+      // Add circles for each point in lent
+      svg.selectAll("circle.lent")
+          .data(lent)
+          .enter()
+          .append("circle")
+          .attr("class", "lent")
+          .attr("cx", d => x(d.date))
+          .attr("cy", d => y(d.value))
+          .attr("r", 3) // Set the radius of the circles
+          .attr("fill", "red");
+      
+      // Add legend
       const legendData = [
-        { name: "Dataset 1", color: "steelblue" },
-        { name: "Dataset 2", color: "red" },
+          { name: "Amplitud", color: "steelblue" },
+          { name: "Lentitud", color: "red" },
       ];
-
+      
       // Create legend container
-      const legendGroup = svg
-        .append("g")
-        .attr("id", "legend")
-        .attr("transform", `translate(${width - margin.right}, 10)`);
-
+      const legendGroup = svg.append("g")
+          .attr("id", "legend")
+          .attr("transform", `translate(${width - margin.right}, 10)`);
+      
       // Create legend items
-      const legendItems = legendGroup
-        .selectAll(".legend-item")
-        .data(legendData)
-        .enter()
-        .append("g")
-        .attr("class", "legend-item")
-        .attr("transform", (d, i) => `translate(0, ${i * 20})`);
-
+      const legendItems = legendGroup.selectAll(".legend-item")
+          .data(legendData)
+          .enter()
+          .append("g")
+          .attr("class", "legend-item")
+          .attr("transform", (d, i) => `translate(0, ${i * 20})`);
+      
       // Add colored squares
-      legendItems
-        .append("rect")
-        .attr("width", 10)
-        .attr("height", 10)
-        .attr("fill", (d) => d.color);
-
+      legendItems.append("rect")
+          .attr("width", 10)
+          .attr("height", 10)
+          .attr("fill", d => d.color);
+      
       // Add legend text
-      legendItems
-        .append("text")
-        .attr("x", 15)
-        .attr("y", 10)
-        .text((d) => d.name)
-        .attr("font-size", "12px"); // Set the font size
+      legendItems.append("text")
+          .attr("x", 15)
+          .attr("y", 10)
+          .text(d => d.name)
+          .attr("font-size", "12px"); // Set the font size
     </script>
+    {% endblock %}
   </body>
 </html>
