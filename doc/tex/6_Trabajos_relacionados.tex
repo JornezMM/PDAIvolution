@@ -1,12 +1,12 @@
 \capitulo{6}{Trabajos relacionados}
 
-Durante los últimos años se han utilizado diferentes métodos para evaluar la enfermedad e Parkinson mediante la prueba del \textit{Rapid Finger-tapping}. En este capítulo se recogen algunos de los trabajos de manera resumida.
+Durante los últimos años se han utilizado diferentes métodos para evaluar la enfermedad de Parkinson mediante la prueba del \textit{Rapid Finger-tapping}. En este capítulo se recogen algunos de los trabajos de manera resumida.
 
 \section{A computer vision framework for finger-tapping evaluation}
 
-En este artículo~\cite{khan2014computer} se documenta el uso de la visión por computador para la clasificación de individuos según el nivel de gravedad de la enfermedad de Parkinson.
+En este artículo~\cite{khan2014computer} se documenta el uso de la visión artificial para la clasificación de individuos según el nivel de gravedad de la enfermedad de Parkinson.
 
-Se emplea un método en el que se emplea el uso de la cara para la calibración de la amplitud de la prueba. Para ello el sujeto ha de elevar las manos a la altura de la cara y apuntar con las puntas de los dedos hacia la misma.
+Se emplea un método que utiliza la cara para la calibración de la amplitud de la prueba. Para ello el sujeto ha de elevar las manos a la altura de la cara y apuntar con las puntas de los dedos hacia la misma.
 
 El estudio se realizó con 387 vídeos de \textit{rapid finger-tapping test} (RFT) de 13 pacientes diagnosticados con Enfermedad del Parkinson en estado avanzado y 84 vídeos de \textit{rapid finger-tapping test} de 6 personas de control sanas. En total 471 vídeos.
 
@@ -26,14 +26,14 @@ Se encontró una nueva característica representativa del ritmo de golpeteo llam
 \section{The discerning eye of computer vision}
 Este artículo~\cite{williams2020discerning} utilizan 133 vídeos de manos realizando el \textbf{RFT} procedentes de 39 pacientes de enfermedad de Parkinson y 30 pacientes de control.
 
-A través de estos vídeos se han logrado extraer características y comprobar la relación que existe entre estas y la gravedad de la enfermedad en un paciente siendo esta valorada desde 0 (normal) hasta 4 (enfermedad muy grave).
+A través de estos vídeos se ha logrado extraer características y comprobar la relación que existe entre estas y la gravedad de la enfermedad en un paciente siendo esta valorada desde 0 (normal) hasta 4 (enfermedad muy grave).
 
 
 \subsection{Metodología}
 \begin{itemize}
 
 
-	\item Se utiliza la librería de DeepCutLab la cual se trata de una librería de visión por computador para obtener la serie temporal de la amplitud.
+	\item Se utiliza la librería de DeepCutLab la cual se trata de una librería de visión artificial para obtener la serie temporal de la amplitud.
 	\item Se normaliza la serie con la amplitud máxima siendo igual a 1 y escalando los valores conforme a esta medida.
 	\item Al igual que en el estudio anterior se extraen ciertas características de la serie siendo estas la velocidad, la amplitud y el ritmo.
 \end{itemize}
@@ -57,7 +57,7 @@ Un modelo Naïve Bayes predijo la presencia de la enfermedad de Parkinson con un
 
 \section{Paddel}
 
-Este proyecto~\cite{paddelRepo} utiliza 158 vídeos de evaluación etiquetados para determinar la presencia o ausencia de Parkinson. El objetivo es realizar una predicción binaria sobre si una persona padece la enfermedad de Parkinson.
+Este proyecto~\cite{paddelRepo} utiliza 158 vídeos de evaluación etiquetados para determinar la presencia o ausencia de Parkinson. El objetivo es realizar una predicción binaria sobre la presencia de la enfermedad de Parkinson en una persona
 
 \subsection{Metodología}
 \begin{itemize}
@@ -80,4 +80,5 @@ Este proyecto~\cite{paddelRepo} utiliza 158 vídeos de evaluación etiquetados p
 
 \end{itemize}
 \subsection{Resultados}
-Una máquina de vectores de soporte con los hiperparametros optimizados por medio de <<gridsearch>> da una precisión media del 78,85\%.
+Una máquina de vectores de soporte con los hiperparámetros optimizados por medio de \textit{GridSearch} da una precisión media del 78,85\%.
+

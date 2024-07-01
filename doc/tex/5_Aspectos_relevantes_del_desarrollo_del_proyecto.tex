@@ -12,22 +12,22 @@ Por último en la subsección~\ref{Fase de desarrollo de la aplicación} se expo
 \label{Fase de experimentación}
 \subsection{Extracción de características mediante un Trabajo de Fin de Grado previo}
 
-Para la extracción de características se hizo uso de un apartado del Trabajo de Fin de Grado de Catalin llamado PADDEL~\cite{paddelRepo}. Este TFG consiste en detectar mediante la bradicenesia si una persona tiene o no Parkinson. Para ello extrae las características de vídeos haciendo el RFTT mediante visión artificial y, aplicando técnicas de minería de datos, es capaz de predecir si una persona tiene o no la enfermedad de Parkinson.
+Para la extracción de características se hizo uso de un apartado del Trabajo de Fin de Grado de Catalín llamado PADDEL~\cite{paddelRepo}. Este TFG consiste en detectar mediante la bradicinesia si una persona tiene o no Parkinson. Para ello extrae las características de vídeos haciendo el RFTT mediante visión artificial y, aplicando técnicas de minería de datos, es capaz de predecir si una persona tiene o no la enfermedad de Parkinson.
 
-Realizando un estudio del TFG de Catalin se pudo extraer y utilizar correctamente el código que permitía la extracción de características. Este código, tras algunas modificaciones, ha sido implementado en el proyecto.
+Realizando un estudio del TFG de Catalín se pudo extraer y utilizar correctamente el código que permitía la extracción de características. Este código, tras algunas modificaciones, ha sido implementado en el proyecto.
 
 Las características que se extraen de los vídeos, se pueden dividir en tres grupos:
 \begin{itemize}
 \item Atributos iniciales: son los atributos que de los que se dispone mediante el titulo del vídeo como son la edad, el sexo o la mano dominante.
 \item Atributos extraídos del vídeo: son los atributos que extrae mediante series temporales como son la velocidad, la amplitud o el número de golpes.
-\item Atributos extraídos de vídeo con TSFresh: Son los 794 atributos
+\item Atributos extraídos del vídeo con TSFresh: Son los 794 atributos
 del vídeo extraídos mediante TSFresh.
 \end{itemize}
 
 
 \subsection{Análisis y tratamiento de los datos}
 Una vez se extrajeron las características de los datos se pudo llevar a cabo un análisis de los datos.
-En el conjunto de datos disponible en la fase de experimentación se disponía de 222 vídeos. 
+En el \textit{dataset} utilizado durante la fase de experimentación se disponía de 222 vídeos. 
 Cada video disponía de los siguientes atributos:
 \begin{itemize}
 \item Sexo de la persona.
@@ -38,13 +38,13 @@ Cada video disponía de los siguientes atributos:
 \item Valoración del grado de lentitud del vídeo. Primera variable objetivo.
 \item Valoración del grado de amplitud del vídeo. Segunda variable objetivo.
 \end{itemize}
-Las valoraciones fueron facilitadas por dos neurólogas del HUBU. Estas valoraciones diferían  entre sí de manera considerable y es por ello se decidió realizar el experimento utilizando solo las clasificaciones de una de las dos. 
+Las valoraciones fueron facilitadas por dos neurólogas del  Hospital Universitario de Burgos. Estas valoraciones diferían entre sí de manera considerable y es por ello se decidió realizar el experimento utilizando solo las clasificaciones de una de las dos. 
 
-Una vez analizados los datos y extraídas las características se hicieron varías comprobaciones. Primero se comprobó que todos los vídeos estuviesen correctamente valorados. Este no fue el caso ya que 2 de los videos de los que se disponía no estaban valorados es por ello que, debido a que el tipo de aprendizaje utilizado es supervisado, se decidió que no se incluirían en la fase de experimentación.
+Una vez analizados los datos y extraídas las características se hicieron varias comprobaciones. Primero se comprobó que todos los vídeos estuviesen correctamente valorados. Este no fue el caso ya que 2 de los vídeos de los que se disponía no estaban valorados es por ello que, debido a que el tipo de aprendizaje utilizado es supervisado, se decidió que no se incluirían en la fase de experimentación.
 
 Tras eliminar los vídeos que no fueron valorados, se comprobó si las clases estaban desbalanceadas. Al realizar esta comprobación se vio que había un desbalanceado muy elevado, habiendo clases que solo tenían menos de 8 instancias. Dado que se pretendía utilizar algoritmos como KNN o técnicas de remuestreo como \textit{Random Oversampling} se tomo la decisión de eliminar aquellas clases que tuviesen menos de 8 instancias. Las clases que se eliminaron fueron lentitud 3 y 4 así como amplitud 4.
 \imagen{./graphs/class_graph1.png}{Número de instancias por clase antes de realizar el tratamiento de datos.}{}
-Además de lo anteriormente mencionado se comprobó si existía alguna característica de los vídeos que fuese nula. Al comprobarlo se observo que en algunas todas había una característica que era nula por lo que se decidió eliminar esa característica nula de todas las instancias ya que no aportaba ninguna información adicional. Una de esas características era la edad, que solo fue nula en vídeos de control, es decir vídeos de personas sin la enfermedad de Parkinson y dado al elevado número de vídeos de control, no supuso una gran perdida de información. Posteriormente se eliminaron aquellos vídeos cuya duración no era superior a 15 segundos ya que, según aparece en la documentación de PADDEL, no se realizaba correctamente la extracción de características si el vídeo no cumplía ese requisito.
+Además de lo anteriormente mencionado se comprobó si existía alguna característica de los vídeos que fuese nula. Al comprobarlo se observó que en algunas todas había una característica que era nula por lo que se decidió eliminar esa característica nula de todas las instancias ya que no aportaba ninguna información adicional. Una de esas características era la edad, que solo fue nula en vídeos de control, es decir vídeos de personas sin la enfermedad de Parkinson y dado al elevado número de vídeos de control, no supuso una gran perdida de información. Posteriormente se eliminaron aquellos vídeos cuya duración no era superior a 15 segundos ya que, según aparece en la documentación de PADDEL, no se realizaba correctamente la extracción de características si el vídeo no cumplía ese requisito.
 \imagen{./graphs/class_graph1.png}{Número de instancias por clase tras realizar el tratamiento de datos.}{}
 Tras eliminar las instancias anteriormente mencionadas, se realizó un tratamiento de datos en el que las característica categóricas se transformaron en numéricas para poder entrenar correctamente los modelos.
 
@@ -79,7 +79,7 @@ Para obtener una información más general sobre los modelos y sus resultados se
 Para el caso de la lentitud, se hicieron de forma paralela la evaluación del modelo para la lentitud utilizando SMOTE y ROS (ver figuras~\ref{fig:./graphs/comparativeLentSmote320.png} y~\ref{fig:./graphs/comparativeLentRos320.png} respectivamente).
 \imagen{./graphs/comparativeLentSmote320.png}{Resultados de modelos con 320 características y SMOTE.}{}
 \imagen{./graphs/comparativeLentRos320.png}{Resultados de modelos con 320 características y ROS.}{}
-Para hacer las comparativas entre los modelos, se omitió la \textit{Accuracy} ya que, en una clasificación multiclase, no es una buena medida para indicar como de bueno es el modelo. Es por esto que las medidas utilizadas para la comparación entre los modelos fueron el \textit{F-score} y \textit{G-mean}. No obstante, no se descartó la medida de \textit{Accuracy} durante la experimentación ya que proveía una vista general del rendimiento de los modelos frente a un problema desconocido.
+Para realizar las comparativas entre los modelos, se omitió la \textit{Accuracy} ya que, en una clasificación multiclase, no es una buena medida para indicar como de bueno es el modelo. Es por esto que las medidas utilizadas para la comparación entre los modelos fueron el \textit{F-score} y \textit{G-mean}. No obstante, no se descartó la medida de \textit{Accuracy} durante la experimentación ya que proveía una vista general del rendimiento de los modelos frente a un problema desconocido.
 
 En términos generales se puede observar que SMOTE tiene mejor desempeño que ROS. Tras descartar ROS, la comparación entre los modelos muestra que el algoritmo de KNN tiene un desempeño peor comparado con respecto al resto de modelos. Es por ello que queda descartado como modelo candidato. Entre los modelos que quedan \textit{XGBoost} y \textit{Random Forest} destacan sobre el SVM, descartandolo así como modelo candidato. Por último, entre los dos modelos restantes, \textit{XGBoost} pese a tener una mediana peor, posee un valor máximo que destaca en gran medida con respecto a \textit{Random Forest}. Es por ello que se decidió utilizar \textit{XGBoost} como modelo para la lentitud.
 
@@ -117,7 +117,7 @@ Este modelo con los hiperparámetros indicados obtuvo un \textit{F-score} de 0,6
 
 \section{Fase de desarrollo de la aplicación}
 \label{Fase de desarrollo de la aplicación}
-\subsection{Calidad el código}
+\subsection{Calidad del código}
 Para evaluar y garantizar la calidad del código se hizo uso de la herramienta \textit{SonarCloud}. \textit{SonarCloud} es una plataforma de análisis de código y gestión de la calidad del software en la nube. Ofrece herramientas para detectar problemas en el código, tales como errores, vulnerabilidades, y código duplicado, y promueve prácticas de desarrollo de software de alta calidad.
 
 Algunas de sus características principales son:
@@ -132,16 +132,16 @@ Algunas de sus características principales son:
 \item \textbf{Informes y Métricas}: Proporciona informes detallados y métricas sobre la calidad del código, facilitando el seguimiento del progreso y la identificación de áreas que necesitan mejora.
 \end{itemize}
 
-El uso de esta herramienta ha sido clave ya que ciertas vulnerabilidades que no se habían tenido en cuenta por desconocimiento de su solución o de las propias vulnerabilidades, fueron solucionadas de forma ágil ya que la propia herramienta muestra las soluciones y la ubicación de los errores.
+El uso de esta herramienta ha sido clave ya que ciertas vulnerabilidades, que no se habían tenido en cuenta por desconocimiento de su solución o de las propias vulnerabilidades, fueron solucionadas de forma ágil ya que la propia herramienta muestra las soluciones y la ubicación de los errores.
 
 \imagen{./sonarCloudReport.png}{Resumen del reporte de \textit{SonarCloud} sobre PDAIvolution.}{}
 
-Como se observa en el reporte de \textit{SonarCloud} (ver figura~\ref{fig:./sonarCloudReport.png} existen varias categorías principales:
+Como se observa en el reporte de \textit{SonarCloud} (ver figura~\ref{fig:./sonarCloudReport.png}), existen varias categorías principales:
 \begin{itemize}
-\item \textit{\textbf{Security}}: muestra el número de problemas de seguridad que tiene la aplicación. Suelen tratarse de problemas como dejar visibles calves secretas, no tener en cuenta vulnerabilidades~\ldots En el caso del proyecto, no existe ningún problema de seguridad.
+\item \textit{\textbf{Security}}: muestra el número de problemas de seguridad que tiene la aplicación. Suelen tratarse de problemas como dejar visibles claves secretas, no tener en cuenta vulnerabilidades~\ldots En el caso del proyecto, no existe ningún problema de seguridad.
 \item \textit{\textbf{Reliability}}: muestra el número de problemas de fiabilidad que tiene la aplicación. Se tratan de problemas como el uso de una variable antes de su declaración. En el caso del proyecto, no existe ningún problema de fiabilidad.
 \item \textit{\textbf{Maintainability}}: muestra el número de problemas de mantenimiento que tiene la aplicación. En el caso del proyecto, no existe ningún problema de mantenimiento.
-\item \textit{\textbf{Duplications}}: muestra el porcentaje de lineas duplicadas que tiene la aplicación. En el caso del proyecto, el porcentaje de lineas duplicadas es 0\%.
+\item \textit{\textbf{Duplications}}: muestra el porcentaje de líneas duplicadas que tiene la aplicación. En el caso del proyecto, el porcentaje de líneas duplicadas es 0\%.
 \item \textit{\textbf{Accepted Issues}}: muestra el número de problemas marcados como aceptados, es decir, problemas que se tiene conocimiento de ellos pero no se van a solucionar. En el caso del proyecto tiene marcados tres problemas como aceptados, dos de los cuales vienen dados por el proyecto PADDEL y el restante se debe a que la solución para el problema resulta más compleja que el problema en sí.
 \item \textit{\textbf{Security Hotspots}}: son secciones del código que pueden no ser vulnerabilidades de seguridad por sí mismas, pero que merecen una revisión más detallada por parte de un desarrollador experimentado.
 \end{itemize}
@@ -153,11 +153,11 @@ Por lo visto en el resumen, el proyecto, a excepción de los problemas previamen
 
 \subsubsection{Planificación temporal}
 
-Durante el desarrollo de la aplicación, hubo dos problemas principales a la hora de realizar la parte de planificación temporal. El primero de ellos fue no conseguir conectar la aplicación de Zube con el repositorio de Github haciendo que este crease los \textit{issues} de forma automática por lo que se opto por indicar las tareas que se realizaban en cada uno de los \textit{commits}. El segundo problema se dio con el proyecto ya avanzado. Este problema fue la perdida total del proyecto en Zube. Debido a un fallo, que todavía se desconoce, el proyecto se eliminó por completo de la plataforma, eliminando a su vez todas las tareas de cada \textit{Sprint} así como la duración de los mismos. Este problema no se consiguió solucionar por lo que no se pudo recuperar nada de la información del proyecto.
+Durante el desarrollo de la aplicación, hubo dos problemas principales a la hora de realizar la parte de planificación temporal. El primero de ellos fue no conseguir conectar la aplicación de Zube con el repositorio de GitHub haciendo que este crease los \textit{issues} de forma automática, por lo que se optó por indicar las tareas que se realizaban en cada uno de los \textit{commits}. El segundo problema se dio cuando el proyecto ya estaba avanzado. Este problema fue la pérdida total del proyecto en Zube. Debido a un fallo, que todavía se desconoce, el proyecto se eliminó por completo de la plataforma, eliminando a su vez todas las tareas de cada \textit{Sprint} así como la duración de los mismos. Este problema no se logró solucionar, por lo que no se pudo recuperar ninguna información del proyecto.
 
 \subsubsection{Compatibilidad}
 
-Tanto durante la implementación del proyecto PADDEL como durante la fase de experimentación y despliegue, han habido problemas de compatibilidad.
+Tanto durante la implementación del proyecto PADDEL como durante la fase de experimentación y despliegue, ha habido problemas de compatibilidad.
 
 Este problema de compatibilidad viene dado por la versión de CUDA~\footnote{Fuente:~\url{https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html}}y numba~\footnote{Fuente:~\url{https://numba.pydata.org/}}. CUDA (Compute Unified Device Architecture) es una plataforma de computación paralela y un modelo de programación creada por NVIDIA y numba es un compilador justo a tiempo (JIT) para Python que traduce funciones numéricas escritas en Python y NumPy a código máquina altamente optimizado utilizando el compilador LLVM. El problema se da cuando la versión de CUDA y numba no son compatibles entre sí. Cuando se da este problema, se ha de modificar las versiones de uno de los dos para que sean compatibles; sin embargo, al hacer la experimentación y despliegue en un servidor donde no se puede modificar la versión de CUDA, se termino resolviendo mediante la desactualización de la versión de numba provocando a su vez una desactualización de la versión de Python de la 3.12 a la 3.10. Es por este motivo por el que el proyecto no se encuentra en la versión más actualizada.
 
