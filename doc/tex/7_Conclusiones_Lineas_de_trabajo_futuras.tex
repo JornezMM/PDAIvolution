@@ -1,4 +1,34 @@
 \capitulo{7}{Conclusiones y Líneas de trabajo futuras}
 
-Todo proyecto debe incluir las conclusiones que se derivan de su desarrollo. Éstas pueden ser de diferente índole, dependiendo de la tipología del proyecto, pero normalmente van a estar presentes un conjunto de conclusiones relacionadas con los resultados del proyecto y un conjunto de conclusiones técnicas. 
-Además, resulta muy útil realizar un informe crítico indicando cómo se puede mejorar el proyecto, o cómo se puede continuar trabajando en la línea del proyecto realizado. 
+En este último aparatado, se recopilan las conclusiones y líneas de trabajo futuras del proyecto.
+
+\subsection{Conclusiones}
+
+Durante el desarrollo del proyecto, se ha extraído una serie de aprendizajes y conclusiones que se describen a continuación. 
+\begin{itemize}
+
+
+\item \textbf{La importancia de saber tratar los datos}: durante la fase de experimentación, los resultados obtenidos al principio fueron pésimos, llegando a ser peores que un clasificador aleatorio. Esto se debía al desbalanceo de las clases, el cual no se había tenido en cuenta durante las primeras fases de experimentación. Tras aplicar las técnicas de remuestreo apropiadas, se observó una mejora notable en la eficacia de los modelos.
+
+\item \textbf{La viabilidad del uso de IA en la evaluación de la bradicinesia}: los resultados obtenidos demuestran que, mediante técnicas de visión artificial y aprendizaje supervisado, se puede llegar a evaluar de manera más o menos precisa el grado de bradicinesia del paciente. Esta precisión se puede llegar mejorar, por ejemplo, con la ampliación del \textit{dataset}.
+
+\item \textbf{La importancia del correcto entrenamiento de modelos}: tanto en la parte de selección de características como en la parametrización de los modelos, se ha visto una gran importancia reflejada en los resultados. Se ha comprobado como un cambio en el número de características o una modificación en los parámetros pueden influir mucho a la hora de entrenar un modelo.
+
+\item \textbf{Los resultados no siempre se obtienen resultados óptimos}: el objetivo de este proyecto no era desarrollar un modelo capaz de clasificar correctamente una alto porcentaje los casos y videos, sino aprender y descubrir con los recursos de los que se dispone cual es el limite que se puede alcanzar. 
+
+\end{itemize}
+\subsection{Líneas de trabajo futuras}
+
+Algunas de las líneas de trabajo futuras son:
+
+\begin{itemize}
+\item Añadir un sistema de predicción integrado en la web, utilizando para ello tanto la medicina como la evolución del paciente.
+
+\item Probar a entrenar modelos más complejos o realizar aprendizaje semisupervisado para comprobar los resultados frente al proyecto actual.
+\item Buscar alguna forma para acelerar el procesado de los vídeos ya que supone una espera muy larga al utilizar la aplicación web. 
+
+\item Internacionalizar la página web, no solo a nivel de idioma sino también a nivel cultural.
+
+\item Una línea de trabajo a más largo plazo, es la ampliación del \textit{dataset} mediante videos de personas con enfermedad de Parkinson mostrando su evolución, como vídeos de personas sin la enfermedad para tener más muestras de grupos de control.
+
+\end{itemize}
