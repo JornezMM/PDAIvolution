@@ -455,17 +455,19 @@ def create_app():
             user = Patient.query.filter_by(id=current_user.id).first()
             age = datetime.datetime.now().year - user.birth_date.year - 1
             videos = Video.query.filter_by(patient_id=user.id).all()
-            medicine_name = None
             actual_medicine = None
             actual_medicine = (
-                PatientMedicine.query.filter_by(patient_id=user.id)
-                .where(PatientMedicine.end_date is None)
-                .first()
-            )
-            if actual_medicine:
-                medicine_name = (
-                    Medicine.query.filter_by(id=actual_medicine.medicine_id).firts().name
+                    PatientMedicine.query.filter_by(patient_id=user.id)
+                    .where(PatientMedicine.end_date == None).all()
                 )
+            
+            if actual_medicine:
+                for medicine in actual_medicine:
+                    medicine.name = Medicine.query.filter_by(
+                        id=medicine.medicine_id
+                    ).first().name
+            else:
+                actual_medicine = None
             if (
                 datetime.datetime.now().month > user.birth_date.month
                 and datetime.datetime.now().day > user.birth_date.day
@@ -481,7 +483,6 @@ def create_app():
                 user=user,
                 age=age,
                 actual_medicine=actual_medicine,
-                medicine_name=medicine_name,
                 doctor=doctor,
                 slowness=slowness,
                 amplitude=amplitude,
@@ -522,17 +523,15 @@ def create_app():
                 age = datetime.datetime.now().year - patient.birth_date.year - 1
                 actual_medicine = (
                     PatientMedicine.query.filter_by(patient_id=patient_id)
-                    .where(PatientMedicine.end_date == None)
-                    .first()
+                    .where(PatientMedicine.end_date == None).all()
                 )
+                
                 if actual_medicine:
-                    medicine_name = (
-                        Medicine.query.filter_by(id=actual_medicine.medicine_id)
-                        .first()
-                        .name
-                    )
+                    for medicine in actual_medicine:
+                        medicine.name = Medicine.query.filter_by(
+                            id=medicine.medicine_id
+                        ).first().name
                 else:
-                    medicine_name = None
                     actual_medicine = None
                 if (
                     datetime.datetime.now().month > patient.birth_date.month
@@ -551,7 +550,6 @@ def create_app():
                     user=patient,
                     age=age,
                     actual_medicine=actual_medicine,
-                    medicine_name=medicine_name,
                     doctor=doctor,
                     slowness=slowness,
                     amplitude=amplitude,

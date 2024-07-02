@@ -26,7 +26,7 @@
     <div class="card bg-dark text-white my-5" style="border-radius: 1rem">
       <div class="card-body pb-5 text-left">
         <div class="container mt-2 px-3">
-          <form method="post" class="row g-3" enctype="multipart/form-data">
+          <form id="videoForm" method="post" class="row g-3" enctype="multipart/form-data">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
             <div class="col-12 mt-4">
               <h1 class="text-center">Añadir video</h1>
@@ -57,6 +57,9 @@
             </div>
             <button type="submit" class="btn btn-primary mt-4">Añadir video</button>
           </form>
+          <div id="progressContainer" class="progress mt-4" style="display: none;">
+            <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -76,6 +79,29 @@
         // Mostrar el contenedor de la previsualización
         document.getElementById("videoPreviewContainer").style.display = "block";
       }
+    });
+
+    document.getElementById("videoForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      
+      // Mostrar el contenedor de la barra de progreso
+      document.getElementById("progressContainer").style.display = "block";
+      
+      const progressBar = document.getElementById("progressBar");
+      progressBar.style.width = "0%";
+      
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += 1;
+        progressBar.style.width = progress + "%";
+        progressBar.setAttribute("aria-valuenow", progress);
+        
+        if (progress >= 100) {
+          clearInterval(interval);
+          // Simular envío del formulario después de la barra de carga
+          document.getElementById("videoForm").submit();
+        }
+      }, 150); // 150 ms * 100 steps = 15 seconds
     });
   </script>
 </body>

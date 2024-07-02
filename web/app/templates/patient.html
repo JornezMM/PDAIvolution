@@ -1,276 +1,318 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>User Page</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-      crossorigin="anonymous"
-    />
-    <script src="https://d3js.org/d3.v7.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
-    {{ font_awesome.load_js() }}
-    <style>
-      body {
-        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-      }
-      .login {
-        color: #fff;
-        background-color: #667eea;
-        transition: 0.5s ease-in-out;
-      }
-      .login:hover {
-        transform: scale(1.2);
-        transition: 0.5s ease-in-out;
-        background-color: #764ba2;
-      }
-      .main {
-        display: grid;
-        width: 100%;
-        height: 100%;
-        grid-template-columns: auto auto;
-        grid-template-rows: 30% 65%;
-      }
-      .user-data {
-        background-color: #fff;
-        border-radius: 1rem;
-        grid-row: 1 / span 1;
-        width: 50%;
-        padding: 10px;
-        height: fit-content;
-      }
-      .graphcontainer {
-        grid-row: 2 / span 1;
-        background-color: #fff;
-        border-radius: 1rem;
-        margin-top: 10px;
-        margin-bottom: -50px;
-        height: auto;
-      }
-      .graph {
-        width: auto;
-        height: 150%;
-        margin-bottom: -10px;
-      }
 
-      .ev {
-        text-align: center;
-      }
-    </style>
-  </head>
-  <body>
-    {% include 'navbarlogged.html' %}
-    <div class="container" style="height: fit-content">
-      <div class="main mt-4">
-        <div class="user-data pb-4 mb-5">
-          <h1 class="mb-3">
-            Datos de {{ user.first_name }} {{ user.last_name }}
-          </h1>
-          <div class="row">
-            <div class="col-md-6">
-              <b>Nombre: </b>{{ user.first_name }} {{ user.last_name }}
-            </div>
-            <div class="col-md-6">
-              <b>Nombre de usuario: </b> {{ user.username }}
-            </div>
-            <div class="col-md-6"><b>Edad: </b>{{ age }}</div>
-            <div class="col-md-6">
-              <b>Genero: </b>{% if user.gender=="M" %} Hombre {% else %} Mujer
-              {% endif %}
-            </div>
-            <div class="col-md-6">
-              <b>Medicina: </b> {%if actual_medicine %} {{ medicine_name }} {{
-              actual_medicine.dose }} {% else %} No tiene una medicina asignada.
-              {% endif %}
-            </div>
-            <div class="col-md-6">
-              <b>Doctor: </b> {{ doctor.first_name }} {{ doctor.last_name }}
-            </div>
-            <div class="col-md-6">
-              <b>Mano dominante</b>: {% if user.handedness == "right" %} Diestro
-              {% else %} Zurdo {% endif %}
-            </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
+  <script src="https://d3js.org/d3.v7.min.js"
+    integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i"
+    crossorigin="anonymous"></script>
+  {{ font_awesome.load_js() }}
+  <style>
+    body {
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .login {
+      color: #fff;
+      background-color: #667eea;
+      transition: 0.5s ease-in-out;
+    }
+
+    .login:hover {
+      transform: scale(1.2);
+      transition: 0.5s ease-in-out;
+      background-color: #764ba2;
+    }
+
+    .main {
+      display: grid;
+      width: 100%;
+      height: 100%;
+      grid-template-columns: auto auto;
+      grid-template-rows: 30% 65%;
+    }
+
+    .user-data {
+      background-color: #fff;
+      border-radius: 1rem;
+      grid-row: 1 / span 1;
+      width: 50%;
+      padding: 10px;
+      height: fit-content;
+    }
+
+    .graphcontainer {
+      grid-row: 2 / span 1;
+      background-color: #fff;
+      border-radius: 1rem;
+      margin-top: 10px;
+      margin-bottom: -50px;
+      height: auto;
+      position: relative;
+    }
+
+    .graph {
+      width: auto;
+      height: 150%;
+      margin-bottom: -10px;
+    }
+
+    .ev {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  {% include 'navbarlogged.html' %}
+  <div class="container" style="height: fit-content">
+    <div class="main mt-4">
+      <div class="user-data pb-4 mb-5">
+        <h1 class="mb-3">
+          Datos de {{ user.first_name }} {{ user.last_name }}
+        </h1>
+        <div class="row">
+          <div class="col-md-6">
+            <b>Nombre: </b>{{ user.first_name }} {{ user.last_name }}
+          </div>
+          <div class="col-md-6">
+            <b>Nombre de usuario: </b> {{ user.username }}
+          </div>
+          <div class="col-md-6"><b>Edad: </b>{{ age }}</div>
+          <div class="col-md-6">
+            <b>Sexo: </b>{% if user.gender=="M" %} Hombre {% else %} Mujer
+            {% endif %}
+          </div>
+          <div class="col-md-6">
+            <b>Medicina: </b>
+            {% if actual_medicine %}
+            <ul>
+              {% for med in actual_medicine %}
+                <li>{{ med.name }}: {{ med.dosage }}</li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            No tiene una medicina asignada.
+          {% endif %}
+          </div>
+          <div class="col-md-6">
+            <b>Doctor: </b> {{ doctor.first_name }} {{ doctor.last_name }}
+          </div>
+          <div class="col-md-6">
+            <b>Mano dominante</b>: {% if user.handedness == "right" %} Diestro
+            {% else %} Zurdo {% endif %}
           </div>
         </div>
+      </div>
 
-        <div class="graphcontainer mt-5">
-          <h1 class="ev my-2">Evolución</h1>
-          <div id="graph" class="graph"></div>
-        </div>
+      <div class="graphcontainer mt-5">
+        <h1 class="ev my-2">Evolución</h1>
+        <div id="graph" class="graph"></div>
       </div>
     </div>
-    {% block javascript %}
-    <script type="module">
-      const margin = { top: 10, right: 40, bottom: 40, left: 40 };
-      const width =
-        document.getElementById("graph").clientWidth -
-        margin.left -
-        margin.right;
-      const height = document.getElementById("graph").clientHeight;
+  </div>
+  {% block javascript %}
+  <script type="module">
+    const margin = { top: 10, right: 40, bottom: 40, left: 40 };
+    const width =
+      document.getElementById("graph").clientWidth - margin.left - margin.right;
+    const height = document.getElementById("graph").clientHeight;
 
-      // Set up the x and y scales
+    // Set up the x and y scales
+    const x = d3.scaleTime().range([0, width]);
+    const y = d3.scaleLinear().range([height, 0]);
 
-      const x = d3.scaleTime().range([0, width]);
+    // Create a fake dataset
+    const amp = []
+    const slowness = []
+    const dates = []
+    '{% for a in amplitude %}'
+    amp.push('{{ a }}');
+    '{% endfor %}'
+    '{% for s in slowness %}'
+    slowness.push('{{ s }}');
+    '{% endfor %}'
+    '{% for d in dates %}'
+    dates.push('{{ d }}');
+    '{% endfor %}'
 
-      const y = d3.scaleLinear().range([height, 0]);
 
-      // Create the SVG element and append it to the chart container
+    // Check if there are enough unique dates to show the graph
+    const uniqueDates = [...new Set(dates.map(date => new Date(date).toDateString()))];
+    if (uniqueDates.length < 2) {
+      const graphContainer = document.getElementById("graph");
+      graphContainer.innerHTML = "<p style='text-align: center; padding-top: 20px;'>No hay suficientes datos de diferentes días para mostrar la gráfica.</p>";
 
-      const svg = d3
-        .select("#graph")
-        .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", `translate(${margin.left},${margin.top})`);
+    }
 
-      // Create a fake dataset
-      const amp = []
-      const slowness = []
-      const dates = []
-      '{% for a in amplitude %}'
-      amp.push('{{ a }}');
-      '{% endfor %}'
-      '{% for s in slowness %}'
-      slowness.push('{{ s }}');
-      '{% endfor %}'
-      '{% for d in dates %}'
-      dates.push('{{ d }}');
-      '{% endfor %}'
+    const amplitude = []
+    for (let i = 0; i < dates.length; i++) {
+      amplitude.push({
+        date: new Date(dates[i]).setHours(0, 0, 0, 0),
+        value: amp[i],
+      });
+    }
+    const lent = []
+    for (let i = 0; i < dates.length; i++) {
+      lent.push({
+        date: new Date(dates[i]).setHours(0, 0, 0, 0),
+        value: slowness[i],
+      });
+    }
+    // Order the dataset by date
+    amplitude.sort((a, b) => a.date - b.date);
+    lent.sort((a, b) => a.date - b.date);
 
-      console.log(dates.length);
-      console.log(amp);
-      const amplitude = []
-      for (let i = 0; i < dates.length; i++) {
-        console.log(dates[i]);
-        amplitude.push({
-          date: new Date(dates[i]),
-          value: amp[i],
-        });
+    let xPadding = 5000000; // 10 days padding for x-axis
+    const yPadding = 0.2; // 10% padding for y-axis
+    let tickFormat;
+    // Update the x scale with padding
+
+
+    // Calculate the minimum time interval between videos
+    let minInterval = Infinity;
+    for (let i = 1; i < dates.length; i++) {
+      const interval = new Date(dates[i]) - new Date(dates[i - 1]);
+      if (interval < minInterval) {
+        minInterval = interval;
       }
-      console.log(amplitude);
-      const lent = []
-      for (let i = 0; i < dates.length; i++) {
-        lent.push({
-          date: new Date(dates[i]),
-          value: slowness[i],
-        });
-      }
-      // Order the dataset by date
-      amplitude.sort((a, b) => a.date - b.date);
-      lent.sort((a, b) => a.date - b.date);
-      console.log(amplitude);
-      console.log(lent);
+    }
 
-      const xPadding = 10 * 24 * 60 * 60 * 1000; // 10 days padding for x-axis
-      const yPadding = (d3.max([...amplitude, ...lent], d => d.value) - d3.min([...amplitude, ...lent], d => d.value)) * 0.1; // 10% padding for y-axis
-      
-      // Update the x scale with padding
-      x.domain([
-          d3.min([...amplitude, ...lent], d => d.date) - xPadding,
-          d3.max([...amplitude, ...lent], d => d.date)
-      ]);
-      
-      // Update the y scale with padding
-      y.domain([
-          d3.min([...amplitude, ...lent], d => d.value) - yPadding,
-          d3.max([...amplitude, ...lent], d => d.value)
-      ]);
-      
-      // Append the X axis
-      svg.append("g")
-          .attr("transform", `translate(0,${height})`)
-          .call(
-              d3.axisBottom(x)
-              .ticks(d3.timeYear.every(1))
-              .tickFormat(d3.timeFormat("%Y"))
-          )
-          .selectAll("text")
-          .style("font-size", "10px"); // Set the font size
-      
-      // Append the Y axis
-      svg.append("g")
-          .call(d3.axisLeft(y))
-          .selectAll("text")
-          .style("font-size", "14px"); // Set the font size
-      
-      // Create the line generator
-      const line = d3.line()
-          .x(d => x(d.date))
-          .y(d => y(d.value));
-      
-      // Add the line path for amplitude
-      svg.append("path")
-          .datum(amplitude)
-          .attr("fill", "none")
-          .attr("stroke", "steelblue")
-          .attr("stroke-width", 1)
-          .attr("d", line);
-      
-      // Add circles for each point in amplitude
-      svg.selectAll("circle.amplitude")
-          .data(amplitude)
-          .enter()
-          .append("circle")
-          .attr("class", "amplitude")
-          .attr("cx", d => x(d.date))
-          .attr("cy", d => y(d.value))
-          .attr("r", 3) // Set the radius of the circles
-          .attr("fill", "steelblue");
-      
-      // Add the line path for lent
-      svg.append("path")
-          .datum(lent)
-          .attr("fill", "none")
-          .attr("stroke", "red")
-          .attr("stroke-width", 1)
-          .attr("d", line);
-      
-      // Add circles for each point in lent
-      svg.selectAll("circle.lent")
-          .data(lent)
-          .enter()
-          .append("circle")
-          .attr("class", "lent")
-          .attr("cx", d => x(d.date))
-          .attr("cy", d => y(d.value))
-          .attr("r", 3) // Set the radius of the circles
-          .attr("fill", "red");
-      
-      // Add legend
-      const legendData = [
-          { name: "Amplitud", color: "steelblue" },
-          { name: "Lentitud", color: "red" },
-      ];
-      
-      // Create legend container
-      const legendGroup = svg.append("g")
-          .attr("id", "legend")
-          .attr("transform", `translate(${width - margin.right}, 10)`);
-      
-      // Create legend items
-      const legendItems = legendGroup.selectAll(".legend-item")
-          .data(legendData)
-          .enter()
-          .append("g")
-          .attr("class", "legend-item")
-          .attr("transform", (d, i) => `translate(0, ${i * 20})`);
-      
-      // Add colored squares
-      legendItems.append("rect")
-          .attr("width", 10)
-          .attr("height", 10)
-          .attr("fill", d => d.color);
-      
-      // Add legend text
-      legendItems.append("text")
-          .attr("x", 15)
-          .attr("y", 10)
-          .text(d => d.name)
-          .attr("font-size", "12px"); // Set the font size
-    </script>
-    {% endblock %}
-  </body>
+    // Determine tick interval based on minInterval
+    let tickInterval;
+    if (minInterval <= 7 * 24 * 60 * 60 * 1000) { // 1 week
+      tickInterval = d3.timeDay.every(2);
+      xPadding = 1 * 12 * 60 * 60 * 1000; // 12 hours padding for x-axis
+      tickFormat = d3.timeFormat("%d-%m-%Y");
+    } else if (minInterval <= 30 * 24 * 60 * 60 * 1000) { // 1 month
+      tickInterval = d3.timeWeek.every(2);
+      xPadding = 7 * 24 * 60 * 60 * 1000; // 1 week padding for x-axis
+      tickFormat = d3.timeFormat("%b-%Y");
+    } else {
+      tickInterval = d3.timeMonth.every(2);
+      xPadding = 30 * 24 * 60 * 60 * 1000; // 1 month padding for x-axis
+      tickFormat = d3.timeFormat("%Y");
+    }
+    x.domain([
+      d3.min([...amplitude, ...lent], d => d.date) - xPadding,
+      d3.max([...amplitude, ...lent], d => d.date)
+    ]);
+
+    // Update the y scale with padding
+    y.domain([
+      d3.min([...amplitude, ...lent], d => d.value) - yPadding,
+      3
+    ]);
+    // Append the SVG element
+    const svg = d3
+      .select("#graph")
+      .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    // Append the X axis
+    svg.append("g")
+      .attr("transform", `translate(0,${height})`)
+      .call(
+        d3.axisBottom(x)
+          .ticks(tickInterval)
+          .tickFormat(tickFormat)
+      )
+      .selectAll("text")
+      .style("font-size", "10px"); // Set the font size
+
+    // Append the Y axis
+    svg.append("g")
+      .call(
+        d3.axisLeft(y)
+          .ticks(3)
+      )
+      .selectAll("text")
+      .style("font-size", "14px"); // Set the font size
+
+    // Create the line generator
+    const line = d3.line()
+      .x(d => x(d.date))
+      .y(d => y(d.value));
+
+    // Add the line path for amplitude
+    svg.append("path")
+      .datum(amplitude)
+      .attr("fill", "none")
+      .attr("stroke", "steelblue")
+      .attr("stroke-width", 1)
+      .attr("d", line);
+
+    // Add circles for each point in amplitude
+    svg.selectAll("circle.amplitude")
+      .data(amplitude)
+      .enter()
+      .append("circle")
+      .attr("class", "amplitude")
+      .attr("cx", d => x(d.date))
+      .attr("cy", d => y(d.value))
+      .attr("r", 3) // Set the radius of the circles
+      .attr("fill", "steelblue");
+
+    // Add the line path for lent
+    svg.append("path")
+      .datum(lent)
+      .attr("fill", "none")
+      .attr("stroke", "red")
+      .attr("stroke-width", 1)
+      .attr("d", line);
+
+    // Add circles for each point in lent
+    svg.selectAll("circle.lent")
+      .data(lent)
+      .enter()
+      .append("circle")
+      .attr("class", "lent")
+      .attr("cx", d => x(d.date))
+      .attr("cy", d => y(d.value))
+      .attr("r", 3) // Set the radius of the circles
+      .attr("fill", "red");
+
+    // Add legend
+    const legendData = [
+      { name: "Amplitud", color: "steelblue" },
+      { name: "Lentitud", color: "red" },
+    ];
+
+    // Create legend container
+    const legendGroup = svg.append("g")
+      .attr("id", "legend")
+      .attr("transform", `translate(${width - margin.right}, 10)`);
+
+    // Create legend items
+    const legendItems = legendGroup.selectAll(".legend-item")
+      .data(legendData)
+      .enter()
+      .append("g")
+      .attr("class", "legend-item")
+      .attr("transform", (d, i) => `translate(0, ${i * 20})`);
+
+    // Add colored squares
+    legendItems.append("rect")
+      .attr("width", 10)
+      .attr("height", 10)
+      .attr("fill", d => d.color);
+
+    // Add legend text
+    legendItems.append("text")
+      .attr("x", 15)
+      .attr("y", 10)
+      .text(d => d.name)
+      .attr("font-size", "12px"); // Set the font size
+  </script>
+
+  {% endblock %}
+</body>
+
 </html>
