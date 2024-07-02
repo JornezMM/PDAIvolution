@@ -217,7 +217,7 @@ def create_app():
         """
         logout_user()
         session.clear()
-        return redirect(url_for(REDIRECTHOME))
+        return redirect(url_for("/"))
 
     @app.route("/register/", methods=["GET"])
     def register_get():

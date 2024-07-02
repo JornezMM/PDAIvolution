@@ -32,6 +32,13 @@
     .navbar-toggler:hover {
       transform: scale(1.1);
     }
+    .navbar-title {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      margin: 0;
+    }
   </style>
 </head>
 <body>
@@ -61,7 +68,7 @@
         </ul>
         <ul class="navbar-nav me-auto">
         </ul>
-          <h1 class="navbar-text mx-auto" style="color: white;">PDAIVOLUTION</h1>
+          <h1 class="navbar-title mx-auto" style="color: white;">PDAIVOLUTION</h1>
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
             <a class="nav-link" href="/home/">Bienvenido {{ session['first_name'] }}</a>
