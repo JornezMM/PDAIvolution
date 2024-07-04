@@ -28,7 +28,7 @@ del vídeo extraídos mediante TSFresh.
 \subsection{Análisis y tratamiento de los datos}
 Una vez se extrajeron las características de los datos se pudo llevar a cabo un análisis de los datos.
 En el \textit{dataset} utilizado durante la fase de experimentación se disponía de 222 vídeos. 
-Cada video disponía de los siguientes atributos:
+Cada vídeo disponía de los siguientes atributos:
 \begin{itemize}
 \item Sexo de la persona.
 \item Edad de la persona.
@@ -38,13 +38,13 @@ Cada video disponía de los siguientes atributos:
 \item Valoración del grado de lentitud del vídeo. Primera variable objetivo.
 \item Valoración del grado de amplitud del vídeo. Segunda variable objetivo.
 \end{itemize}
-Las valoraciones fueron facilitadas por dos neurólogas del  Hospital Universitario de Burgos. Estas valoraciones diferían entre sí de manera considerable y es por ello se decidió realizar el experimento utilizando solo las clasificaciones de una de las dos. 
+Las valoraciones fueron facilitadas por dos neurólogas del  Hospital Universitario de Burgos. Estas valoraciones diferían entre sí de manera considerable y es por ello que se decidió realizar el experimento utilizando solo las clasificaciones de una de las dos. 
 
-Una vez analizados los datos y extraídas las características se hicieron varias comprobaciones. Primero se comprobó que todos los vídeos estuviesen correctamente valorados. Este no fue el caso ya que 2 de los vídeos de los que se disponía no estaban valorados es por ello que, debido a que el tipo de aprendizaje utilizado es supervisado, se decidió que no se incluirían en la fase de experimentación.
+Una vez analizados los datos y extraídas las características se hicieron varias comprobaciones. Primero se comprobó que todos los vídeos estuviesen correctamente valorados. Este no fue el caso, ya que 2 de los vídeos de los que se disponía no estaban valorados es por ello que, debido a que el tipo de aprendizaje utilizado es supervisado, se decidió que no se incluirían en la fase de experimentación.
 
-Tras eliminar los vídeos que no fueron valorados, se comprobó si las clases estaban desbalanceadas. Al realizar esta comprobación se vio que había un desbalanceado muy elevado, habiendo clases que solo tenían menos de 8 instancias. Dado que se pretendía utilizar algoritmos como KNN o técnicas de remuestreo como \textit{Random Oversampling} se tomo la decisión de eliminar aquellas clases que tuviesen menos de 8 instancias. Las clases que se eliminaron fueron lentitud 3 y 4 así como amplitud 4.
+Tras eliminar los vídeos que no fueron valorados, se comprobó si las clases estaban desbalanceadas. Al realizar esta comprobación se vio que había un desequilibrio muy elevado, habiendo clases que solo tenían menos de 8 instancias. Dado que se pretendía utilizar algoritmos como KNN o técnicas de remuestreo como \textit{SMOTE} se tomo la decisión de eliminar aquellas clases que tuviesen menos de 8 instancias. Las clases que se eliminaron fueron lentitud 3 y 4 así como amplitud 4.
 \imagen{./graphs/class_graph1.png}{Número de instancias por clase antes de realizar el tratamiento de datos.}{}
-Además de lo anteriormente mencionado se comprobó si existía alguna característica de los vídeos que fuese nula. Al comprobarlo se observó que en algunas todas había una característica que era nula por lo que se decidió eliminar esa característica nula de todas las instancias ya que no aportaba ninguna información adicional. Una de esas características era la edad, que solo fue nula en vídeos de control, es decir vídeos de personas sin la enfermedad de Parkinson y dado al elevado número de vídeos de control, no supuso una gran perdida de información. Posteriormente se eliminaron aquellos vídeos cuya duración no era superior a 15 segundos ya que, según aparece en la documentación de PADDEL, no se realizaba correctamente la extracción de características si el vídeo no cumplía ese requisito.
+Además de lo anteriormente mencionado se comprobó si existía alguna característica de los vídeos que fuese nula. Al comprobarlo se observó que en algunas todas había una característica que era nula por lo que se decidió eliminar esa característica nula de todas las instancias ya que no aportaba ninguna información adicional. Una de esas características era la edad, que solo fue nula en vídeos de control, es decir vídeos de personas sin la enfermedad de Parkinson y dado el elevado número de vídeos de control, no supuso una gran pérdida de información. Posteriormente se eliminaron aquellos vídeos cuya duración no era superior a 15 segundos ya que, según aparece en la documentación de PADDEL, no se realizaba correctamente la extracción de características si el vídeo no cumplía ese requisito.
 \imagen{./graphs/class_graph1.png}{Número de instancias por clase tras realizar el tratamiento de datos.}{}
 Tras eliminar las instancias anteriormente mencionadas, se realizó un tratamiento de datos en el que las característica categóricas se transformaron en numéricas para poder entrenar correctamente los modelos.
 
@@ -52,13 +52,13 @@ Tras eliminar las instancias anteriormente mencionadas, se realizó un tratamien
 
 Una vez se trataron los datos correctamente, se realizó una selección de los modelos a evaluar. Para ello se eligieron aquellos modelos que mejor funcionaron en las pruebas de PADDEL así como los que obtuvieron mejores resultados en el artículo <<Computer Vision for Parkinson’s Disease Evaluation: A Survey on Finger Tapping>>~\cite{AmoSalas2024}. Los algoritmos seleccionados fueron KNN, \textit{Random Forest}, XGBoost y SVM.
 
-Para la comparación de modelos, se utilizo \textit{GridSearchCV}, una técnica de validación cruzada que nos permite evaluar los mejores hiperparámetros para un modelo. Para ello el modelo se entrena utilizando una parte del \textit{dataset} como entrenamiento y la restante como prueba. Para estas pruebas se decidió utilizar 320 características de las 807 resultantes tras el tratamiento de los datos. Este dato fue extraído de la documentación del proyecto de PADDEL~\cite{paddelRepo} y probado durante los experimentos viendo que era el que mejor resultados reportaba (ver comparativa en las figuras~\ref{fig:./graphs/comparativeLentSmote.png} y~\ref{fig:./graphs/comparativeLentSmote320.png}). Es importante destacar que para entrenar cada modelos, las estadísticas que se seleccionan difieren ya que no tienen las mismas correlaciones.
+Para la comparación de modelos, se utilizo \textit{GridSearchCV}, una técnica de validación cruzada que nos permite evaluar los mejores hiperparámetros para un modelo. Para ello el modelo se entrena utilizando una parte del \textit{dataset} como entrenamiento y la restante como prueba. Para estas pruebas se decidió utilizar 320 características de las 807 resultantes tras el tratamiento de los datos. Este dato fue extraído de la documentación del proyecto de PADDEL~\cite{paddelRepo} y probado durante los experimentos viendo que era el que mejor resultados reportaba (ver comparativa en las figuras~\ref{fig:./graphs/comparativeLentSmote.png} y~\ref{fig:./graphs/comparativeLentSmote320.png}). Es importante destacar que para entrenar cada modelo, las estadísticas que se seleccionan difieren ya que no tienen las mismas correlaciones.
 \imagen{./graphs/comparativeLentSmote.png}{Resultados de modelos con todas las características y SMOTE}{}
 Durante la fase de entrenamiento se hizo uso tanto de \textit{Random Over-Sampling} (ROS) como de \textit{Synthetic Minority Over-sampling Technique} (SMOTE). Estas técnicas son esenciales en problemas de desequilibrio de clases, ya que permiten entrenar el modelo haciendo que todas las clases tengan el mismo número de instancias y evitar que el modelo ignore las clases minoritarias y pueda predecirlas adecuadamente. Al utilizar este tipo de técnicas hay que tener en cuenta que solo se ha de hacer remuestreo sobre los datos de entrenamiento ya que los datos de test no se deben modificar. 
 
 Esto supuso un problema ya que internamente \textit{GridSearchCV} no te permite separar la parte de entrenamiento y test y hacer el \textit{Over-Sampling} correctamente. Es por ello que se decidió hacer de manera externa al entrenamiento del modelo una validación cruzada estratificada dividida en 5 grupos. En ella 4 de los 5 grupos eran utilizados para entrenar el modelo y el restante se utilizaba para evaluar el rendimiento del modelo con los datos no modificados.
 
-Dado que este problema se componía de dos variables objetivo, se opto por realizar modelos independientes para cada clase de manera que cada modelo predijese una variable. Es por ello que, durante el entrenamiento de cada una de las variable objetivo, la variable que no se predecía se omitía y no se introducía durante los entrenamientos.
+Dado que este problema se componía de dos variables objetivo, se optó por entrenar modelos independientes para cada variable objetivo de manera que cada modelo predijese una variable. Es por ello que, durante el entrenamiento de cada una de las variable objetivo, la variable que no se predecía se omitía y no se introducía durante los entrenamientos.
 
 \section{Resultados}
 \label{Resultados}
@@ -71,7 +71,7 @@ Tras realizar el tratamiento de los datos y el entrenamiento de los modelos se o
 \end{itemize}
 Cada modelo fue evaluado con cinco veces, una por cada grupo dentro de las divisiones de la validación cruzada y dentro de cada grupo fue evaluado utilizando ROS y SMOTE.
 
-Para realizar acabo estas evaluaciones, se utilizó tanto en la medida F-score como en la \textit{G-mean} el parámetro de \textit{average} en \textit{weighted} debido al gran desbalanceo entre clases ya que, si se hubiese indicado \textit{macro}, debido a que internamente realiza una media aritmética entre cada \textit{F-score} de cada clase, no se habría tenido en cuenta el desbalanceo.
+Para llevar acabo estas evaluaciones, se utilizó tanto en la medida F-score como en la \textit{G-mean} el parámetro de \textit{average} en \textit{weighted} debido al gran desbalanceo entre clases ya que, si se hubiese indicado \textit{macro}, debido a que internamente realiza una media aritmética entre cada \textit{F-score} de cada clase, no se habría tenido en cuenta el desbalanceo.
 
 Para obtener una información más general sobre los modelos y sus resultados se decidió que las gráficas que representaran los valores fuesen diagramas de cajas y bigotes, lo cual permitió un mejor visión general del cada modelo.
 
@@ -81,15 +81,15 @@ Para el caso de la lentitud, se hicieron de forma paralela la evaluación del mo
 \imagen{./graphs/comparativeLentRos320.png}{Resultados de modelos con 320 características y ROS.}{}
 Para realizar las comparativas entre los modelos, se omitió la \textit{Accuracy} ya que, en una clasificación multiclase, no es una buena medida para indicar como de bueno es el modelo. Es por esto que las medidas utilizadas para la comparación entre los modelos fueron el \textit{F-score} y \textit{G-mean}. No obstante, no se descartó la medida de \textit{Accuracy} durante la experimentación ya que proveía una vista general del rendimiento de los modelos frente a un problema desconocido.
 
-En términos generales se puede observar que SMOTE tiene mejor desempeño que ROS. Tras descartar ROS, la comparación entre los modelos muestra que el algoritmo de KNN tiene un desempeño peor comparado con respecto al resto de modelos. Es por ello que queda descartado como modelo candidato. Entre los modelos que quedan \textit{XGBoost} y \textit{Random Forest} destacan sobre el SVM, descartandolo así como modelo candidato. Por último, entre los dos modelos restantes, \textit{XGBoost} pese a tener una mediana peor, posee un valor máximo que destaca en gran medida con respecto a \textit{Random Forest}. Es por ello que se decidió utilizar \textit{XGBoost} como modelo para la lentitud.
+En términos generales se puede observar que SMOTE tiene mejor desempeño que ROS. Tras descartar ROS, la comparación entre los modelos muestra que el algoritmo de KNN tiene un desempeño peor comparado con respecto al resto de modelos. Es por ello que queda descartado como modelo candidato. Entre los modelos que quedan \textit{XGBoost} y \textit{Random Forest} destacan sobre el SVM, descartándolo así como modelo candidato. Por último, entre los dos modelos restantes, \textit{XGBoost} pese a tener una mediana peor, posee un valor máximo que destaca en gran medida con respecto a \textit{Random Forest}. Es por ello que se decidió utilizar \textit{XGBoost} como modelo para la lentitud.
 
 Dado que este diagrama es la representación de cinco iteraciones, los mejores hiperparámetros son aquellos que proporcionen el valor máximo. Pese a tener dos valores máximos para dos medidas distintas, los valores pertenecen a la misma instancia por lo que solo tenemos un grupo de hiperparámetros.
 
 Para el caso de la lentitud los hiperparámetros fueron:
 \begin{itemize}
-\item \textit{grow\_policy}: \textit{depthwise}.
-\item \textit{learning\_rate}: 0,1.
-\item \textit{Number of estimators}: 200.
+\item \texttt{grow\_policy}: \textit{depthwise}.
+\item \texttt{learning\_rate}: 0,1.
+\item \texttt{Number of estimators}: 200.
 \end{itemize}
 Este modelo con los hiperparámetros indicados obtuvo un \textit{F-score} de 0,69 y un \textit{G-mean} de 0,71 siendo estos los mejores valores reportados entre todos los modelos.
 
@@ -101,7 +101,7 @@ Al igual que en el caso de la lentitud,  se hicieron de forma paralela la evalua
 
 En el caso de la amplitud, la diferencia entre ROS y SMOTE no es tan pronunciada; sin embargo, podemos observar una diferencia notoria en el caso de \textit{XGBoost} el cual se ve claramente beneficiado por SMOTE. El resto de modelos, aunque no de forma tan notoria también se ven beneficiados por SMOTE. Es por ello que se decide tomar SMOTE como método de remuestreo como se hizo para la lentitud. 
 
-Parecido a lo que ocurría con la lentitud KNN tiene peor desempeño en el caso de \textit{F-sore} y SVM, \textit{Random Forest} y \textit{XGBoost} tienen resultados muy parecidos. En el caso de \textit{G-mean} tanto SVM como \textit{Random Forest} presentan un peor rendimiento, mientras que los dos modelos restantes obtienen mejores resultados.
+Parecido a lo que ocurría con la lentitud, KNN tiene peor desempeño en el caso de \textit{F-sore} y SVM, \textit{Random Forest} y \textit{XGBoost} tienen resultados muy parecidos. En el caso de \textit{G-mean} tanto SVM como \textit{Random Forest} presentan un peor rendimiento, mientras que los dos modelos restantes obtienen mejores resultados.
 
 Dentro de las comparativas de SMOTE, vuelve a destacar \textit{XGBoost} que, en esta ocasión, posee un mejor rendimiento general mejor que el resto de modelos a diferencia de lo que ocurría con la lentitud que se eligió por el caso máximo. 
 
@@ -109,9 +109,9 @@ Como ya se explicó anteriormente al ser diagramas de cajas y bigotes, se elegir
 
 Para el caso de la amplitud los hiperparámetros fueron:
 \begin{itemize}
-\item \textit{grow\_policy}: \textit{depthwise}.
-\item \textit{learning\_rate}: 0,1.
-\item \textit{Number of estimators}: 800.
+\item \texttt{grow\_policy}: \textit{depthwise}.
+\item \texttt{learning\_rate}: 0,1.
+\item \texttt{Number of estimators}: 800.
 \end{itemize}
 Este modelo con los hiperparámetros indicados obtuvo un \textit{F-score} de 0,69 y un \textit{G-mean} de 0,71 siendo estos los mejores valores reportados entre todos los modelos.
 
@@ -141,33 +141,33 @@ Como se observa en el reporte de \textit{SonarCloud} (ver figura~\ref{fig:./sona
 \item \textit{\textbf{Security}}: muestra el número de problemas de seguridad que tiene la aplicación. Suelen tratarse de problemas como dejar visibles claves secretas, no tener en cuenta vulnerabilidades~\ldots En el caso del proyecto, no existe ningún problema de seguridad.
 \item \textit{\textbf{Reliability}}: muestra el número de problemas de fiabilidad que tiene la aplicación. Se tratan de problemas como el uso de una variable antes de su declaración. En el caso del proyecto, no existe ningún problema de fiabilidad.
 \item \textit{\textbf{Maintainability}}: muestra el número de problemas de mantenimiento que tiene la aplicación. En el caso del proyecto, no existe ningún problema de mantenimiento.
-\item \textit{\textbf{Duplications}}: muestra el porcentaje de líneas duplicadas que tiene la aplicación. En el caso del proyecto, el porcentaje de líneas duplicadas es 0\%.
+\item \textit{\textbf{Duplications}}: muestra el porcentaje de líneas duplicadas que tiene la aplicación. En el caso del proyecto, el porcentaje de líneas duplicadas es del 1,9\%.
 \item \textit{\textbf{Accepted Issues}}: muestra el número de problemas marcados como aceptados, es decir, problemas que se tiene conocimiento de ellos pero no se van a solucionar. En el caso del proyecto tiene marcados tres problemas como aceptados, dos de los cuales vienen dados por el proyecto PADDEL y el restante se debe a que la solución para el problema resulta más compleja que el problema en sí.
 \item \textit{\textbf{Security Hotspots}}: son secciones del código que pueden no ser vulnerabilidades de seguridad por sí mismas, pero que merecen una revisión más detallada por parte de un desarrollador experimentado.
 \end{itemize}
 
-Por lo visto en el resumen, el proyecto, a excepción de los problemas previamente comentados, cumple los criterios de calidad de código.
+Por lo visto en el resumen\footnote{Resumen disponible en: \url{https://sonarcloud.io/summary/new_code?id=JornezMM_tfg}}, el proyecto, a excepción de los problemas previamente comentados, cumple los criterios de calidad de código.
 
 
 \subsection{Problemas durante el desarrollo}
 
 \subsubsection{Planificación temporal}
 
-Durante el desarrollo de la aplicación, hubo dos problemas principales a la hora de realizar la parte de planificación temporal. El primero de ellos fue no conseguir conectar la aplicación de Zube con el repositorio de GitHub haciendo que este crease los \textit{issues} de forma automática, por lo que se optó por indicar las tareas que se realizaban en cada uno de los \textit{commits}. El segundo problema se dio cuando el proyecto ya estaba avanzado. Este problema fue la pérdida total del proyecto en Zube. Debido a un fallo, que todavía se desconoce, el proyecto se eliminó por completo de la plataforma, eliminando a su vez todas las tareas de cada \textit{Sprint} así como la duración de los mismos. Este problema no se logró solucionar, por lo que no se pudo recuperar ninguna información del proyecto.
+Durante el desarrollo de la aplicación, hubo dos problemas principales a la hora de realizar la parte de planificación temporal. El primero de ellos fue no conseguir conectar la aplicación de Zube con el repositorio de GitHub haciendo que este crease los \textit{issues} de forma automática, por lo que se optó por indicar las tareas que se realizaban en cada uno de los \textit{commits}. El segundo problema se dio cuando el proyecto ya estaba avanzado. Este problema fue la pérdida total del proyecto en Zube. Debido a un fallo, que todavía se desconoce, el proyecto se eliminó por completo de la plataforma, eliminando a su vez todas las tareas de cada \textit{Sprint} así como la duración de los mismos. Este problema no se logró solucionar, por lo que no se pudo recuperar ninguna información del proyecto; no obstante, siguiendo los commits de github, se puede ver que el progreso en el desarrollo del TFG ha sido constante.
 
 \subsubsection{Compatibilidad}
 
 Tanto durante la implementación del proyecto PADDEL como durante la fase de experimentación y despliegue, ha habido problemas de compatibilidad.
 
-Este problema de compatibilidad viene dado por la versión de CUDA~\footnote{Fuente:~\url{https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html}}y numba~\footnote{Fuente:~\url{https://numba.pydata.org/}}. CUDA (Compute Unified Device Architecture) es una plataforma de computación paralela y un modelo de programación creada por NVIDIA y numba es un compilador justo a tiempo (JIT) para Python que traduce funciones numéricas escritas en Python y NumPy a código máquina altamente optimizado utilizando el compilador LLVM. El problema se da cuando la versión de CUDA y numba no son compatibles entre sí. Cuando se da este problema, se ha de modificar las versiones de uno de los dos para que sean compatibles; sin embargo, al hacer la experimentación y despliegue en un servidor donde no se puede modificar la versión de CUDA, se termino resolviendo mediante la desactualización de la versión de numba provocando a su vez una desactualización de la versión de Python de la 3.12 a la 3.10. Es por este motivo por el que el proyecto no se encuentra en la versión más actualizada.
+Este problema de compatibilidad viene dado por la versión de CUDA\footnote{Fuente:~\url{https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html}} y numba\footnote{Fuente:~\url{https://numba.pydata.org/}}. CUDA (Compute Unified Device Architecture) es una plataforma de computación paralela y un modelo de programación creada por NVIDIA y numba es un compilador justo a tiempo (JIT) para Python que traduce funciones numéricas escritas en Python y NumPy a código máquina altamente optimizado utilizando el compilador LLVM. El problema se da cuando la versión de CUDA y numba no son compatibles entre sí. Cuando se da este problema, se ha de modificar las versiones de uno de los dos para que sean compatibles; sin embargo, al hacer la experimentación y despliegue en un servidor donde no se puede modificar la versión de CUDA, se termino resolviendo mediante la desactualización de la versión de numba provocando a su vez una desactualización de la versión de Python de la 3.12 a la 3.10. Es por este motivo por el que el proyecto no se encuentra en la versión más actualizada.
 
 \subsection{Despliegue}
 
 Por último, se destaca el despliegue en un servidor Linux real.
-Primero se planteo el despliegue en un servicio gratuito pero, debido al gran tamaño de la aplicación y de los datos con los que se iba a trabajar, se descartó esta opción tras comprobar el reducido tamaño que ofrecen los servicios gratuitos. Tras esto, se opto por el despliegue en un servidor proporcionado por la Universidad de Burgos asegurando que la aplicación estuviera operativa y accesible de manera continua y confiable, pudiendo satisfacer las necesidades de uso. 
+Primero se planteo el despliegue en un servicio gratuito pero, debido al gran tamaño de la aplicación y de los datos con los que se iba a trabajar, se descartó esta opción tras comprobar el reducido tamaño que ofrecen los servicios gratuitos. Tras esto, se optó por el despliegue en un servidor proporcionado por la Universidad de Burgos asegurando que la aplicación estuviera operativa y accesible de manera continua y confiable, pudiendo satisfacer las necesidades de uso. 
 Durante la fase de desarrollo la aplicación fue probada en un entorno local haciendo uso de la herramienta integrada de Flask que permite lanzar un servidor de prueba y modificarlo en tiempo real. No obstante, a la hora del paso a producción, la forma en la que se despliega es mediante la herramienta de Gunicorn~\footnote{Fuente:~\url{https://gunicorn.org/}}. Gunicorn \textit{Green Unicorn} es un servidor HTTP Python WSGI para UNIX.
 
-A su vez se creo una imagen de \textit{DockerHub}~\footnote{Fuente:~\url{https://hub.docker.com/}} (disponible en~\url{https://hub.docker.com/repository/docker/jornez/pdaivolution/general} que permite hacer un despliegue muy sencillo sin necesidad de instalar nada a excepción de \textit{Docker} o \textit{Docker Desktop}.
+A su vez se creó una imagen de \textit{DockerHub}~\footnote{Fuente:~\url{https://hub.docker.com/}} (disponible en~\url{https://hub.docker.com/repository/docker/jornez/pdaivolution/general} que permite hacer un despliegue muy sencillo sin necesidad de instalar nada a excepción de \textit{Docker} o \textit{Docker Desktop}.
 
 
 

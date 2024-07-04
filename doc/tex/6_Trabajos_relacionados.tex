@@ -52,7 +52,7 @@ Dos expertos clínicos en \textbf{Parkinson}, que desconocían los diagnósticos
 	\item La densidad espectral de energía se calculó como la integral al cuadrado del espectro FFT, una medida que se espera que aumente con la amplitud del golpeteo.
 \end{itemize}
 \subsection{Resultados}
-Una máquina de vectores de soporte con núcleos de función de base radial predijo la presencia de bradicinesia leve/moderada/grave con una precisión de prueba estimada del 0,8 \%.
+Una máquina de vectores de soporte con núcleos de función de base radial predijo la presencia de bradicinesia leve/moderada/grave con una precisión de prueba estimada del 0,8.
 Un modelo Naïve Bayes predijo la presencia de la enfermedad de Parkinson con una precisión de prueba estimada de 0,67. 
 
 \section{Paddel}
@@ -82,3 +82,18 @@ Este proyecto~\cite{paddelRepo} utiliza 158 vídeos de evaluación etiquetados p
 \subsection{Resultados}
 Una máquina de vectores de soporte con los hiperparámetros optimizados por medio de \textit{GridSearch} da una precisión media del 78,85\%.
 
+
+\section{TremorTrack}
+
+Este proyecto~\cite{TremorTrack} se enfoca en desarrollar una aplicación web en la que tanto pacientes como médicos puedan acceder a información personal y médica. Esta información incluye gráficos generados a partir de los datos medidos por un sensor que llevan los pacientes.
+
+\subsubsection{Metodología}
+\begin{itemize}
+\item  Uso de Series Temporales: los datos del sensor se presentan como series temporales, permitiendo analizar su evolución y entender patrones y tendencias que ayudan a crear modelos de predicción para anticipar la progresión de la enfermedad y ajustar tratamientos.
+\item Modelos de Suavizado Exponencial Simple: Se utilizó el modelo de suavizado exponencial simple para las predicciones, pero se observó que proporcionaba el mismo valor para todas las predicciones futuras.
+\item Modelos de Exponencial de \textit{Holt}: Este modelo detectó una ligera tendencia en los datos, prediciendo un aumento en la lentitud y una disminución en la velocidad media.
+\end{itemize}
+
+\subsubsection{Resultados}
+
+Debido a que la función solicita introducir la tendencia y la estacionalidady los datos de los vídeos del paciente no tienen estacionalidad se eligió el modelo suavizado exponencial de \textit{Holt} para realizar la predicción.
