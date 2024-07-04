@@ -1,0 +1,131 @@
+<mxfile host="app.diagrams.net" modified="2024-07-04T19:25:09.448Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 OPR/111.0.0.0" etag="JaLajaQ3-hOm9YvwsEn3" version="24.6.2" type="device">
+  <diagram name="Página-1" id="M-ZSTxh6JOsAXfXdJga2">
+    <mxGraphModel dx="890" dy="476" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="btw8MzeOIz6MvSK8TIFe-1" value="Navegador" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+          <mxGeometry x="190" y="140" width="100" height="700" as="geometry" />
+        </mxCell>
+        <mxCell id="btw8MzeOIz6MvSK8TIFe-20" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="btw8MzeOIz6MvSK8TIFe-1">
+          <mxGeometry x="45" y="102" width="10" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="btw8MzeOIz6MvSK8TIFe-3" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="btw8MzeOIz6MvSK8TIFe-1">
+          <mxGeometry x="45" y="280" width="10" height="370" as="geometry" />
+        </mxCell>
+        <mxCell id="btw8MzeOIz6MvSK8TIFe-2" value="Servidor Web" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+          <mxGeometry x="350" y="140" width="100" height="700" as="geometry" />
+        </mxCell>
+        <mxCell id="btw8MzeOIz6MvSK8TIFe-13" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="btw8MzeOIz6MvSK8TIFe-2">
+          <mxGeometry x="45" y="120" width="10" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="btw8MzeOIz6MvSK8TIFe-33" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="btw8MzeOIz6MvSK8TIFe-2">
+          <mxGeometry x="45" y="290" width="10" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="btw8MzeOIz6MvSK8TIFe-7" value="Obtener página de añadir&lt;div&gt;video&lt;/div&gt;" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;entryX=0;entryY=0;entryDx=0;entryDy=5;entryPerimeter=0;" edge="1" target="btw8MzeOIz6MvSK8TIFe-13" parent="1" source="btw8MzeOIz6MvSK8TIFe-20">
+          <mxGeometry x="0.0023" relative="1" as="geometry">
+            <mxPoint x="260" y="305" as="sourcePoint" />
+            <mxPoint x="380" y="275" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="btw8MzeOIz6MvSK8TIFe-9" value="Base de datos" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+          <mxGeometry x="780" y="140" width="100" height="590" as="geometry" />
+        </mxCell>
+        <mxCell id="btw8MzeOIz6MvSK8TIFe-24" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="btw8MzeOIz6MvSK8TIFe-9">
+          <mxGeometry x="45" y="485" width="10" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="btw8MzeOIz6MvSK8TIFe-10" value="Paddel" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+          <mxGeometry x="500" y="140" width="100" height="700" as="geometry" />
+        </mxCell>
+        <mxCell id="btw8MzeOIz6MvSK8TIFe-22" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="btw8MzeOIz6MvSK8TIFe-10">
+          <mxGeometry x="45" y="310" width="10" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="btw8MzeOIz6MvSK8TIFe-11" value="Modelos entrenados" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+          <mxGeometry x="640" y="140" width="100" height="660" as="geometry" />
+        </mxCell>
+        <mxCell id="btw8MzeOIz6MvSK8TIFe-23" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="btw8MzeOIz6MvSK8TIFe-11">
+          <mxGeometry x="45" y="325" width="10" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="btw8MzeOIz6MvSK8TIFe-18" value="" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};participant=umlActor;" vertex="1" parent="1">
+          <mxGeometry x="80" y="130" width="20" height="730" as="geometry" />
+        </mxCell>
+        <mxCell id="btw8MzeOIz6MvSK8TIFe-19" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="btw8MzeOIz6MvSK8TIFe-18">
+          <mxGeometry x="5" y="55" width="10" height="605" as="geometry" />
+        </mxCell>
+        <mxCell id="btw8MzeOIz6MvSK8TIFe-21" value="Acceder a la página&lt;div&gt;de añadir videos de un&lt;/div&gt;&lt;div&gt;paciente&lt;/div&gt;" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;entryX=0;entryY=0;entryDx=0;entryDy=5;entryPerimeter=0;" edge="1" parent="1" source="btw8MzeOIz6MvSK8TIFe-18" target="btw8MzeOIz6MvSK8TIFe-20">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="115" y="243" as="sourcePoint" />
+            <mxPoint x="235" y="243" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="btw8MzeOIz6MvSK8TIFe-37" value="Página de añadir video" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;exitX=0;exitY=1;exitDx=0;exitDy=-5;exitPerimeter=0;" edge="1" parent="1" source="btw8MzeOIz6MvSK8TIFe-13" target="btw8MzeOIz6MvSK8TIFe-20">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="245" y="340" as="targetPoint" />
+            <mxPoint x="395" y="340" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="btw8MzeOIz6MvSK8TIFe-38" value="Página de añadir video" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;exitX=0;exitY=1;exitDx=0;exitDy=-5;exitPerimeter=0;" edge="1" parent="1" source="btw8MzeOIz6MvSK8TIFe-20" target="btw8MzeOIz6MvSK8TIFe-19">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="115" y="361" as="targetPoint" />
+            <mxPoint x="235" y="361.0000000000001" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="btw8MzeOIz6MvSK8TIFe-39" value="Introducir y enviar vídeo&lt;div&gt;y datos del vídeo&lt;/div&gt;" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;entryX=0;entryY=0;entryDx=0;entryDy=5;entryPerimeter=0;" edge="1" parent="1" source="btw8MzeOIz6MvSK8TIFe-19" target="btw8MzeOIz6MvSK8TIFe-3">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="90" y="405" as="sourcePoint" />
+            <mxPoint x="235" y="405" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="btw8MzeOIz6MvSK8TIFe-40" value="Enviar vídeo&lt;div&gt;y datos del vídeo&lt;/div&gt;" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;entryX=0;entryY=0;entryDx=0;entryDy=5;entryPerimeter=0;" edge="1" parent="1" source="btw8MzeOIz6MvSK8TIFe-3" target="btw8MzeOIz6MvSK8TIFe-33">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="250" y="425" as="sourcePoint" />
+            <mxPoint x="390" y="425" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="btw8MzeOIz6MvSK8TIFe-41" value="Extraer características" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;entryX=0;entryY=0;entryDx=0;entryDy=5;entryPerimeter=0;" edge="1" parent="1" source="btw8MzeOIz6MvSK8TIFe-33" target="btw8MzeOIz6MvSK8TIFe-22">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="490" y="464.17" as="sourcePoint" />
+            <mxPoint x="640" y="464.17" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="btw8MzeOIz6MvSK8TIFe-42" value="Enviar características" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;entryX=0;entryY=0;entryDx=0;entryDy=5;entryPerimeter=0;" edge="1" parent="1" source="btw8MzeOIz6MvSK8TIFe-22" target="btw8MzeOIz6MvSK8TIFe-23">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="550" y="474.43" as="sourcePoint" />
+            <mxPoint x="690" y="474.43" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="btw8MzeOIz6MvSK8TIFe-43" value="Clasificaciones" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;exitX=0;exitY=1;exitDx=0;exitDy=-5;exitPerimeter=0;" edge="1" parent="1" source="btw8MzeOIz6MvSK8TIFe-23" target="btw8MzeOIz6MvSK8TIFe-22">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="540" y="605" as="targetPoint" />
+            <mxPoint x="690" y="605" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="btw8MzeOIz6MvSK8TIFe-44" value="Clasificaciones" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;exitX=0;exitY=1;exitDx=0;exitDy=-5;exitPerimeter=0;" edge="1" parent="1" source="btw8MzeOIz6MvSK8TIFe-22" target="btw8MzeOIz6MvSK8TIFe-33">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="410" y="565" as="targetPoint" />
+            <mxPoint x="540" y="565" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="btw8MzeOIz6MvSK8TIFe-45" value="Enviar vídeo,&lt;div&gt;&amp;nbsp;datos del vídeo&lt;/div&gt;&lt;div&gt;y clasificaciones&lt;/div&gt;" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;entryX=0;entryY=0;entryDx=0;entryDy=5;entryPerimeter=0;" edge="1" parent="1" source="btw8MzeOIz6MvSK8TIFe-33" target="btw8MzeOIz6MvSK8TIFe-24">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="520" y="640" as="sourcePoint" />
+            <mxPoint x="670" y="640" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="btw8MzeOIz6MvSK8TIFe-46" value="Página de videos del&lt;div&gt;paciente actualizada&lt;/div&gt;" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;exitX=0;exitY=1;exitDx=0;exitDy=-5;exitPerimeter=0;" edge="1" parent="1" source="btw8MzeOIz6MvSK8TIFe-33" target="btw8MzeOIz6MvSK8TIFe-3">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="240" y="740" as="targetPoint" />
+            <mxPoint x="390" y="750" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="btw8MzeOIz6MvSK8TIFe-47" value="Página de videos del&lt;div&gt;paciente actualizada&lt;/div&gt;" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;exitX=0;exitY=1;exitDx=0;exitDy=-5;exitPerimeter=0;entryX=1;entryY=1;entryDx=0;entryDy=-5;entryPerimeter=0;" edge="1" parent="1" source="btw8MzeOIz6MvSK8TIFe-3" target="btw8MzeOIz6MvSK8TIFe-19">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="100" y="790" as="targetPoint" />
+            <mxPoint x="250" y="790" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

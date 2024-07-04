@@ -141,7 +141,32 @@ Se adjunta a continuación, para cada tabla, el diccionario de datos correspondi
 \end{table}
 \end{itemize}
 \section{Diseño procedimental}
+El diseño procedimental en informática es una metodología de desarrollo de software que se centra en la creación de procedimientos o funciones para llevar a cabo tareas específicas dentro de un programa.
+Durante el desarrollo del proyecto se ha hecho uso de la herramienta Draw.io\footnote{Fuente:~\url{draw.io}} para representar los procedimientos. Dentro del sistema podemos distinguir los siguientes componentes:
+\begin{itemize}
+\item Doctor: representado por el monigote, representa a un usuario que haya iniciado sesión como doctor.
+\item Navegador: se refiere al apartado de \textit{frontend} de la aplicación.
+\item Servidor web: se refiere a la parte de \textit{backend}.
+\item Paddel: se refiere a la librería de Paddel utilizada durante el proyecto.
+\item Base de datos: se refiere a la base de datos de la aplicación.
+\end{itemize}
+
+Debido a que los diagramas secuenciales de la aplicación son muy básicos exceptuando el de la clasificación de los vídeos, se ha tomado la decisión de omitirlos.
+
+\subsection{Clasificación de los videos}
+Para esta funcionalidad, el doctor ha de tener al menos un paciente para poder realizar la acción. El doctor solicita la vista de añadir vídeos al usuario. Tras recibirla, el doctor envía la información del vídeo junto con el archivo del mismo a la aplicación. La aplicación lo envía a la librería Paddel para extraer las características y estas características se envían a los modelos entrenados para obtener las clasificaciones. Una vez obtenidas el vídeo es guardado en la base de datos y posteriormente, se envía al usuario de vuelta a la página de gestión de vídeos actualizada del paciente al que se le ha añadido.
+La figura~\ref{fig:./img/DiagramaSecuencia} muestra el diagrama de secuencia del proceso.
+\imagen{./img/DiagramaSecuencia}{Diagrama de secuencia de clasificación de los vídeos}{}
+
 
 \section{Diseño arquitectónico}
 
 
+Para ilustrar la arquitectura de la aplicación se emplea el diagrama de despliegue de la figura~\ref{fig:./img/DiagramaDespliegue}. Este tipo de diagrama UML muestra cómo están organizados físicamente los componentes del software en el sistema.
+
+La aplicación no se ha desplegado debido al gran tamaño de los archivos, incluidos los vídeos y los datos de los sensores de los pacientes, por lo que la sección del Web Server no es precisa, ya que la lógica de la aplicación se ejecuta localmente.
+
+El Data Base Server se encarga de gestionar la capa de persistencia del proyecto. Para ello, se ha utilizado SQLite como herramienta de gestión de la base de datos.
+
+El usuario o cliente actúa como el controlador de la interfaz de usuario, interactuando con las páginas HTML a través de su navegador.
+\imagen{./img/DiagramaDespliegue}{Diagrama de despliegue}{}
