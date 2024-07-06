@@ -1,9 +1,34 @@
 \apendice{Anexo de sostenibilización curricular}
 
 \section{Introducción}
-Este anexo incluirá una reflexión personal del alumnado sobre los aspectos de la sostenibilidad que se abordan en el trabajo.
-Se pueden incluir tantas subsecciones como sean necesarias con la intención de explicar las competencias de sostenibilidad adquiridas durante el alumnado y aplicadas al Trabajo de Fin de Grado.
+Este apartado, aborda los diversos aspectos de sostenibilidad aplicados durante el desarrollo del proyecto.
+Para la elaboración de este apartado, se ha utilizado como referencia el documento <<Directrices para la inclusión de la sostenibilidad en el currículo universitario>> publicado por la Conferencia de Rectores de las Universidades Españolas (CRUE)\footnote{\url{https://www.crue.org/wp-content/uploads/2020/02/Directrices_Sosteniblidad_Crue2012.pdf}}. Este documento proporciona un marco teórico y práctico para integrar la sostenibilidad en los proyectos educativos y de investigación. 
 
-Más información en el documento de la CRUE \url{https://www.crue.org/wp-content/uploads/2020/02/Directrices_Sosteniblidad_Crue2012.pdf}.
+Este apartado se divide en tres secciones: impacto del software a nivel de consumo, igualdad y accesibilidad y conclusiones.
 
-Este anexo tendrá una extensión comprendida entre 600 y 800 palabras.
+\section{Impacto del software a nivel de consumo}
+El impacto del software en términos de consumo energético y de recursos es un aspecto crítico a considerar en el desarrollo de aplicaciones sostenibles. Durante el proyecto se ha hecho uso de modelos de aprendizaje y servidores.
+
+\subsection{Servidor}
+
+Para el despliegue de la aplicación se ha hecho uso del servidor de la UBU. Este servidor genera un consumo constante debido a la necesidad de mantener la infraestructura para poder proporcionar servicios de manera ininterrumpida. Es este uso continuo el que lleva a un consumo energético elevado. Para solucionar esto se podría hacer un estudio para mejorar los procesadores y componentes del servidor para ser más eficientes energéticamente o apagar aquellos componentes y servicios que no estén en uso.
+
+\subsection{Aprendizaje automático}
+
+Los modelos de aprendizaje automático consumen una cantidad significativa de energía por varias razones, relacionadas principalmente con el proceso de entrenamiento y la infraestructura necesaria para ejecutar estos modelos. Debido a que el entrenamiento de modelos, especialmente los de deep learning, requiere realizar cálculos complejos y numerosas iteraciones sobre grandes conjuntos de datos y las unidades de procesamiento gráfico (GPU) y las unidades de procesamiento tensorial (TPU) son esenciales para el entrenamiento eficiente, pero también son muy intensivas en energía.
+
+Como solución se propone el uso de modelos más pequeños y eficiente, entrenamiento distribuido o adquisición de \textit{hardware} específico. Otras soluciones podría ser entrenamiento fuera de las horas pico programando el entrenamiento de modelos durante períodos de baja demanda energética u optimización de la carga de trabajo balanceando y distribuyendo la carga de trabajo de manera óptima para evitar picos de consumo energético.
+El desarrollo de este software también ha considerado la sostenibilidad a largo plazo, buscando minimizar su huella de carbono. Se han implementado prácticas de programación eficientes, optimizando el código para reducir el tiempo de procesamiento y, por ende, el consumo energético.
+
+\section{Igualdad y accesibilidad}
+Uno de los objetivos fundamentales del software es su accesibilidad para todos los usuarios, independientemente de sus capacidades o limitaciones. Este enfoque inclusivo garantiza que el software sea una herramienta útil y eficaz para el mayor número posible de personas, alineándose con los principios de igualdad y no discriminación.
+
+El compromiso con la igualdad también se refleja en la estructura de precios del software. Dado que el proyecto está destinado a facilitar el trabajo de pacientes y médicos, se ha decidido que su uso sea completamente gratuito. Esta decisión garantiza que el software esté disponible para todos los usuarios, independientemente de su situación económica, promoviendo así la igualdad de oportunidades .
+
+\section{Conclusiones}
+La integración de la sostenibilidad en el desarrollo de software es esencial para minimizar el impacto ambiental y promover la igualdad de acceso a la tecnología. Este proyecto ha sido diseñado con un enfoque holístico, considerando tanto la eficiencia energética como la accesibilidad y la igualdad. Siguiendo las directrices de sostenibilidad de la CRUE, se ha logrado desarrollar un software que no solo cumple con sus objetivos funcionales, sino que también contribuye a un futuro más sostenible y equitativo.
+
+
+
+
+

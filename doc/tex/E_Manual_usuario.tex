@@ -2,10 +2,106 @@
 
 \section{Introducción}
 
+En este apartado, se detalla la información necesaria para el uso de la aplicación por un usuario. Además, en este se indican los requisitos necesarios para hacer un uso correcto de la aplicación.
+
 \section{Requisitos de usuarios}
+
+Para poder hacer uso de la aplicación es necesario disponer de conexión a internet y utilizar cualquiera de los siguientes navegadores: Mozilla Firefox, Safari, Opera, Microsoft Edge o Google Chrome.
+
+Para el desarrollo y pruebas de la aplicación se ha hecho uso tanto del navegador de Opera como del de Google Chrome.
+
 
 \section{Instalación}
 
+Dado que que se trata de una aplicación web alojada en un servidor, no es necesario ningún tipo de instalación. No obstante, debido a que la aplicación se encuentra alojada dentro de los servidores de la UBU es necesario tener acceso a la Intranet ya sea mediante el uso de una VPN previamente autorizada o mediante el acceso a internet dentro de los recintos físicos de la universidad. Para poder acceder a la aplicación, una vez dentro de la Intranet, se hará mediante la dirección: \url{http://10.168.168.34:9000/}.
+
 \section{Manual del usuario}
+
+Una vez accedido a la aplicación, el usuario tendrá acceso a la página principal. Dentro de la aplicación existen diversas funcionalidades dependiendo del tipo de usuario que tenga iniciada la sesión.
+
+En este apartado se mostrarán tanto las funcionalidades comunes, que son aquellas que se pueden realizar independientemente del tipo de usuario como las funcionalidades especificas de cada tipo de usuario: administrador, médico, paciente.
+
+\subsection{Funcionalidades generales}
+\subsubsection{Página principal}
+Al tomar contacto por primera ver con la aplicación,la  primera página que se mostrará será la página principal (ver figura~\ref{fig:./img/manual/principal}), la cual se compone de una barra de navegación donde se encuentra los botones de <<iniciar sesión>> y <<acerca de>>.
+
+\imagen{./img/manual/principal}{Página principal}{}
+
+\subsubsection{Inicio de sesión}
+Al pulsar en el botón de <<inicio de sesión>> se redirige al usuario a la página de inicio de sesión (ver figura~\ref{fig:./img/manual/login}) la cual consiste en un formulario en el que se solicitan las credenciales y el rol con el que se desea acceder.
+
+\imagen{./img/manual/login}{Página de inicio de sesión}{}
+
+\subsubsection{Acerca de}
+Al pulsar en el botón de <<acerca de>> se redirige al usuario a la página de información (ver figura~\ref{fig:./img/manual/about}) en la que se muestra una breve descripción de la aplicación y del estudiante así como un enlace de contacto.
+
+\imagen{./img/manual/about}{Página de información}{}
+
+\subsection{Funcionalidades del administrador}
+
+\subsubsection{Página de gestión de usuarios}
+
+Al iniciar sesión como administrador, se redirige al usuario a la página de gestión de usuarios (ver figura~\ref{fig:./img/manual/adminMain}). En esta página se muestra un listado con todos los usuarios de la base de datos junto a las opciones de eliminar y modificar al usuario. Además se puede encontrar el botón de <<añadir usuario>>.
+
+\imagen{./img/manual/adminMain}{Página del administrador}{}
+
+\subsubsection{Página de añadir usuarios}
+
+Al pulsar el botón de <<añadir usuario>> se redirigirá a la página de añadir usuarios (ver figura~\ref{fig:./img/manual/adminAdd}), la cual se compone de un formulario que varía dependiendo del tipo de usuario que se desee añadir. Una vez rellenado el formulario, al pulsar el botón de <<añadir usuario>>, se añadirá a la base de datos si cumple los requisitos.
+
+\imagen{./img/manual/adminAdd}{Página de añadir usuarios}{}
+
+\subsubsection{Página de modificar usuarios}
+
+Al pulsar el botón con el símbolo de edición se redirigirá a la página de modificar usuarios con los datos de ese usuario (ver figura~\ref{fig:./img/manual/adminMod}), la cual se compone de un formulario que varía dependiendo del tipo de usuario que se desee modificar. El formulario se rellena automáticamente con los datos del usuario que se desea modificar. Si la contraseña se deja en blanco, no se modificará la contraseña actual del usuario a modificar. Una vez rellenado el formulario, al pulsar el botón de <<modificar usuario>>, se guardará en la base de datos si cumple los requisito el nuevo usuario modificado.
+
+\imagen{./img/manual/adminMod}{Página de modificar usuarios}{}
+
+\subsection{Funcionalidades del administrador}
+
+\subsubsection{Página principal del médico}
+
+Al iniciar sesión como médico, se redirige al usuario a la página de gestión de pacientes (ver figura~\ref{fig:./img/manual/docMain}). En esta página se muestra un listado con todos los pacientes asignados al usuario con la sesión iniciada junto a las opciones de <<ver usuario>>, <<ver medicinas>> y <<ver vídeos del usuario>>. Además se puede encontrar el botón de <<añadir usuario>>.
+
+\imagen{./img/manual/docMain}{Página del médico}{}
+
+\subsubsection{Página de evolución del paciente}
+
+Al pulsar el botón de <<ver usuario>> se redirigirá a la página de evolución del paciente (ver figura~\ref{fig:./img/manual/docPac}), en la que se muestran los datos del paciente como su nombre, edad, mano, medicinas, así como la gráfica de evolución del paciente.
+
+\imagen{./img/manual/docPac}{Página de evolución del paciente}{}
+
+\subsubsection{Página de gestión de medicinas}
+
+Al pulsar el botón de <<ver medicinas>> se redirigirá a la página de medicinas del paciente (ver figura~\ref{fig:./img/manual/docMed}), en la que se muestra un listado con la medicina, dosis y fechas de inicio y fin del tratamiento. Además, se incluyen dos botones adicionales, uno <<eliminar medicina>> que como su texto indica elimina la medicina de la lista y un botón de <<añadir medicinas>> que redirige al médico a la página de añadir medicinas.
+
+\imagen{./img/manual/docMed}{Página de medicinas del paciente}{}
+
+
+\subsubsection{Página de añadir medicinas}
+
+Al pulsar el botón de <<añadir medicina>> se redirigirá a la página de añadir medicinas (ver figura~\ref{fig:./img/manual/docAddMed}), la cual se compone de un formulario en el que se introducen los datos de la medicina que se desee añadir. Estos datos incluyen el nombre de la medicina, la dosis y la fecha de inicio y fin del tratamiento. Si la fecha de fin se deja en blanco, se interpreta que el tratamiento sigue en curso. Una vez rellenado el formulario, al pulsar el botón de <<añadir medicina>>, se añadirá la medicina al listado del paciente.
+
+\imagen{./img/manual/docAddMed}{Página de añadir medicinas}{}
+
+\subsubsection{Página de gestión de vídeos}
+
+Al pulsar el botón de <<ver vídeos>> se redirigirá a la página de vídeos del paciente (ver figura~\ref{fig:./img/manual/docVid}), en la que se muestra un listado con los vídeos, amplitud, lentitud, mano y fechas grabación. Además, se incluyen tres botones adicionales, uno <<eliminar vídeo>> que como su texto indica elimina el vídeo de la lista y un botón de <<añadir vídeos>> que redirige al médico a la página de añadir medicinas y por último el botón de ver vídeo.
+
+\imagen{./img/manual/docVid}{Página de vídeos del paciente}{}
+
+\subsubsection{Página de añadir vídeos}
+
+Al pulsar el botón de <<añadir vídeos>> se redirigirá a la página de añadir medicinas (ver figura~\ref{fig:./img/manual/docAddVid}), la cual se compone de un formulario en el que se introducen los datos: archivo de vídeom mano y día en el que fue tomado. Una vez rellenado el formulario, al pulsar el botón de <<añadir vídeos>>, se añadirá el vídeo al listado del paciente.
+
+\imagen{./img/manual/docAddVid}{Página de añadir vídeos}{}
+
+\subsection{Funcionalidades del paciente}
+
+\subsubsection{Página principal del paciente}
+
+Al iniciar sesión como paciente, se redirige al usuario a la página principal de usuarios (ver figura~\ref{fig:./img/manual/pacMain}). En esta página al igual que en la página de vista de evolución del paciente, se muestra una tabla con los datos del paciente, así como la gráfica de su evolución.
+
+\imagen{./img/manual/pacMain}{Página del médico}{}
 
 

@@ -1,11 +1,454 @@
 \apendice{Documentación técnica de programación}
 
 \section{Introducción}
+Esta sección contiene la documentación necesaria para describir el funcionamiento del \textit{software}. Esta documentación es esencial para desarrolladores que pretendan utilizar, mantener o modificar el proyecto.
+
+Se exponen en ella la estructura de directorios, el manual del desarrollador, compilación, instalación y ejecución del proyecto y pruebas del sistema.
 
 \section{Estructura de directorios}
+En el repositorio de GitHub~\footnote{\url{https://github.com/JornezMM/PDAIvolution}} esta dividido en los siguientes directorios:
+
+\newpage
+
+\dirtree{%
+    .1 /web/ \\
+    \hphantom{0cm}{}
+    \begin{minipage}[t]{10cm}
+        \normalfont
+		En este directorio se encuentran todos los subdirectorios y archivos relativos al código fuente de la 			aplicación{.}
+    \end{minipage}.
+     .2 controllers/ \\
+    \hphantom{0cm}{}
+    \begin{minipage}[t]{10cm}
+        \normalfont
+        Contiene los controladores de la aplicación{.}
+    \end{minipage}.
+    .2 instance/ \\
+    \hphantom{0cm}{}
+    \begin{minipage}[t]{10cm}
+        \normalfont
+		Contiene la base de datos de gestionada mediante SQLite{.}
+    \end{minipage}.
+   .2 models/ \\
+    \hphantom{0cm}{}
+    \begin{minipage}[t]{10cm}
+        \normalfont
+		Contiene todos los modelos de la base de datos de la aplicación{.}
+    \end{minipage}.
+    .2 app/ \\
+    \hphantom{0cm}{}
+    \begin{minipage}[t]{10cm}
+        \normalfont
+		 En el se pueden encontrar el código fuente de la aplicación junto con las \textit{templates} de la aplicación{.}
+    \end{minipage}.
+    .3 static/ \\
+    \hphantom{0cm}{}
+    \begin{minipage}[t]{10cm}
+        \normalfont
+		Contiene los archivos estáticos de la aplicación entre los que se encuentran hojas de estilos (CSS), imágenes y archivos {.}js{.}
+    \end{minipage}.
+    .3 templates/ \\
+    \hphantom{0cm}{}
+    \begin{minipage}[t]{10cm}
+        \normalfont
+		Contiene todos los archivos HTML relativos a la aplicación{.}
+    \end{minipage}.
+     .3 paddel/ \\
+    \hphantom{0cm}{}
+    \begin{minipage}[t]{10cm}
+        \normalfont
+        Contiene los diferentes archivos de Python que componen la librería PADDEL{.}
+    \end{minipage}.
+    .4 hyper\_parameters/ \\
+    \hphantom{0cm}{}
+    \begin{minipage}[t]{10cm}
+        \normalfont
+        Contiene los archivos de Python relacionados con la fase de optimización de
+        hiperparámetros{.}
+    \end{minipage}.
+    .4 preprocessing/ \\
+    \hphantom{0cm}{}
+    \begin{minipage}[t]{10cm}
+        \normalfont
+        Contiene los archivos de Python relacionados con el preprocesado y
+        transformación de los vídeos para reducirlos a un conjunto de características{.}
+    \end{minipage}.
+}
+
+
+\newpage
+
+\dirtree{%
+    .1 /docs/ \\
+    \hphantom{0cm}{}
+    \begin{minipage}[t]{10cm}
+        \normalfont
+        Proyecto en \LaTeX{} que contiene este documento junto con la memoria{.}
+    \end{minipage}.
+    .2 schematics/ \\
+    \hphantom{0cm}{}
+    \begin{minipage}[t]{10cm}
+        \normalfont
+        Contiene diferentes ficheros \texttt{.dawio} utilizados durante el desarrollo del proyecto{.}
+    \end{minipage}.
+    .2 tex/ \\
+    \hphantom{0cm}{}
+    \begin{minipage}[t]{10cm}
+        \normalfont
+        Carpeta que contiene todos los fuentes \texttt{.tex} para memoria y anexos{.}
+    \end{minipage}.
+    .2 img/ \\
+    \hphantom{0cm}{}
+    \begin{minipage}[t]{10cm}
+        \normalfont
+        Diferentes imágenes utilizadas en la documentación{.}
+    \end{minipage}.
+    .3 concepts/ \\
+    \hphantom{0cm}{}
+    \begin{minipage}[t]{10cm}
+        \normalfont
+        Diferentes imágenes utilizadas en el apartado de conceptos teóricos{.}
+    \end{minipage}.
+    .3 graphs/ \\
+    \hphantom{0cm}{}
+    \begin{minipage}[t]{10cm}
+        \normalfont
+        Diferentes gráficos utilizados en la documentación{.}
+    \end{minipage}.
+    .3 introduction/ \\
+    \hphantom{0cm}{}
+    \begin{minipage}[t]{10cm}
+        \normalfont
+        Diferentes imágenes utilizadas en el apartado de introducción de la memoria{.}
+    \end{minipage}.
+    .3 manual/ \\
+    \hphantom{0cm}{}
+    \begin{minipage}[t]{10cm}
+        \normalfont
+        Diferentes imágenes utilizadas en el apartado del manual de estos anexos{.}
+    \end{minipage}.
+}
+
+\vspace{1cm}
+
+
+\dirtree{%
+    .1 /notebooks/ \\
+    \hphantom{0cm}{}
+    \begin{minipage}[t]{10cm}
+        \normalfont
+        Notebooks de Jupyter que se han utilizado para realizar pruebas, entrenar
+        modelos, optimizar hiperparámetros y generar gráficas{.}
+    \end{minipage}.
+    .2 datasets/ \\
+    \hphantom{0cm}{}
+    \begin{minipage}[t]{10cm}
+        \normalfont
+       	Resultados obtenidos tras el entrenamiento y evaluación de los modelos{.}
+    \end{minipage}.
+}
+
+\newpage
+
 
 \section{Manual del programador}
 
+Se describen a continuación las herramientas y entornos utilizados durante el desarrollo del proyecto:
+
+\begin{itemize}
+\item \textbf{Sistema operativo}: para llevar a cabo la fase de desarrollo se ha hecho uso del sistema operativo Windows 11. No obstante, en la fase de producción, ha sido necesario el uso de \textit{Windows Subsystem for Linux} (WSL)\footnote{\url{https://ubuntu.com/desktop/wsl}} para poder utilizar la herramienta \textit{gunicorn}. Por lo que para que la fase de desarrollo y producción sea constante se recomienda el uso de Linux o en su defecto WSL desde el inicio.
+\item \textbf{Versión de Python}: la aplicación está desarrollada en Python\footnote{\url{https://www.python.org/downloads/}} 3.10.7 debido a incompatibilidades de versión con Numba y CUDA. Se recomienda comprobar la versión de CUDA instalada en el dispositivo. Para CUDA 11, se ha utilizado Numba 0.56.0; para CUDA 12, se ha utilizado Numba 0.59.0
+\item \textbf{Visual Studio Code}: tanto para el control de versiones, mediante el \textit{plugin} de GitHub de Visual Studio Code, como para el desarrollo del código se ha hecho uso de la versión 1.91.0 de Visual Studio Code\footnote{\url{https://code.visualstudio.com/download}}. 
+\end{itemize}
+
+Aunque para la programación y ejecución del código se hizo uso de Visual Studio Code, se puede utilizar cualquier IDE(\textit{Integrated development environment}) que sea compatible con Python.
+
+Durante el desarrollo de la aplicación se hizo uso de un entorno virtual de Python. Antes de crear el entorno virtual, se recomienda consultar la versión de Python con la que se está trabajando mediante el siguiente comando:
+
+\begin{lstlisting}[language=bash, caption={Comprobación de versión de Python}]
+python --version
+\end{lstlisting}
+
+A su vez, se ha de tener en cuenta que el entorno virtual creado estará en la versión que nos aparezca tras ejecutar el comando anterior. 
+
+Para crear un entorno virtual se hará uso del siguiente comando:
+
+\begin{lstlisting}[language=bash, caption={Creación de un entorno virtual}]
+python -m venv nombre_del_entorno
+\end{lstlisting}
+
+Una vez creado, antes de instalar las dependencias, se recomienda comprobar la versión de CUDA instala. Para ello se utilizará el comando \texttt{nvidia-smi} el cual nos mostrará, entre otras cosas la versión de CUDA instalada.
+
+
 \section{Compilación, instalación y ejecución del proyecto}
 
+A continuación se explican algunos de los procesos para poder modificar y utilizar el proyecto.
+
+\subsection{Obtención de los ficheros fuente}
+
+Par obtener los ficheros fuente de la aplicación, se puede hacer uso del comando \texttt{git clone} o en su defecto, ir al GitHub\footnote{\url{https://github.com/JornezMM/PDAIvolution/tree/main}} y, en el botón de \textit{code}, seleccionar la opción de descargar \textit{ZIP}.
+
+\subsection{Instalación del entorno virtual y dependencias}
+
+Para instalar las librerías y dependencias necesarias para lanzar la aplicación, se incluye en el repositorio un archivos \texttt{requirements.txt} en el que se incluyen tanto librerías como dependencias con sus correspondientes versiones. Para crear este archivo se hizo uso de comando \texttt{pip freeze > requirements.txt}.
+
+Para instalar las librerías en el entorno virtual primero deberá ser activado. En Windows, habrá que desplazarse hasta el directorio donde se encuentra el entorno virtual y, posteriormente, ejecutar \texttt{./nombre\_del\_entorno/Scripts/activate}. En Linux el proceso es similar salvo que el comando será \texttt{./nombre\_del\_entorno/bin/activate}. Una vez activado el entorno virtual, se ejecutará el siguiente comando:
+
+\begin{lstlisting}[language=bash, caption={Instalación dependencias y librerías}]
+python install -r requirements.txt
+\end{lstlisting}
+
+Este comando instalará automáticamente las librerías y dependencias con sus correspondientes versiones, incluidas en el archivo previamente mencionado.
+
+\subsection{Ejecución de experimentos en remoto}
+
+Debido a la gran cantidad de recursos necesarios para lanzar los experimentos, se ha hecho uso de un servidor remoto proporcionado por la UBU. Para ello se han seguido los siguientes pasos:
+
+\begin{enumerate}
+\item Activar VPN de la UBU\footnote{\url{https://www.ubu.es/servicio-de-informatica-y-comunicaciones/
+documentacion-de-ayuda/manuales-de-usuario/manuales-vpn}}. Se necesita autorización previa.
+\item Acceder al servidor de manera remota mediante ssh. Para ello se hace uso del comando \texttt{ssh -X -p 22 usuario@ipmáquina}. Tras ello solicitará las credenciales del usuario.
+\item Descargarse el proyecto ya sea mediante \texttt{git clone} o enviarlo por ssh.
+\item Crear un entorno virtual. Para ello primero habrá de instalar Miniconda y posteriormente ejecutar estos comandos:
+\begin{enumerate}
+\item \texttt{\text{bash  Miniconda3-latest-Linux-x86\_64.sh}}
+\item \texttt{conda create --name EntornoProyecto python=3.10.2}
+\item \texttt{conda activate EntornoProyecto}
+\item \texttt{pip install -r requirements.txt}
+\end{enumerate}
+\item Por último, ejecutar el notebook ModelTraining con el archivo .csv correspondiente a los datos extraídos mediante la librería Paddel.
+\end{enumerate}
+
+\subsection{Despliegue de la aplicación en local}
+
+Para desplegar la aplicación en local en modo \textit{debug}, se deberán seguir los siguientes pasos:
+
+\begin{enumerate}
+\item Ir al directorio \texttt{/web}
+\item Activar el entorno virtual como se ha explicado anteriormente.
+\item Ejecutar el comando \texttt{python run.py}
+\end{enumerate}
+
+Esto desplegará la aplicación en modo depuración, permitiendo hacer cambios y verlos en tiempo real en vez de tener que relanzar la aplicación.
+
+Para desplegarla en producción se seguirán los siguientes pasos:
+\begin{enumerate}
+\item Ir al directorio \texttt{/web}.
+\item Activar el entorno virtual como se ha explicado anteriormente.
+\item Ejecutar el comando \texttt{gunicorn --bind 0.0.0.0:8000 wsgi:application}.
+\end{enumerate}
+
+Esto desplegará la aplicación en el puerto 8000.
+
+\subsection{Despliegue de la aplicación mediante Docker}
+
+
+Para instalar una imagen de Docker desde Docker Hub\footnote{\url{https://hub.docker.com/repository/docker/jornez/pdaivolution/general}}, primero se debe asegurar de tener Docker instalado en tu sistema. Luego, abrir una terminal y usar el comando docker pull seguido del nombre de la imagen que deseas descargar. Para instalar la imagen de la aplicación, se debe ejecutar docker push jornez/pdaivolution:tagname. Esto descargará la imagen más reciente de de la aplicación desde Docker Hub. Para lanzar la imagen se recomienda el uso de DockerDesktop ya que automatiza el despliegue de la aplicación. Para poderla desplegar correctamente, se ha de introducir el puerto de salida deseado, en este caso el 8000.
+
 \section{Pruebas del sistema}
+
+En este apartado se muestran las pruebas para comprobar el correcto funcionamiento de la aplicación.
+
+\cp {Alta}
+    {05/07/2024}
+    {Manual}
+    {Probar el inicio de sesión}
+    {Inicio de Sesión}
+    {No tener una sesión iniciada}
+    {Se ha guardado un token de sesión en la memoria local del navegador con el rol seleccionado}
+    {
+        Acceder a la página de inicio de sesión &  & Estar en la página de inicio de sesión & Estar en la página de inicio de sesión & \ding{51} \\
+        
+        Introducir información de acceso & Usuario: \texttt{admin}; Contraseña: \texttt{defaultpassword} Rol:\texttt{Administrador}; & Datos introducidos & Datos introducidos & \ding{51} \\
+        
+        Enviar información mediante el botón <<Iniciar sesión>> &  & Estar en el panel de administración & Estar en el panel de administración & \ding{51} \\
+    }
+
+
+\cp {Alta}
+    {05/07/2024}
+    {Manual}
+    {Probar el cierre de sesión}
+    {Cierre de Sesión}
+    {Tener una sesión iniciada}
+    {Se ha eliminado el token de sesión}
+    {
+        Pulsar el botón de <<Cerrar sesión>> &  & Estar en la de inicio de sesión con la barra de navegación mostrando <<Iniciar sesión>>  & Estar en la página de inicio de sesión con la barra de navegación mostrando <<Iniciar sesión>> & \ding{51} \\
+    }
+
+\cp {Alta}
+    {05/07/2024}
+    {Manual}
+    {No poder acceder a una página sin permisos}
+    {Acceder a una página sin permisos}
+    {No ser tener permisos de la página}
+    {Ha devuelto al usuario a su página principal 
+     si tiene sesión iniciada o a la página de inicio de sesión}
+    {
+        Iniciar sesión como administrador &  & Estar en la página principal del administrador & Estar en la página principal del administrador & \ding{51} \\
+        
+        Introducir la URL de la página principal del paciente & & Volver a la página de principal de administrador & Volver a la página de principal de administrador & \ding{51} \\
+        
+        Cerrar sesión &  & Estar en la página de inicio de sesión & Estar en la página de inicio de sesión & \ding{51} \\
+        Introducir la URL de la página principal del administrador &  & Volver a la página de principal de inicio de sesión & Volver a la página de principal de inicio de sesión & \ding{51} \\
+    }
+\cp {Alta}
+    {05/07/2024}
+    {Manual}
+    {Probar a añadir usuario}
+    {Añadir usuario}
+    {El usuario que se desea añadir no existe
+     y el usuario actual tiene la sesión iniciada como administrador}
+    {Ver en la página de administración el nuevo usuario}
+    {
+    	Acceder al panel de gestión de usuarios & & Estar en el panel del administrador & Estar en el panel del administrador & \ding{51} \\
+        Pulsar el botón <<Añadir usuario>> &  & Estar en la página de añadir usuario & Estar en la página principal de añadir usuario & \ding{51} \\
+        Introducir información del nuevo usuario & Nombre: \texttt{Juan};
+         Apellidos: \texttt{Pérez};
+         Nombre de usuario: \texttt{admin2};
+         Contraseña: \texttt{1234}
+         Rol:\texttt{Administrador}; & Datos introducidos & Datos introducidos & \ding{51} \\
+        Enviar información mediante el botón <<Añadir usuario>> &  & Estar en el panel de administración con el nuevo usuario añadido & Estar en el panel de administración con el nuevo usuario añadido & \ding{51} \\
+    }
+    
+\cp {Media}
+    {05/07/2024}
+    {Manual}
+    {Probar a eliminar a un médico con pacientes}
+    {Eliminar médico con pacientes}
+    {El usuario actual tiene la sesión iniciada como administrador}
+    {Aviso de no poder eliminar a un médico con pacientes}
+    {
+       	Acceder al panel de gestión de usuarios & & Estar en el panel del administrador & Estar en el panel del administrador & \ding{51} \\
+        Pulsar el botón <<Eliminar usuario>> al lado del médico &  & Mostrar un mensaje de confirmación & Mostrar un mensaje de confirmación & \ding{51} \\
+		Pulsar el botón de <<Confirmar>> en el mensaje de confirmación & & Mostrar un aviso de que no se ha podido eliminar al médico & Mostrar un aviso de que no se ha podido eliminar al médico & \ding{51}\\
+    }
+\cp {Media}
+    {05/07/2024}
+    {Manual}
+    {Probar a eliminar a un administrador}
+    {Eliminar administrador}
+    {El usuario actual tiene la sesión iniciada como administrador}
+    {No aparece el administrador en el panel de administrador}
+    {
+       	Acceder al panel de gestión de usuarios & & Estar en el panel del administrador & Estar en el panel del administrador & \ding{51} \\
+        Pulsar el botón <<Eliminar usuario>> al lado del administrador &  & Mostrar un mensaje de confirmación & Mostrar un mensaje de confirmación & \ding{51} \\
+		Pulsar el botón de <<Confirmar>> en el mensaje de confirmación & & Estar en el panel del administrador sin el paciente & Estar en el panel del administrador sin el paciente & \ding{51}\\
+    }
+\cp {Media}
+    {05/07/2024}
+    {Manual}
+    {Probar a eliminar a un paciente con vídeos y medicinas}
+    {Eliminar paciente con vídeos y medicinas}
+    {El usuario actual tiene la sesión iniciada como administrador}
+    {No aparece el paciente en el panel de administrador}
+    {
+       	Acceder al panel de gestión de usuarios & & Estar en el panel del administrador & Estar en el panel del administrador & \ding{51} \\
+        Pulsar el botón <<Eliminar usuario>> al lado del paciente &  & Mostrar un mensaje de confirmación & Mostrar un mensaje de confirmación & \ding{51} \\
+		Pulsar el botón de <<Confirmar>> en el mensaje de confirmación & & Estar en el panel del administrador sin el paciente & Estar en el panel del administrador sin el paciente & \ding{51}\\
+    }
+\cp {Alta}
+    {05/07/2024}
+    {Manual}
+    {Probar a modificar usuario}
+    {Modificar usuario}
+    {El usuario actual tiene la sesión iniciada como administrador}
+    {Ver en la página de administración el usuario modificado}
+    {
+    	Acceder al panel de gestión de usuarios & & Estar en el panel del administrador & Estar en el panel del administrador & \ding{51} \\
+        Pulsar el botón <<Modificar usuario>> al lado del administrador &  & Estar en la página de añadir usuario & Estar en la página principal de añadir usuario & \ding{51} \\
+        Introducir información del nuevo usuario & Nombre: \texttt{Juan};
+         Apellidos: \texttt{Pérez};
+         Nombre de usuario: \texttt{admin3};
+         Contraseña:
+         Rol:\texttt{Administrador}; & Datos introducidos & Datos introducidos & \ding{51} \\
+        Enviar información mediante el botón <<Modificar usuario>> &  & Estar en el panel de administración con el usuario modificado & Estar en el panel de administración con el usuario modificado & \ding{51} \\
+    } 
+    
+\cp {Alta}
+    {05/07/2024}
+    {Manual}
+    {Probar a añadir un vídeo a un paciente}
+    {Añadir vídeo}
+    {El usuario actual tiene la sesión iniciada como médico}
+    {El vídeo aparece con las predicciones en el listado de vídeos del paciente}
+    {
+       	Acceder al panel de gestión de pacientes & & Estar en el panel del médico & Estar en el panel del médico & \ding{51} \\
+       	Pulsar el botón de <<Gestionar vídeos>> al lado del paciente & & Estar en la página de gestión de vídeos & Estar en la página de gestión de vídeos & \ding{51} \\
+        Pulsar el botón <<Añadir vídeo>> &  & Estar en la página de añadir vídeo & Estar en la página de añadir vídeo & \ding{51} \\
+        Introducir información del nuevo vídeo & Fichero: \texttt{video.mp4};
+         Mano: \texttt{Izquierda};
+         Fecha: \texttt{05/07/2024} & Datos introducidos & Datos introducidos & \ding{51} \\
+		Enviar información mediante el botón <<Añadir usuario>> &  & Estar en el panel de vídeos del paciente con el nuevo vídeo añadido & Estar en el panel de vídeos del paciente con el nuevo vídeo añadido & \ding{51} \\
+    }
+\cp {Media}
+    {05/07/2024}
+    {Manual}
+    {Probar a eliminar un vídeo a un paciente}
+    {Eliminar vídeo}
+    {El usuario actual tiene la sesión iniciada como médico}
+    {El vídeo no aparece en el listado de vídeos del paciente}
+    {
+       	Acceder al panel de gestión de pacientes & & Estar en el panel del médico & Estar en el panel del médico & \ding{51} \\
+       	Pulsar el botón de <<Gestionar vídeos>> al lado del paciente & & Estar en la página de gestión de vídeos & Estar en la página de gestión de vídeos & \ding{51} \\
+        Pulsar el botón <<Eliminar vídeo>> al lado del vídeo  &  & Mostrar un mensaje de confirmación & Mostrar un mensaje de confirmación & \ding{51} \\
+		Pulsar el botón de <<Confirmar>> en el mensaje de confirmación & & Estar en la página de gestión de vídeos sin el vídeo & Estar en la página de gestión de vídeos sin el vídeo & \ding{51}\\
+    } 
+\cp {Media}
+    {05/07/2024}
+    {Manual}
+    {Probar a añadir medicina}
+    {Añadir medicina}
+    {El usuario actual tiene la sesión iniciada como médico}
+    {Eliminación tanto del paciente como de los vídeos y medicinas asociadas}
+    {
+       	Acceder al panel de gestión de pacientes & & Estar en el panel del médico & Estar en el panel del médico & \ding{51} \\
+       	Pulsar el botón de <<Gestionar medicinas>> al lado del paciente & & Estar en la página de gestión de vídeos & Estar en la página de gestión de vídeos & \ding{51} \\
+        Pulsar el botón <<Añadir medicina>> &  & Estar en la página de añadir medicina & Estar en la página de añadir medicina & \ding{51} \\
+        Introducir información de la nueva medicina & Medicina: \texttt{Medicine1};
+         Dosis: \texttt{1 pastilla};
+         Fecha inicio: \texttt{02/07/2024};
+         Fecha fin: \texttt{05/07/2024} & Datos introducidos & Datos introducidos & \ding{51} \\
+		Enviar información mediante el botón <<Añadir usuario>> &  & Estar en el panel de vídeos del paciente con el nuevo vídeo añadido & Estar en el panel de vídeos del paciente con el nuevo vídeo añadido & \ding{51} \\
+    }
+    
+\cp {Baja}
+    {05/07/2024}
+    {Manual}
+    {Probar a eliminar un medicina a un paciente}
+    {Eliminar medicina}
+    {El usuario actual tiene la sesión iniciada como médico}
+    {El vídeo no aparece en el listado de medicinas del paciente}
+    {
+       	Acceder al panel de gestión de pacientes & & Estar en el panel del médico & Estar en el panel del médico & \ding{51} \\
+       	Pulsar el botón de <<Gestionar medicinas>> al lado del paciente & & Estar en la página de gestión de vídeos & Estar en la página de gestión de vídeos & \ding{51} \\
+        Pulsar el botón <<Eliminar medicina>> al lado de la medicina  &  & Mostrar un mensaje de confirmación & Mostrar un mensaje de confirmación & \ding{51} \\
+		Pulsar el botón de <<Confirmar>> en el mensaje de confirmación & & Estar en la página de gestión de medicinas sin la medicina & Estar en la página de gestión de medicinas sin el medicina & \ding{51}\\
+    } 
+    
+\cp {Media}
+    {05/07/2024}
+    {Manual}
+    {Probar a visualizar gráfica con 1 o menos vídeos}
+    {Error en la gráfica del paciente}
+    {El usuario actual tiene la sesión iniciada como paciente}
+    {Mostrar un aviso de que no se ha podido dibujar la gráfica}
+    {
+       	Acceder a la página principal del paciente & & Estar en la página principal del paciente & Estar en la página principal del paciente & \ding{51} \\
+        Visualizar gráfica & & Mostrar un mensaje de vídeos insuficientes & Mostrar un mensaje de vídeos insuficientes & \ding{51} \\
+    }
+    
+\cp {Media}
+    {05/07/2024}
+    {Manual}
+    {Probar a visualizar gráfica con 2 o más vídeos}
+    {Visualizar gráfica del paciente}
+    {El usuario actual tiene la sesión iniciada como paciente}
+    {Mostrar un aviso de que no se ha podido dibujar la gráfica}
+    {
+       	Acceder a la página principal del paciente & & Estar en la página principal del paciente & Estar en la página principal del paciente & \ding{51} \\
+        Visualizar gráfica & & Mostrar la gráfica del paciente & Mostrar la gráfica del paciente & \ding{51} \\
+    }
+    
+        
+    
