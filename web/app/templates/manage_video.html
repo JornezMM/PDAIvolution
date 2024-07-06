@@ -24,7 +24,7 @@
     </style>
     <script>
       function confirmDelete(videoId) {
-        if (confirm('¿Estás seguro de que deseas eliminar este video?')) {
+        if (confirm('¿Estás seguro de que deseas eliminar este vídeo?')) {
           window.location.href = '/delete_video/' + videoId;
         }
       }
@@ -42,7 +42,7 @@
             <table class="table text-white">
               <thead>
                 <tr>
-                  <th>Nombre del video</th>
+                  <th>Nombre del vídeo</th>
                   <th>Fecha</th>
                   <th>Mano</th>
                   <th>Amplitud</th>
@@ -65,7 +65,7 @@
                       class="btn btn-danger"
                       onclick="confirmDelete('{{ video.id }}')"
                     >
-                      Eliminar video
+                      Eliminar vídeo
                     </button>
                   </td>
                   <td>
@@ -73,7 +73,7 @@
                       class="btn btn-primary"
                       onclick="window.location.href='/video/{{ video.id }}'"
                     >
-                      Ver video
+                      Ver vídeo
                     </button>
                   </td>
                 </tr>
