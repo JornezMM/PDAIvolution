@@ -44,8 +44,7 @@ PDAIvolution es un trabajo de fin grado en el que se ha desarrollado una aplicac
 | Gráficas con los datos obtenidos de vídeos del paciente  |         ✔️         |   
 | Algoritmos para la calsificación de la gravedad del parkinson |         ✔️         |    
 | Interfaz intuitiva para pacientes, médicos y administradores         |         ✔️         |    
-| [Documentación detallada](https://github.com/SandraDiaz22/TFG/tree/main/doc) 📚 |         ✔️         |    
-| [Canal de YouTube con tutoriales](https://youtu.be/tYYHd_bVTjg) 🎥 |         ✔️         |  
+
 <br />
 
 ## Contacto
