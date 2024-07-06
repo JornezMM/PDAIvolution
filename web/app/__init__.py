@@ -89,16 +89,17 @@ def create_app():
         if not Admin.query.first():
             default_admin = Admin(
                 username="admin",
-                password=config["DEFAULT_PASSWORD"],
+                password=generate_password_hash(config["DEFAULT_PASSWORD"]),
                 first_name="Default",
                 last_name="Admin",
             )
             db.session.add(default_admin)
-        
+
+            
         if not Medicine.query.first():
-            medicine1 = Medicine(name="Medicine 1")
-            medicine2 = Medicine(name="Medicine 2")
-            medicine3 = Medicine(name="Medicine 3")
+            medicine1 = Medicine(name="Selegilina")
+            medicine2 = Medicine(name="Rasagilina")
+            medicine3 = Medicine(name="Safanimida")
             db.session.add(medicine1)
             db.session.add(medicine2)
             db.session.add(medicine3)
