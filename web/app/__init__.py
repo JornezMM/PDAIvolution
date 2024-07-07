@@ -544,7 +544,6 @@ def create_app():
                 dates = [date.strftime("%Y-%m-%d") for date in dates]
                 amplitude= [video.amplitude for video in videos]
                 slowness= [video.slowness for video in videos]
-                print(slowness)
                 doctor = Doctor.query.filter_by(id=patient.doctor_id).first()
                 return render_template(
                     "patient.html",
@@ -826,7 +825,6 @@ def create_app():
                 all_features = all_features.drop(columns=["angle__query_similarity_count__query_None__threshold_0.0"])
                 all_features_lent= all_features.iloc[:, COLUMNS_LENT]
                 all_features_amp= all_features.iloc[:, COLUMNS_AMP]
-                print(all_features)
                 video.amplitude = struct.unpack('<Q', amp.predict(all_features_amp))[0]
                 video.slowness = struct.unpack('<Q', lent.predict(all_features_lent))[0]
             file.close()
