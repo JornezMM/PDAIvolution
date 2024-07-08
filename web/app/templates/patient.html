@@ -174,28 +174,29 @@
 
 
     // Calculate the minimum time interval between videos
-    let minInterval = Infinity;
+    let maxInterval = 0;
     for (let i = 1; i < dates.length; i++) {
-      const interval = new Date(dates[i]) - new Date(dates[i - 1]);
-      if (interval < minInterval) {
-        minInterval = interval;
-      }
+      for (let j = 1; i < dates.length; i++) {
+        const interval = Math.abs(new Date(dates[i]) - new Date(dates[j]));
+        if (interval > maxInterval) {
+          maxInterval = interval;
+        }
+     }
     }
-
     // Determine tick interval based on minInterval
     let tickInterval;
-    if (minInterval <= 7 * 24 * 60 * 60 * 1000) { // 1 week
+    if (maxInterval <= 7 * 24 * 60 * 60 * 1000) { // 1 week
       tickInterval = d3.timeDay.every(2);
-      xPadding = 1 * 12 * 60 * 60 * 1000; // 12 hours padding for x-axis
+      xPadding = 12* 60 * 60 * 1000; // 12 hours padding for x-axis
       tickFormat = d3.timeFormat("%d-%m-%Y");
-    } else if (minInterval <= 30 * 24 * 60 * 60 * 1000) { // 1 month
+    } else if (maxInterval <= 30 * 24 * 60 * 60 * 1000) { // 1 month
       tickInterval = d3.timeWeek.every(2);
-      xPadding = 7 * 24 * 60 * 60 * 1000; // 1 week padding for x-axis
+      xPadding = 3 * 24 * 60 * 60 * 1000; // 1 week padding for x-axis
       tickFormat = d3.timeFormat("%b-%Y");
     } else {
       tickInterval = d3.timeMonth.every(2);
       xPadding = 30 * 24 * 60 * 60 * 1000; // 1 month padding for x-axis
-      tickFormat = d3.timeFormat("%Y");
+      tickFormat = d3.timeFormat("%m-%Y");
     }
     x.domain([
       d3.min([...amplitude, ...lent], d => d.date) - xPadding,
