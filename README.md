@@ -68,7 +68,7 @@ La aplicación ha sido desplegada en la Intranet de la [UBU](http://10.168.168.3
 ## Credenciales
 
 Las credenciales predeterminadas al crear una nueva base de datos son:
-<p>_Nombre de usuario: admin_<\p>
-<p>_Contraseña: defaultpassword_<\p>
-<p>_Rol: admistrador_<\p>
+<p> Nombre de usuario: admin </p>
+<p> Contraseña: defaultpassword </p>
+<p> Rol: admistrador</p>
 
