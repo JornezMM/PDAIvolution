@@ -61,9 +61,6 @@ No dudes en ponerte en contacto conmigo 💌
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
-## Despligue
-
-La aplicación ha sido desplegada en la Intranet de la [UBU](http://10.168.168.34:9000).
 
 ## Credenciales
 
