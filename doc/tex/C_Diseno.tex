@@ -4,7 +4,7 @@
 En el siguiente apartado se describen los detalles de la estructura del \textit{software}: el comportamiento y la interacción entre los distintos componentes.
 
 \section{Diseño de datos}
-Para implementar la persistencia de los datos se ha hecho uso de una base de datos SQLite debido a que no requiere instalación separada y es fácil de integrar con el framework de Flask. Este diseño se ha dividido en varias fases: diseño del diagrama entidad-relación, diseño del diagrama relacional y diseño del diccionario de datos.
+Este diseño se ha dividido en varias fases: diseño del diagrama entidad-relación, diseño del diagrama relacional y diseño del diccionario de datos.
 
 \subsection{Modelo entidad-relación}
 
@@ -81,26 +81,26 @@ Se adjunta a continuación, para cada tabla, el diccionario de datos correspondi
 \caption[Diccionario de datos: \texttt{Patient}]{Diccionario de datos. Tabla correspondiente a la clase \texttt{Patient}.}
 \label{datadic:patient}
 \end{table}
-\item \textbf{Vídeos}: la tabla~\ref{datadic:video} contiene la información correspondiente a los vídeos de los pacientes pacientes.
+\item \textbf{Vídeos}: la tabla~\ref{datadic:vídeo} contiene la información correspondiente a los vídeos de los pacientes pacientes.
 \begin{table}
 	\scalebox{0.80}{
 		\begin{tabular}{@{}p{5em} p{6em} p{6em} p{20em}@{}}
 			\toprule
 			\textbf{Nombre} & \textbf{Tipo} & \textbf{Columna} & \textbf{Descripción}\\
 			\midrule
-			\texttt{id} & \texttt{INTEGER} & \texttt{\textbf{PK}} & Identificador único del video.\\
+			\texttt{id} & \texttt{INTEGER} & \texttt{\textbf{PK}} & Identificador único del vídeo.\\
 			\texttt{patient\_id} & \texttt{INTEGER} & \texttt{FK
-			(patient.id)} & Clave foránea a la tabla Paciente. Indica el paciente asociado al video.\\
+			(patient.id)} & Clave foránea a la tabla Paciente. Indica el paciente asociado al vídeo.\\
 			\texttt{hand} & \texttt{ENUM('left', 'right')} & \texttt{NOT NULL} & Mano usada en el vídeo (izquierda o derecha). \\
-			\texttt{date} & \texttt{DATE} & \texttt{NOT NULL} & Fecha de grabación del video. \\
-			\texttt{video\_data} & \texttt{LargeBinary} & \texttt{NOT NULL} & Datos binarios del vídeo. \\
-			\texttt{amplitude} & \texttt{VARCHAR(100)} & \texttt{NOT NULL} & Amplitud clasificada para el video. \\
-			\texttt{slowness} & \texttt{VARCHAR(100)} & \texttt{NOT NULL} & Lentitud clasificada para el video. \\
+			\texttt{date} & \texttt{DATE} & \texttt{NOT NULL} & Fecha de grabación del vídeo. \\
+			\texttt{vídeo\_data} & \texttt{LargeBinary} & \texttt{NOT NULL} & Datos binarios del vídeo. \\
+			\texttt{amplitude} & \texttt{VARCHAR(100)} & \texttt{NOT NULL} & Amplitud clasificada para el vídeo. \\
+			\texttt{slowness} & \texttt{VARCHAR(100)} & \texttt{NOT NULL} & Lentitud clasificada para el vídeo. \\
 			\bottomrule
 		\end{tabular}
 	}
-	\caption[Diccionario de datos: \texttt{Video}]{Diccionario de datos. Tabla correspondiente a la clase \texttt{Video}.}
-	\label{datadic:video}
+	\caption[Diccionario de datos: \texttt{vídeo}]{Diccionario de datos. Tabla correspondiente a la clase \texttt{vídeo}.}
+	\label{datadic:vídeo}
 \end{table}
 
 \item \textbf{Medicinas}: la tabla~\ref{datadic:medicine} contiene la información de las medicinas.
@@ -153,8 +153,8 @@ Durante el desarrollo del proyecto se ha hecho uso de la herramienta Draw.io\foo
 
 Debido a que los diagramas secuenciales de la aplicación son muy básicos exceptuando el de la clasificación de los vídeos, se ha tomado la decisión de omitirlos.
 
-\subsection{Clasificación de los videos}
-Para esta funcionalidad, el doctor ha de tener al menos un paciente para poder realizar la acción. El doctor solicita la vista de añadir vídeos al usuario. Tras recibirla, el doctor envía la información del vídeo junto con el archivo del mismo a la aplicación. La aplicación lo envía a la librería Paddel para extraer las características y estas características se envían a los modelos entrenados para obtener las clasificaciones. Una vez obtenidas el vídeo es guardado en la base de datos y posteriormente, se envía al usuario de vuelta a la página de gestión de vídeos actualizada del paciente al que se le ha añadido.
+\subsection{Clasificación de los vídeos}
+Para esta funcionalidad, el doctor ha de tener al menos un paciente para poder realizar la acción. El doctor es redirigido a la pestaña de añadir vídeos al usuario. Tras recibirla, el doctor envía la información del vídeo junto con el archivo del mismo a la aplicación. La aplicación lo envía a la librería Paddel para extraer las características y estas características se envían a los modelos entrenados para obtener las clasificaciones. Una vez obtenidas el vídeo es guardado en la base de datos y posteriormente, se envía al usuario de vuelta a la página de gestión de vídeos actualizada del paciente al que se le ha añadido.
 La figura~\ref{fig:./img/DiagramaSecuencia} muestra el diagrama de secuencia del proceso.
 \imagen{./img/DiagramaSecuencia}{Diagrama de secuencia de clasificación de los vídeos}{}
 
@@ -162,11 +162,11 @@ La figura~\ref{fig:./img/DiagramaSecuencia} muestra el diagrama de secuencia del
 \section{Diseño arquitectónico}
 
 
-Para ilustrar la arquitectura de la aplicación se emplea el diagrama de despliegue de la figura~\ref{fig:./img/DiagramaDespliegue}. Este tipo de diagrama UML muestra cómo están organizados físicamente los componentes del software en el sistema.
+Para ilustrar la arquitectura de la aplicación se emplea el diagrama de despliegue de la figura~\ref{fig:./img/DiagramaDespliegue.png}. Este tipo de diagrama UML muestra cómo están organizados físicamente los componentes del software en el sistema.
 
-La aplicación no se ha desplegado debido al gran tamaño de los archivos, incluidos los vídeos y los datos de los sensores de los pacientes, por lo que la sección del Web Server no es precisa, ya que la lógica de la aplicación se ejecuta localmente.
+La aplicación ha sido desplegada en los servidores de la UBU.
 
 El Data Base Server se encarga de gestionar la capa de persistencia del proyecto. Para ello, se ha utilizado SQLite como herramienta de gestión de la base de datos.
 
 El usuario o cliente actúa como el controlador de la interfaz de usuario, interactuando con las páginas HTML a través de su navegador.
-\imagen{./img/DiagramaDespliegue}{Diagrama de despliegue}{}
+\imagen{./img/DiagramaDespliegue.png}{Diagrama de despliegue}{}
